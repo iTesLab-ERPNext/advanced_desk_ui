@@ -1,6 +1,7 @@
 [
 	{
 		"doctype": "Custom Field",
+		"name": "User-adu_theme_mode",
 		"dt": "User",
 		"fieldname": "adu_theme_mode",
 		"label": "Desk Theme Mode",
@@ -12,6 +13,7 @@
 	},
 	{
 		"doctype": "Custom Field",
+		"name": "User-adu_density",
 		"dt": "User",
 		"fieldname": "adu_density",
 		"label": "Desk Density",
@@ -23,6 +25,7 @@
 	},
 	{
 		"doctype": "Custom Field",
+		"name": "User-adu_sidebar_width",
 		"dt": "User",
 		"fieldname": "adu_sidebar_width",
 		"label": "Desk Sidebar Width",
@@ -33,6 +36,7 @@
 	},
 	{
 		"doctype": "Custom Field",
+		"name": "User-adu_animations_enabled",
 		"dt": "User",
 		"fieldname": "adu_animations_enabled",
 		"label": "Desk Animations Enabled",
