@@ -1,0 +1,36 @@
+.adu-theme-toggle {
+	.adu-theme-icon-dark {
+		display: none;
+	}
+	[data-theme="dark"] & {
+		.adu-theme-icon-light {
+			display: none;
+		}
+		.adu-theme-icon-dark {
+			display: inline-flex;
+		}
+	}
+	.adu-theme-menu .dropdown-item.active {
+		color: var(--primary);
+		font-weight: 600;
+	}
+}
+
+.adu-fullscreen-toggle a,
+.adu-theme-toggle a {
+	display: flex;
+	align-items: center;
+	color: var(--text-muted);
+	&:hover {
+		color: var(--text);
+	}
+}
+
+.adu-company-switcher .nav-link {
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 10px;
+	background: var(--surface-hover);
+	border-radius: var(--radius-sm);
+	color: var(--text);
+}

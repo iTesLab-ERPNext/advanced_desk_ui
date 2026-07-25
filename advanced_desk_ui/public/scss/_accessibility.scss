@@ -1,0 +1,52 @@
+// -----------------------------------------------------------------------------
+// Accessibility
+// -----------------------------------------------------------------------------
+
+:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}
+
+.adu-sidebar-item:focus-visible,
+.adu-cp-item:focus-visible,
+.btn:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 1px;
+}
+
+// Respect the OS-level "reduce motion" preference regardless of the
+// Advanced Desk Settings animation toggle.
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}
+
+// High-contrast helper class — toggled by user agent / OS forced-colors
+@media (forced-colors: active) {
+	.adu-sidebar-item.active,
+	.adu-chip.active {
+		forced-color-adjust: none;
+		border: 2px solid CanvasText;
+	}
+}
+
+.adu-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	background: var(--primary);
+	color: #fff;
+	padding: 8px 16px;
+	border-radius: var(--radius-sm);
+	z-index: 3000;
+
+	&:focus {
+		left: 12px;
+		top: 12px;
+	}
+}

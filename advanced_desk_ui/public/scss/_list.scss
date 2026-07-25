@@ -1,0 +1,43 @@
+.adu-sticky-list-header .list-row-head {
+	position: sticky;
+	top: var(--navbar-height);
+	z-index: 40;
+	background: var(--surface);
+}
+
+.adu-col-hidden {
+	display: none !important;
+}
+
+.adu-column-picker-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.adu-quick-filter-chips {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-bottom: 8px;
+
+	.adu-chip {
+		font-size: 12px;
+		padding: 4px 10px;
+		border-radius: 999px;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		color: var(--text-muted);
+		cursor: pointer;
+		transition: all var(--anim-fast) var(--anim-easing);
+
+		&:hover {
+			background: var(--surface-hover);
+		}
+		&.active {
+			background: var(--primary);
+			border-color: var(--primary);
+			color: #fff;
+		}
+	}
+}

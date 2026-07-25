@@ -1,0 +1,44 @@
+[
+	{
+		"doctype": "Custom Field",
+		"dt": "User",
+		"fieldname": "adu_theme_mode",
+		"label": "Desk Theme Mode",
+		"fieldtype": "Select",
+		"options": "Light\nDark\nAuto",
+		"default": "Light",
+		"insert_after": "desk_theme",
+		"module": "Advanced Desk UI"
+	},
+	{
+		"doctype": "Custom Field",
+		"dt": "User",
+		"fieldname": "adu_density",
+		"label": "Desk Density",
+		"fieldtype": "Select",
+		"options": "comfortable\ncompact",
+		"default": "comfortable",
+		"insert_after": "adu_theme_mode",
+		"module": "Advanced Desk UI"
+	},
+	{
+		"doctype": "Custom Field",
+		"dt": "User",
+		"fieldname": "adu_sidebar_width",
+		"label": "Desk Sidebar Width",
+		"fieldtype": "Int",
+		"default": "268",
+		"insert_after": "adu_density",
+		"module": "Advanced Desk UI"
+	},
+	{
+		"doctype": "Custom Field",
+		"dt": "User",
+		"fieldname": "adu_animations_enabled",
+		"label": "Desk Animations Enabled",
+		"fieldtype": "Check",
+		"default": "1",
+		"insert_after": "adu_sidebar_width",
+		"module": "Advanced Desk UI"
+	}
+]

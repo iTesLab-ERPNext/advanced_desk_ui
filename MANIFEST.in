@@ -1,0 +1,13 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+recursive-include advanced_desk_ui *.json
+recursive-include advanced_desk_ui *.md
+recursive-include advanced_desk_ui *.txt
+recursive-include advanced_desk_ui *.css
+recursive-include advanced_desk_ui *.scss
+recursive-include advanced_desk_ui *.js
+recursive-include advanced_desk_ui *.html
+recursive-include advanced_desk_ui *.png
+recursive-include advanced_desk_ui *.svg
+recursive-exclude advanced_desk_ui *.pyc

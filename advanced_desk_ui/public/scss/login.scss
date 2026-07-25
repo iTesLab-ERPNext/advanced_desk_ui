@@ -1,0 +1,88 @@
+@import "variables";
+
+.adu-login-bg {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	background: var(--background);
+}
+.adu-login-bg-blob {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(80px);
+	opacity: 0.35;
+	animation: adu-blob-float 14s ease-in-out infinite alternate;
+}
+.adu-blob-1 {
+	width: 420px;
+	height: 420px;
+	background: var(--primary);
+	top: -80px;
+	left: -80px;
+}
+.adu-blob-2 {
+	width: 360px;
+	height: 360px;
+	background: var(--accent);
+	bottom: -100px;
+	right: -60px;
+	animation-delay: 3s;
+}
+@keyframes adu-blob-float {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+	to {
+		transform: translate(30px, 20px) scale(1.08);
+	}
+}
+
+.adu-login-theme-toggle {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	color: var(--text);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: var(--shadow-sm);
+}
+
+.adu-login-lang-select {
+	position: fixed;
+	top: 20px;
+	right: 66px;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	color: var(--text);
+	border-radius: var(--radius-sm);
+	padding: 6px 10px;
+	font-size: 12px;
+}
+
+.adu-login-illustration {
+	display: flex;
+	justify-content: center;
+	color: var(--primary);
+	margin-bottom: 16px;
+}
+
+.for-login,
+.login-content {
+	background: var(--surface);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 480px) {
+	.adu-login-lang-select {
+		display: none; // avoid crowding small screens; still reachable post-login
+	}
+}

@@ -1,0 +1,60 @@
+// -----------------------------------------------------------------------------
+// Mobile / Tablet Responsiveness
+// -----------------------------------------------------------------------------
+
+.adu-mobile-sidebar-toggle {
+	display: none;
+}
+
+@media (max-width: 992px) {
+	.adu-mobile-sidebar-toggle {
+		display: inline-flex;
+	}
+
+	.adu-sidebar {
+		transform: translateX(-100%);
+		box-shadow: var(--shadow-lg);
+		transition: transform var(--anim-base) var(--anim-easing);
+
+		&.adu-mobile-open {
+			transform: translateX(0);
+		}
+	}
+	body.adu-has-sidebar .page-container,
+	body.adu-has-sidebar .navbar {
+		margin-left: 0 !important;
+	}
+
+	.adu-command-palette {
+		width: 94vw;
+	}
+
+	.adu-widget-card,
+	.adu-widget-card.adu-widget-size-s,
+	.adu-widget-card.adu-widget-size-m {
+		grid-column: span 12;
+	}
+}
+
+@media (max-width: 576px) {
+	.adu-floating-save {
+		right: 16px;
+		bottom: 16px;
+		width: 44px;
+		height: 44px;
+	}
+	.adu-login-theme-toggle {
+		top: 12px;
+		right: 12px;
+	}
+}
+
+// Larger touch targets on coarse-pointer (touch) devices
+@media (pointer: coarse) {
+	.adu-sidebar-item,
+	.adu-cp-item,
+	.adu-chip,
+	.btn {
+		min-height: 40px;
+	}
+}
