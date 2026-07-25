@@ -91,6 +91,24 @@ bench build --app advanced_desk_ui
 bench --site your-site.local clear-cache
 ```
 
+### Troubleshooting: `uv` / pypika resolution error on install
+
+If `bench install-app` fails with something like:
+
+```
+Failed to resolve dependencies for `frappe` ...
+Package `pypika` was included as a URL dependency ...
+```
+
+this happens because `requirements.txt` listed `frappe` itself as a
+dependency, which makes `uv` try to re-resolve Frappe's *own* pinned
+git dependencies (like pypika) outside the bench environment that
+already has them installed. Fixed as of this version — `requirements.txt`
+is empty and `setup.py` no longer declares `frappe` as an install
+dependency (it's provided by the bench, not pip). If you're on an older
+copy, just empty out `requirements.txt` and re-run `bench get-app` /
+`install-app`.
+
 ## Configure
 
 Go to **Advanced Desk UI → Advanced Desk Settings** (System Manager only)
