@@ -8,6 +8,7 @@
 @import "list";
 @import "accessibility";
 @import "responsive";
+@import "pack-ember";
 
 // -----------------------------------------------------------------------------
 // Base shell — layered on top of the Desk via app_include_css only.
@@ -17,6 +18,7 @@
 body {
 	background: var(--background);
 	color: var(--text);
+	font-family: var(--adu-font, "Inter", sans-serif);
 	transition: background var(--anim-base) var(--anim-easing),
 		color var(--anim-base) var(--anim-easing);
 }

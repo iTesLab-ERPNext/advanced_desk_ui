@@ -57,6 +57,14 @@
 			"reqd": 1
 		},
 		{
+			"fieldname": "theme_pack",
+			"fieldtype": "Select",
+			"label": "Theme Pack",
+			"options": "Default\nEmber",
+			"default": "Default",
+			"description": "Default is the original glass/rounded look. Ember is a flat, warm coral-and-teal alternative — no blur, bolder borders."
+		},
+		{
 			"fieldname": "primary_color",
 			"fieldtype": "Color",
 			"label": "Primary Color",

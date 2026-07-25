@@ -13,7 +13,7 @@ app_version = app_version
 # --------------------------------------------------------------------------
 
 app_include_css = [
-    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap",
     "/assets/advanced_desk_ui/css/theme.css",
 ]
 

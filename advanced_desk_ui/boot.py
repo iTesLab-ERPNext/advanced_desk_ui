@@ -20,6 +20,7 @@ def boot_session(bootinfo):
 		"css_vars": get_active_theme_vars(settings),
 		"default_theme": settings.default_theme,
 		"user_theme": user_theme,
+		"theme_pack": settings.theme_pack or "Default",
 		"density": frappe.db.get_value("User", frappe.session.user, "adu_density") or "comfortable",
 		"animations_enabled": bool(settings.enable_animations),
 		"glass_enabled": bool(settings.enable_glass_effect),

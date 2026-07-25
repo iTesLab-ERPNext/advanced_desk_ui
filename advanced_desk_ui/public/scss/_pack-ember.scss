@@ -1,0 +1,135 @@
+// =============================================================================
+// Theme Pack: Ember
+// -----------------------------------------------------------------------------
+// A flat, high-contrast, warm alternative to the default pack. Where the
+// default pack (and Naidapa, which inspired this app's original brief) leans
+// on soft glassmorphism and pastel blur, Ember is deliberately the opposite:
+// solid fills, 2px borders instead of shadows, a coral + deep-teal palette,
+// and pill-shaped active states. Selected via Advanced Desk Settings →
+// Theme Pack, applied as [data-theme-pack="ember"] on <html>.
+// =============================================================================
+
+[data-theme-pack="ember"] {
+	--primary: #d8552b;
+	--primary-hover: #c14a23;
+	--secondary: #0e6e5c;
+	--accent: #f2a93b;
+	--success: #1f8a5f;
+	--warning: #f2a93b;
+	--danger: #c23b2c;
+
+	--background: #fbf5ee;
+	--surface: #ffffff;
+	--surface-hover: #f6ebe0;
+	--border: #e7d5c4;
+	--text: #2b1f16;
+	--text-muted: #8a7462;
+	--sidebar: #2b1710;
+	--navbar: #ffffff;
+
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 14px;
+
+	// No blur, no soft shadows — flat fills with a hard 2px border instead.
+	--ember-border-width: 2px;
+	--shadow-sm: none;
+	--shadow-md: none;
+	--shadow-lg: none;
+	--glass-bg: transparent;
+	--glass-blur: 0px;
+
+	--adu-font: "Poppins", "Inter", sans-serif;
+}
+
+[data-theme-pack="ember"][data-theme="dark"] {
+	--background: #1c130d;
+	--surface: #241a12;
+	--surface-hover: #2f2216;
+	--border: #4a3624;
+	--text: #f5e9dc;
+	--text-muted: #b89c85;
+	--sidebar: #150d08;
+	--navbar: #241a12;
+}
+
+// -----------------------------------------------------------------------------
+// Ember overrides — flat surfaces with real borders instead of shadows
+// -----------------------------------------------------------------------------
+
+[data-theme-pack="ember"] {
+	.widget,
+	.frappe-card,
+	.form-page,
+	.list-row-container,
+	.adu-widget-card {
+		border-width: var(--ember-border-width);
+		box-shadow: none !important;
+	}
+
+	// Sidebar reads as a solid warm panel, not a translucent surface —
+	// text/icons switch to the light end of the palette against it.
+	.adu-sidebar {
+		border-right: var(--ember-border-width) solid var(--border);
+	}
+	.adu-sidebar .adu-item-label,
+	.adu-sidebar .adu-sidebar-section-title {
+		color: #f0ddc9;
+	}
+	.adu-sidebar .adu-item-icon,
+	.adu-sidebar .adu-dot {
+		color: #c9a888;
+	}
+	.adu-sidebar-item:hover {
+		background: rgba(255, 255, 255, 0.08);
+	}
+	.adu-sidebar-item.active {
+		background: var(--primary);
+		color: #fff;
+		border-radius: 999px; // pill, not a soft rounded rect
+	}
+	.adu-sidebar-search {
+		background: rgba(255, 255, 255, 0.08);
+		color: #f0ddc9;
+		input {
+			color: #fff;
+		}
+	}
+	.adu-sidebar-header {
+		border-bottom-color: rgba(255, 255, 255, 0.12);
+	}
+
+	.btn-primary {
+		background: var(--primary);
+		border-color: var(--primary);
+		border-radius: 999px;
+		font-weight: 600;
+		&:hover {
+			background: var(--primary-hover);
+		}
+	}
+
+	.adu-chip.active {
+		background: var(--secondary);
+		border-color: var(--secondary);
+	}
+
+	.adu-kpi-value {
+		color: var(--secondary);
+	}
+
+	.adu-gradient-icon {
+		background: var(--primary) !important; // solid fill, no gradient
+	}
+
+	.adu-shortcut {
+		border: var(--ember-border-width) solid var(--border);
+		border-radius: 999px;
+	}
+
+	// Command palette and dialogs get the same flat, bordered treatment
+	.adu-command-palette,
+	.adu-widget-card {
+		border: var(--ember-border-width) solid var(--border);
+	}
+}

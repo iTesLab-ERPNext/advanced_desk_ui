@@ -15,6 +15,7 @@ frappe.provide("advanced_desk_ui");
 
 advanced_desk_ui.theme = (function () {
 	const STORAGE_KEY = "adu:theme"; // local fallback before boot info loads
+	const STORAGE_PACK_KEY = "adu:theme:pack";
 	const listeners = [];
 
 	function systemPrefersDark() {
@@ -32,6 +33,16 @@ advanced_desk_ui.theme = (function () {
 		Object.keys(vars).forEach((key) => {
 			if (vars[key]) root.style.setProperty(`--${key}`, vars[key]);
 		});
+	}
+
+	function applyPack(pack) {
+		const resolved = (pack || "Default").toLowerCase();
+		document.documentElement.setAttribute("data-theme-pack", resolved);
+		try {
+			localStorage.setItem(STORAGE_PACK_KEY, pack || "Default");
+		} catch (e) {
+			/* noop */
+		}
 	}
 
 	function applyTheme(mode, opts) {
@@ -56,12 +67,15 @@ advanced_desk_ui.theme = (function () {
 	function init() {
 		// 1. Instant paint from local cache (avoids flash before boot info)
 		let cached = null;
+		let cachedPack = null;
 		try {
 			cached = localStorage.getItem(STORAGE_KEY);
+			cachedPack = localStorage.getItem(STORAGE_PACK_KEY);
 		} catch (e) {
 			/* ignore */
 		}
 		if (cached) applyTheme(cached);
+		if (cachedPack) applyPack(cachedPack);
 
 		// 2. Boot info: admin-level Advanced Desk Settings + this user's saved pref
 		const boot = frappe.boot && frappe.boot.advanced_desk_ui;
@@ -71,6 +85,7 @@ advanced_desk_ui.theme = (function () {
 				density: boot.density,
 				animations: boot.animations_enabled,
 			});
+			applyPack(boot.theme_pack || "Default");
 		}
 
 		// 3. Track OS-level changes when mode is Auto
@@ -93,11 +108,16 @@ advanced_desk_ui.theme = (function () {
 		});
 	}
 
+	function setPack(pack) {
+		applyPack(pack);
+		listeners.forEach((fn) => fn(resolveMode(document.documentElement.getAttribute("data-theme-mode")), null, pack));
+	}
+
 	function onChange(fn) {
 		listeners.push(fn);
 	}
 
-	return { init, setMode, onChange, applyCssVars };
+	return { init, setMode, setPack, onChange, applyCssVars };
 })();
 
 $(document).on("app_ready", function () {

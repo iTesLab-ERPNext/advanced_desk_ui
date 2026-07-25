@@ -82,6 +82,24 @@ phases from the original spec.
   `lazyRun` helper, so debouncing/lazy-loading logic isn't reimplemented
   per component.
 
+## Theme packs
+
+Besides Light/Dark/Auto, Advanced Desk Settings has a **Theme Pack**
+selector:
+
+- **Default** — the original look from this app's brief: rounded 12px
+  corners, soft shadows, optional glassmorphism.
+- **Ember** — a flat, high-contrast alternative: coral (`#d8552b`) and deep
+  teal (`#0e6e5c`) accents on a warm cream/espresso background, 2px solid
+  borders instead of shadows, pill-shaped active nav/shortcut states, no
+  blur anywhere, and Poppins for headings instead of Inter. It's the
+  deliberate opposite of a glassmorphic/pastel look, not a re-skin of it.
+
+Implemented as `public/scss/_pack-ember.scss`, scoped under
+`[data-theme-pack="ember"]` so it layers cleanly on top of the same token
+system everything else already uses — switching packs is a one-field
+change in Advanced Desk Settings, no rebuild-from-scratch required.
+
 ## Install
 
 ```bash
