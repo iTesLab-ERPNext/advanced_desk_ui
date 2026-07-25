@@ -1,0 +1,141 @@
+{
+	"doctype": "DocType",
+	"name": "Theme Settings",
+	"module": "Aurora Theme",
+	"custom": 0,
+	"issingle": 1,
+	"engine": "InnoDB",
+	"allow_rename": 0,
+	"field_order": [
+		"section_break_branding",
+		"sidebar_logo",
+		"column_break_branding",
+		"title",
+		"favicon_image",
+		"sidebar_text",
+		"primary_color",
+		"secondary_color",
+		"accent_color",
+		"section_break_login",
+		"skin",
+		"login_tag",
+		"short_notes",
+		"column_break_login",
+		"login_description",
+		"section_break_fonts",
+		"heading_font",
+		"body_font"
+	],
+	"fields": [
+		{
+			"fieldname": "section_break_branding",
+			"fieldtype": "Section Break",
+			"label": "Branding"
+		},
+		{
+			"fieldname": "sidebar_logo",
+			"fieldtype": "Attach Image",
+			"label": "Sidebar Logo"
+		},
+		{
+			"fieldname": "column_break_branding",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "title",
+			"fieldtype": "Data",
+			"label": "Title"
+		},
+		{
+			"fieldname": "favicon_image",
+			"fieldtype": "Attach Image",
+			"label": "Favicon Image"
+		},
+		{
+			"fieldname": "sidebar_text",
+			"fieldtype": "Data",
+			"label": "Sidebar Text",
+			"description": "Short label shown next to the logo in the sidebar header."
+		},
+		{
+			"fieldname": "primary_color",
+			"fieldtype": "Color",
+			"label": "Primary Color",
+			"default": "#5b3ce0"
+		},
+		{
+			"fieldname": "secondary_color",
+			"fieldtype": "Color",
+			"label": "Secondary Color",
+			"default": "#0fae82"
+		},
+		{
+			"fieldname": "accent_color",
+			"fieldtype": "Color",
+			"label": "Accent Color",
+			"default": "#22c1dc"
+		},
+		{
+			"fieldname": "section_break_login",
+			"fieldtype": "Section Break",
+			"label": "Login Page"
+		},
+		{
+			"fieldname": "skin",
+			"fieldtype": "Select",
+			"label": "Skin",
+			"options": "aurora",
+			"default": "aurora"
+		},
+		{
+			"fieldname": "login_tag",
+			"fieldtype": "Data",
+			"label": "Login Tag",
+			"description": "Short eyebrow text above the login title, e.g. 'Welcome back'."
+		},
+		{
+			"fieldname": "short_notes",
+			"fieldtype": "Data",
+			"label": "Short Notes"
+		},
+		{
+			"fieldname": "column_break_login",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "login_description",
+			"fieldtype": "Small Text",
+			"label": "Login Description"
+		},
+		{
+			"fieldname": "section_break_fonts",
+			"fieldtype": "Section Break",
+			"label": "Fonts"
+		},
+		{
+			"fieldname": "heading_font",
+			"fieldtype": "Select",
+			"label": "Heading Font",
+			"options": "Space Grotesk\nInter\nSora",
+			"default": "Space Grotesk"
+		},
+		{
+			"fieldname": "body_font",
+			"fieldtype": "Select",
+			"label": "Body Font",
+			"options": "Inter\nSora\nSpace Grotesk",
+			"default": "Inter"
+		}
+	],
+	"permissions": [
+		{
+			"role": "System Manager",
+			"read": 1,
+			"write": 1,
+			"create": 1,
+			"delete": 0
+		}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC"
+}

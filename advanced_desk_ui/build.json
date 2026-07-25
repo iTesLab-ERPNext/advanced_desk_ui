@@ -1,8 +1,0 @@
-{
-  "advanced_desk_ui/public/css/theme.css": [
-    "advanced_desk_ui/public/scss/theme.scss"
-  ],
-  "advanced_desk_ui/public/css/login.css": [
-    "advanced_desk_ui/public/scss/login.scss"
-  ]
-}

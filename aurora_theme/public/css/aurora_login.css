@@ -1,0 +1,68 @@
+/* Aurora Theme — Login Page (overlay only; the login form itself is
+   untouched core markup, this just adds background + a toggle button) */
+
+.aurora-login-bg {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	background: var(--aurora-bg, #f5f4fb);
+}
+.aurora-login-blob {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(90px);
+	opacity: 0.4;
+	animation: aurora-login-drift 18s ease-in-out infinite alternate;
+}
+.aurora-login-blob.b1 {
+	width: 420px;
+	height: 420px;
+	background: var(--aurora-primary, #5b3ce0);
+	top: -100px;
+	left: -100px;
+}
+.aurora-login-blob.b2 {
+	width: 360px;
+	height: 360px;
+	background: var(--aurora-secondary, #0fae82);
+	bottom: -100px;
+	right: -80px;
+	animation-delay: 4s;
+}
+.aurora-login-blob.b3 {
+	width: 280px;
+	height: 280px;
+	background: var(--aurora-accent, #22c1dc);
+	top: 40%;
+	right: 10%;
+	animation-delay: 8s;
+}
+@keyframes aurora-login-drift {
+	from { transform: translate(0, 0) scale(1); }
+	to { transform: translate(26px, 20px) scale(1.1); }
+}
+
+.aurora-login-dark-toggle {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	border: 1px solid var(--aurora-border, #e4e1f5);
+	background: var(--aurora-surface, #fff);
+	color: var(--aurora-text, #1c1730);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: var(--aurora-shadow, 0 8px 28px rgba(30,20,70,0.12));
+}
+
+.for-login,
+.login-content {
+	background: var(--aurora-surface, #fff);
+	border-radius: var(--aurora-radius-lg, 22px);
+	box-shadow: var(--aurora-shadow, 0 8px 28px rgba(30,20,70,0.12));
+}

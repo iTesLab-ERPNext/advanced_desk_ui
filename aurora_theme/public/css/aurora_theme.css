@@ -1,0 +1,294 @@
+/* ==========================================================================
+   Aurora Theme — Desk CSS
+   A cool-toned, "northern lights" aesthetic: deep violet + emerald + cyan,
+   flowing gradient blobs behind a dark glass sidebar, pill-shaped controls.
+   Deliberately different composition from Naidapa (which keeps the light,
+   warm-pastel glass look across the whole shell): Aurora keeps the sidebar
+   dark/immersive while the workspace content stays bright, so the accent
+   gradient reads as a strip of "sky" rather than a tint on every surface.
+   ========================================================================== */
+
+:root {
+	--aurora-primary: #5b3ce0;
+	--aurora-secondary: #0fae82;
+	--aurora-accent: #22c1dc;
+	--aurora-bg: #f5f4fb;
+	--aurora-surface: #ffffff;
+	--aurora-border: #e4e1f5;
+	--aurora-text: #1c1730;
+	--aurora-text-muted: #6f6a8a;
+
+	--aurora-sidebar-bg: #140f2b;
+	--aurora-sidebar-text: #e7e4fb;
+	--aurora-sidebar-muted: #9089c2;
+
+	--aurora-radius-sm: 8px;
+	--aurora-radius-md: 14px;
+	--aurora-radius-lg: 22px;
+	--aurora-shadow: 0 8px 28px rgba(30, 20, 70, 0.12);
+	--aurora-font-heading: "Space Grotesk", "Inter", sans-serif;
+	--aurora-font-body: "Inter", sans-serif;
+}
+
+[data-aurora-theme="dark"] {
+	--aurora-bg: #0e0b1e;
+	--aurora-surface: #191430;
+	--aurora-border: #2c2450;
+	--aurora-text: #efeeff;
+	--aurora-text-muted: #a49dcf;
+	--aurora-sidebar-bg: #0a0818;
+	--aurora-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+body {
+	background: var(--aurora-bg);
+	color: var(--aurora-text);
+	font-family: var(--aurora-font-body);
+}
+h1, h2, h3, h4, .navbar-brand, .page-title {
+	font-family: var(--aurora-font-heading);
+}
+
+/* -------------------------------------------------------------------------
+   Sidebar shell (rendered server-side by templates/includes/aurora)
+   ------------------------------------------------------------------------- */
+.aurora-sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 264px;
+	background: var(--aurora-sidebar-bg);
+	color: var(--aurora-sidebar-text);
+	overflow: hidden;
+	z-index: 950;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Flowing aurora gradient blobs behind the sidebar content — the app's
+   one signature visual motif, kept subtle and slow-moving. */
+.aurora-sidebar::before,
+.aurora-sidebar::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(70px);
+	opacity: 0.35;
+	pointer-events: none;
+	animation: aurora-drift 16s ease-in-out infinite alternate;
+}
+.aurora-sidebar::before {
+	width: 260px;
+	height: 260px;
+	background: var(--aurora-primary);
+	top: -60px;
+	left: -60px;
+}
+.aurora-sidebar::after {
+	width: 220px;
+	height: 220px;
+	background: var(--aurora-secondary);
+	bottom: -60px;
+	right: -80px;
+	animation-delay: 4s;
+}
+@keyframes aurora-drift {
+	from { transform: translate(0, 0) scale(1); }
+	to { transform: translate(24px, 18px) scale(1.1); }
+}
+
+.aurora-sidebar-header {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 18px 16px;
+}
+.aurora-sidebar-header img {
+	width: 30px;
+	height: 30px;
+	border-radius: var(--aurora-radius-sm);
+}
+.aurora-sidebar-header .aurora-sidebar-title {
+	font-family: var(--aurora-font-heading);
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.aurora-sidebar-search {
+	position: relative;
+	z-index: 1;
+	margin: 4px 14px 10px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 999px;
+	padding: 8px 14px;
+	color: var(--aurora-sidebar-muted);
+}
+.aurora-sidebar-search input {
+	background: transparent;
+	border: none;
+	outline: none;
+	color: #fff;
+	font-size: 13px;
+	flex: 1;
+}
+
+.aurora-sidebar-nav {
+	position: relative;
+	z-index: 1;
+	flex: 1;
+	overflow-y: auto;
+	padding: 6px 10px 16px;
+}
+
+.aurora-nav-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 12px;
+	border-radius: 999px;
+	color: var(--aurora-sidebar-text);
+	font-size: 13px;
+	cursor: pointer;
+	transition: background 0.15s ease, transform 0.15s ease;
+	text-decoration: none;
+}
+.aurora-nav-item:hover {
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+	transform: translateX(2px);
+	text-decoration: none;
+}
+.aurora-nav-item.active {
+	background: linear-gradient(90deg, var(--aurora-primary), var(--aurora-accent));
+	color: #fff;
+	font-weight: 500;
+}
+.aurora-nav-item .aurora-nav-icon {
+	width: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+}
+.aurora-nav-children {
+	margin-left: 14px;
+	border-left: 1px solid rgba(255, 255, 255, 0.1);
+	padding-left: 6px;
+}
+
+/* -------------------------------------------------------------------------
+   Navbar (pill search bar, floating above the content area)
+   ------------------------------------------------------------------------- */
+.aurora-navbar {
+	position: sticky;
+	top: 0;
+	z-index: 900;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px 12px 288px; /* leaves room for the fixed sidebar */
+	background: var(--aurora-bg);
+}
+
+.aurora-navbar-search {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--aurora-surface);
+	border: 1px solid var(--aurora-border);
+	border-radius: 999px;
+	padding: 8px 16px;
+	color: var(--aurora-text-muted);
+	box-shadow: var(--aurora-shadow);
+	min-width: 320px;
+}
+.aurora-navbar-search input {
+	border: none;
+	outline: none;
+	background: transparent;
+	flex: 1;
+	font-size: 13px;
+	color: var(--aurora-text);
+}
+
+.aurora-navbar-actions {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+.aurora-navbar-actions .aurora-icon-btn {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--aurora-surface);
+	border: 1px solid var(--aurora-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--aurora-text-muted);
+	cursor: pointer;
+}
+.aurora-navbar-avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--aurora-primary), var(--aurora-secondary));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------
+   Content area offset for the fixed sidebar
+   ------------------------------------------------------------------------- */
+body.aurora-has-sidebar .page-container,
+body.aurora-has-sidebar .navbar {
+	margin-left: 264px;
+	transition: margin-left 0.2s ease;
+}
+
+/* -------------------------------------------------------------------------
+   Workspace cards — duotone icon badges instead of Naidapa's glass orbs
+   ------------------------------------------------------------------------- */
+.aurora-workspace-card {
+	background: var(--aurora-surface);
+	border: 1px solid var(--aurora-border);
+	border-radius: var(--aurora-radius-md);
+	padding: 16px;
+	box-shadow: var(--aurora-shadow);
+	transition: transform 0.15s ease;
+}
+.aurora-workspace-card:hover {
+	transform: translateY(-3px);
+}
+.aurora-workspace-icon-badge {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--aurora-radius-sm);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, var(--aurora-primary) 0%, var(--aurora-accent) 100%);
+	color: #fff;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+	.aurora-sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+	.aurora-sidebar.aurora-mobile-open { transform: translateX(0); }
+	.aurora-navbar { padding-left: 24px; }
+	body.aurora-has-sidebar .page-container,
+	body.aurora-has-sidebar .navbar {
+		margin-left: 0 !important;
+	}
+}

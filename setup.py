@@ -3,13 +3,12 @@ from setuptools import find_packages, setup
 with open("requirements.txt") as f:
 	install_requires = [line.strip() for line in f if line.strip()]
 
-# get version from __version__ variable in advanced_desk_ui/__init__.py
-from advanced_desk_ui import __version__ as version
+from aurora_theme import __version__ as version
 
 setup(
-	name="advanced_desk_ui",
+	name="aurora_theme",
 	version=version,
-	description="Modern SaaS-style Desk theme and UX layer for ERPNext v15+",
+	description="A cool-toned, aurora-inspired ERPNext desk theme with animated workspace icons and a customer portal dashboard.",
 	author="Your Company",
 	author_email="dev@yourcompany.com",
 	packages=find_packages(),
