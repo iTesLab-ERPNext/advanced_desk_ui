@@ -91,6 +91,23 @@ bench build --app advanced_desk_ui
 bench --site your-site.local clear-cache
 ```
 
+### Troubleshooting: `ModuleNotFoundError: No module named 'advanced_desk_ui.advanced_desk_ui'`
+
+This means the DocType/Workspace/Dashboard folders are sitting directly
+under the app package instead of inside a **module subfolder** whose name
+(scrubbed to snake_case) matches an entry in `modules.txt`. Frappe expects:
+
+```
+advanced_desk_ui/advanced_desk_ui/advanced_desk_ui/doctype/...
+        ^app dir      ^app package   ^module folder
+```
+
+Fixed as of this version — `doctype/`, `workspace/`, and `dashboard/` now
+live inside `advanced_desk_ui/advanced_desk_ui/advanced_desk_ui/`. If
+you're on an older copy, move those three folders one level deeper (into
+a new folder named `advanced_desk_ui`, with an `__init__.py`), then re-run
+`bench migrate` / `install-app`.
+
 ### Troubleshooting: `uv` / pypika resolution error on install
 
 If `bench install-app` fails with something like:
@@ -122,12 +139,20 @@ effect on next page load — the theme cache is cleared automatically via the
 advanced_desk_ui/
 ├── hooks.py                 # app wiring — assets, boot, fixtures, events
 ├── boot.py                  # extend_bootinfo: pushes tokens+prefs to client
+├── modules.txt              # "Advanced Desk UI" — declares the module below
 ├── config/
 │   └── desktop.py           # module icon/label
-├── doctype/
-│   ├── advanced_desk_settings/   # admin control panel (Single doctype)
-│   ├── adu_favorite/             # per-user starred sidebar items
-│   └── adu_dashboard_layout/     # per-user dashboard widget layout
+├── advanced_desk_ui/        # ⚠ MODULE FOLDER — must match modules.txt,
+│   │                        #   scrubbed to snake_case. DocTypes/Workspaces/
+│   │                        #   Dashboards live here, one level deeper than
+│   │                        #   the app package itself (a common Frappe
+│   │                        #   gotcha — this nesting is required, not a typo).
+│   ├── doctype/
+│   │   ├── advanced_desk_settings/   # admin control panel (Single doctype)
+│   │   ├── adu_favorite/             # per-user starred sidebar items
+│   │   └── adu_dashboard_layout/     # per-user dashboard widget layout
+│   ├── workspace/
+│   └── dashboard/
 ├── api/
 │   ├── preferences.py       # whitelisted endpoints (theme mode, density)
 │   ├── sidebar.py           # favorites, recents, permission-aware search
@@ -136,7 +161,7 @@ advanced_desk_ui/
 │   ├── theme.py             # builds CSS var dict from settings, cached
 │   └── cache.py             # invalidation on save + daily warmup
 ├── fixtures/
-│   └── custom_field.json    # 2 User fields: adu_theme_mode, adu_density
+│   └── custom_field.json    # User fields: theme mode, density, sidebar width, animations
 └── public/
     ├── scss/                # variables, sidebar, navbar, command-palette,
     │                        # dashboard, workspace, forms, list,
