@@ -64,6 +64,28 @@ h1, h2, h3, h4, .navbar-brand, .page-title {
 	z-index: 950;
 	display: flex;
 	flex-direction: column;
+	/* Hidden by default at every breakpoint — this is an on-demand drawer,
+	   not a permanently docked column. Opened via the navbar toggle. */
+	transform: translateX(-100%);
+	transition: transform 0.22s ease;
+	box-shadow: 24px 0 60px rgba(10, 6, 30, 0.35);
+}
+.aurora-sidebar.aurora-open {
+	transform: translateX(0);
+}
+
+.aurora-sidebar-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(10, 6, 24, 0.35);
+	z-index: 940;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.22s ease;
+}
+.aurora-sidebar-backdrop.aurora-open {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 /* Flowing aurora gradient blobs behind the sidebar content — the app's
@@ -192,7 +214,7 @@ h1, h2, h3, h4, .navbar-brand, .page-title {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 12px 24px 12px 288px; /* leaves room for the fixed sidebar */
+	padding: 12px 24px;
 	background: var(--aurora-bg);
 }
 
@@ -250,11 +272,9 @@ h1, h2, h3, h4, .navbar-brand, .page-title {
 /* -------------------------------------------------------------------------
    Content area offset for the fixed sidebar
    ------------------------------------------------------------------------- */
-body.aurora-has-sidebar .page-container,
-body.aurora-has-sidebar .navbar {
-	margin-left: 264px;
-	transition: margin-left 0.2s ease;
-}
+/* The sidebar is an overlay drawer now (see .aurora-sidebar above), so
+   content no longer needs to make room for it — it floats above the
+   page with a backdrop instead of shifting .page-container/.navbar. */
 
 /* -------------------------------------------------------------------------
    Workspace cards — duotone icon badges instead of Naidapa's glass orbs
@@ -283,12 +303,138 @@ body.aurora-has-sidebar .navbar {
 	margin-bottom: 10px;
 }
 
+/* -------------------------------------------------------------------------
+   Tables — Desk list view, report/grid view, and child-table grids
+   ------------------------------------------------------------------------- */
+.list-row-container,
+.list-row-head {
+	border-color: var(--aurora-border) !important;
+	border-radius: var(--aurora-radius-sm);
+}
+.list-row-head {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	background: var(--aurora-surface) !important;
+	font-family: var(--aurora-font-heading);
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--aurora-text-muted) !important;
+}
+.list-row {
+	border-radius: var(--aurora-radius-sm);
+	transition: background 0.12s ease;
+}
+.list-row:hover {
+	background: rgba(91, 60, 224, 0.06) !important;
+}
+.list-row-container:nth-child(even) .list-row {
+	background: rgba(91, 60, 224, 0.02);
+}
+.list-row-checkbox:checked ~ * ,
+.list-row-container.checked .list-row {
+	background: rgba(91, 60, 224, 0.1) !important;
+}
+.indicator-pill,
+.filterable {
+	border-radius: 999px !important;
+}
+
+/* Report View / data-grid tables (generic <table> inside .frappe-list,
+   report view, and query report) */
+.frappe-list table,
+.dt-scrollable,
+table.report-table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.frappe-list table thead th,
+table.report-table thead th,
+.dt-header .dt-cell {
+	background: var(--aurora-surface) !important;
+	color: var(--aurora-text-muted) !important;
+	font-family: var(--aurora-font-heading);
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	border-bottom: 2px solid var(--aurora-border) !important;
+}
+.frappe-list table tbody tr:hover,
+table.report-table tbody tr:hover,
+.dt-row:hover .dt-cell {
+	background: rgba(91, 60, 224, 0.06) !important;
+}
+
+/* Child table grids on forms */
+.grid-heading-row {
+	background: var(--aurora-surface) !important;
+	border-radius: var(--aurora-radius-sm) var(--aurora-radius-sm) 0 0;
+}
+.grid-row:hover .data-row {
+	background: rgba(91, 60, 224, 0.05) !important;
+}
+.grid-body .rows {
+	border: 1px solid var(--aurora-border);
+	border-radius: var(--aurora-radius-sm);
+	overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------
+   Shortcuts — Workspace shortcut widgets, restyled with duotone badges
+   and pill hover motion consistent with the rest of Aurora
+   ------------------------------------------------------------------------- */
+.widget-shortcut,
+.shortcut-widget-box {
+	background: var(--aurora-surface);
+	border: 1px solid var(--aurora-border) !important;
+	border-radius: var(--aurora-radius-md) !important;
+	box-shadow: var(--aurora-shadow);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.widget-shortcut:hover,
+.shortcut-widget-box:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 14px 32px rgba(91, 60, 224, 0.18);
+	text-decoration: none;
+}
+.widget-shortcut .shortcut-icon,
+.shortcut-widget-box .shortcut-icon {
+	background: linear-gradient(135deg, var(--aurora-primary) 0%, var(--aurora-accent) 100%) !important;
+	color: #fff !important;
+	border-radius: var(--aurora-radius-sm) !important;
+}
+.widget-shortcut .shortcut-stat-count,
+.shortcut-widget-box .shortcut-stat-count {
+	color: var(--aurora-primary);
+	font-weight: 700;
+}
+.widget-shortcut .widget-label,
+.shortcut-widget-box .widget-label {
+	font-family: var(--aurora-font-heading);
+}
+
+/* A lighter "pill" shortcut variant, available for custom pages that
+   want an inline chip instead of a full card (e.g. dashboard widgets) */
+.aurora-shortcut-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	border-radius: 999px;
+	background: rgba(91, 60, 224, 0.08);
+	color: var(--aurora-primary);
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+.aurora-shortcut-pill:hover {
+	background: rgba(91, 60, 224, 0.16);
+	text-decoration: none;
+}
+
 @media (max-width: 900px) {
-	.aurora-sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
-	.aurora-sidebar.aurora-mobile-open { transform: translateX(0); }
-	.aurora-navbar { padding-left: 24px; }
-	body.aurora-has-sidebar .page-container,
-	body.aurora-has-sidebar .navbar {
-		margin-left: 0 !important;
-	}
+	.aurora-sidebar { width: 240px; }
+	.aurora-navbar { padding-left: 16px; padding-right: 16px; }
 }

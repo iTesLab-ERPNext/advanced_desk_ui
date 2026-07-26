@@ -34,8 +34,14 @@ aurora_theme.toggleDarkMode = function () {
 	}
 };
 
-aurora_theme.toggleMobileSidebar = function () {
-	document.querySelector(".aurora-sidebar")?.classList.toggle("aurora-mobile-open");
+aurora_theme.toggleSidebar = function () {
+	document.querySelector(".aurora-sidebar")?.classList.toggle("aurora-open");
+	document.querySelector(".aurora-sidebar-backdrop")?.classList.toggle("aurora-open");
+};
+
+aurora_theme.closeSidebar = function () {
+	document.querySelector(".aurora-sidebar")?.classList.remove("aurora-open");
+	document.querySelector(".aurora-sidebar-backdrop")?.classList.remove("aurora-open");
 };
 
 function iconTag(code) {
@@ -58,6 +64,7 @@ function buildSidebar(pages) {
 	if (document.querySelector(".aurora-sidebar")) return;
 
 	const boot = frappe.boot && frappe.boot.aurora_theme;
+	const $backdrop = $(`<div class="aurora-sidebar-backdrop"></div>`);
 	const $sidebar = $(`
 		<div class="aurora-sidebar">
 			<div class="aurora-sidebar-header">
@@ -73,7 +80,13 @@ function buildSidebar(pages) {
 			</div>
 		</div>
 	`);
-	$("body").addClass("aurora-has-sidebar").prepend($sidebar);
+	// Sidebar starts closed (see .aurora-sidebar default transform in CSS) —
+	// opened only via the navbar toggle, never automatically.
+	$("body").append($backdrop).append($sidebar);
+
+	$backdrop.on("click", aurora_theme.closeSidebar);
+	$sidebar.on("click", ".aurora-nav-item", aurora_theme.closeSidebar);
+
 	$sidebar.find("input").on("input", function () {
 		const q = $(this).val().toLowerCase();
 		$sidebar.find(".aurora-nav-item").each(function () {
@@ -97,13 +110,13 @@ function buildNavbar() {
 	$darkToggle.on("click", aurora_theme.toggleDarkMode);
 	$stockNavbar.find(".navbar-nav").first().prepend($darkToggle);
 
-	const $mobileToggle = $(`
-		<li class="nav-item aurora-mobile-toggle d-lg-none" title="${__("Menu")}" style="cursor:pointer;display:flex;align-items:center;padding:0 8px">
+	const $sidebarToggle = $(`
+		<li class="nav-item aurora-sidebar-toggle" title="${__("Toggle sidebar")}" style="cursor:pointer;display:flex;align-items:center;padding:0 8px">
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
 		</li>
 	`);
-	$mobileToggle.on("click", aurora_theme.toggleMobileSidebar);
-	$stockNavbar.find(".navbar-nav").first().prepend($mobileToggle);
+	$sidebarToggle.on("click", aurora_theme.toggleSidebar);
+	$stockNavbar.find(".navbar-nav").first().prepend($sidebarToggle);
 }
 
 function loadSidebarData() {
@@ -125,5 +138,9 @@ function loadSidebarData() {
 		aurora_theme.applySettings(frappe.boot && frappe.boot.aurora_theme);
 		buildNavbar();
 		loadSidebarData();
+	});
+
+	$(document).on("keydown", function (e) {
+		if (e.key === "Escape") aurora_theme.closeSidebar();
 	});
 })();

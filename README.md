@@ -19,7 +19,18 @@ the palette, layout, and every file here are original.
   `ph:rocket-launch-duotone`) with a live preview grid; free-text entry
   also accepts any valid Iconify code beyond the starter set.
 - **Custom sidebar + navbar** — dark, gradient-lit sidebar with nested
-  workspaces, a pill search box, dark-mode toggle, and a mobile drawer.
+  workspaces, a pill search box, and dark-mode toggle. The sidebar is a
+  closed-by-default overlay drawer (not a permanently docked column) —
+  it never auto-opens; click the navbar toggle to slide it in over the
+  content with a backdrop, click outside or press Esc to close. This
+  keeps the full width available for list/report views by default.
+- **Tables** — Desk list view, report/grid view, and child-table grids all
+  get a sticky header, zebra striping, and hover highlight in the Aurora
+  palette (`.list-row-head`, `.frappe-list table`, `.grid-body` — no core
+  markup changes, just restyling). Portal tables match.
+- **Shortcuts** — Workspace shortcut cards get duotone gradient icon
+  badges and a lift-on-hover animation; a lighter pill variant
+  (`.aurora-shortcut-pill`) is available for custom pages/dashboards.
 - **Customer Portal Dashboard** (`/dashboard`) — order/invoice/outstanding/
   open-issue stats for portal (Customer) users, resolved via the standard
   User → Contact → Customer link.
