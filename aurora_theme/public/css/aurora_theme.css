@@ -1,11 +1,12 @@
 /* ==========================================================================
    Aurora Theme — Desk CSS
-   A cool-toned, "northern lights" aesthetic: deep violet + emerald + cyan,
-   flowing gradient blobs behind a dark glass sidebar, pill-shaped controls.
-   Deliberately different composition from Naidapa (which keeps the light,
-   warm-pastel glass look across the whole shell): Aurora keeps the sidebar
-   dark/immersive while the workspace content stays bright, so the accent
-   gradient reads as a strip of "sky" rather than a tint on every surface.
+   A cool-toned, "northern lights" aesthetic: deep violet + emerald + cyan.
+   This restyles ERPNext's OWN sidebar, navbar, tables, buttons, forms and
+   dialogs in place — it does not render a second/duplicate sidebar. Real
+   Frappe v15 class names are targeted directly (sidebar-item-container,
+   desk-sidebar-item, item-anchor, etc.); a couple of container-level
+   selectors are listed with fallbacks since exact wrapper names have
+   shifted slightly across v14/v15/v16 point releases.
    ========================================================================== */
 
 :root {
@@ -21,6 +22,7 @@
 	--aurora-sidebar-bg: #140f2b;
 	--aurora-sidebar-text: #e7e4fb;
 	--aurora-sidebar-muted: #9089c2;
+	--aurora-sidebar-width: 250px;
 
 	--aurora-radius-sm: 8px;
 	--aurora-radius-md: 14px;
@@ -50,234 +52,180 @@ h1, h2, h3, h4, .navbar-brand, .page-title {
 }
 
 /* -------------------------------------------------------------------------
-   Sidebar shell (rendered server-side by templates/includes/aurora)
+   Sidebar — restyling ERPNext's OWN sidebar (no second sidebar rendered).
+   Wrapper selectors are listed with fallbacks: the outer container has
+   been named .desk-sidebar-container / .body-sidebar-container /
+   .sidebar-container across recent v15 point releases.
    ------------------------------------------------------------------------- */
-.aurora-sidebar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 264px;
-	background: var(--aurora-sidebar-bg);
-	color: var(--aurora-sidebar-text);
+.desk-sidebar-container,
+.body-sidebar-container,
+.sidebar-container.standard-sidebar,
+.sidebar-container {
+	background: var(--aurora-sidebar-bg) !important;
+	border-right: none !important;
+	width: var(--aurora-sidebar-width);
+	position: relative;
 	overflow: hidden;
-	z-index: 950;
-	display: flex;
-	flex-direction: column;
-	/* Hidden by default at every breakpoint — this is an on-demand drawer,
-	   not a permanently docked column. Opened via the navbar toggle. */
-	transform: translateX(-100%);
-	transition: transform 0.22s ease;
-	box-shadow: 24px 0 60px rgba(10, 6, 30, 0.35);
-}
-.aurora-sidebar.aurora-open {
-	transform: translateX(0);
+	transition: width 0.2s ease, transform 0.2s ease;
 }
 
-.aurora-sidebar-backdrop {
-	position: fixed;
-	inset: 0;
-	background: rgba(10, 6, 24, 0.35);
-	z-index: 940;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.22s ease;
+/* Hidden by default (the ask: no sidebar shown on load). Toggled open by
+   adding .aurora-sidebar-open to <body> via the navbar toggle button. */
+.desk-sidebar-container,
+.body-sidebar-container,
+.sidebar-container.standard-sidebar {
+	width: 0 !important;
+	min-width: 0 !important;
 }
-.aurora-sidebar-backdrop.aurora-open {
-	opacity: 1;
-	pointer-events: auto;
+body.aurora-sidebar-open .desk-sidebar-container,
+body.aurora-sidebar-open .body-sidebar-container,
+body.aurora-sidebar-open .sidebar-container.standard-sidebar {
+	width: var(--aurora-sidebar-width) !important;
+	min-width: var(--aurora-sidebar-width) !important;
 }
 
-/* Flowing aurora gradient blobs behind the sidebar content — the app's
-   one signature visual motif, kept subtle and slow-moving. */
-.aurora-sidebar::before,
-.aurora-sidebar::after {
+/* Flowing aurora gradient glow behind the sidebar content — the one
+   signature visual motif, kept subtle. */
+.desk-sidebar-container::before,
+.body-sidebar-container::before {
 	content: "";
 	position: absolute;
-	border-radius: 50%;
-	filter: blur(70px);
-	opacity: 0.35;
-	pointer-events: none;
-	animation: aurora-drift 16s ease-in-out infinite alternate;
-}
-.aurora-sidebar::before {
-	width: 260px;
-	height: 260px;
-	background: var(--aurora-primary);
-	top: -60px;
-	left: -60px;
-}
-.aurora-sidebar::after {
 	width: 220px;
 	height: 220px;
-	background: var(--aurora-secondary);
-	bottom: -60px;
-	right: -80px;
-	animation-delay: 4s;
-}
-@keyframes aurora-drift {
-	from { transform: translate(0, 0) scale(1); }
-	to { transform: translate(24px, 18px) scale(1.1); }
+	top: -60px;
+	left: -60px;
+	border-radius: 50%;
+	background: var(--aurora-primary);
+	filter: blur(70px);
+	opacity: 0.3;
+	pointer-events: none;
 }
 
-.aurora-sidebar-header {
-	position: relative;
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 18px 16px;
-}
-.aurora-sidebar-header img {
-	width: 30px;
-	height: 30px;
-	border-radius: var(--aurora-radius-sm);
-}
-.aurora-sidebar-header .aurora-sidebar-title {
+.standard-sidebar-section,
+.standard-sidebar-label {
+	color: var(--aurora-sidebar-muted) !important;
 	font-family: var(--aurora-font-heading);
-	font-weight: 600;
-	font-size: 15px;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 }
 
-.aurora-sidebar-search {
+/* Real sidebar item markup (confirmed structure):
+   .sidebar-item-container > .desk-sidebar-item.standard-sidebar-item
+     > .item-anchor > .sidebar-item-icon, .sidebar-item-label */
+.sidebar-item-container {
+	padding: 1px 8px;
 	position: relative;
 	z-index: 1;
-	margin: 4px 14px 10px;
+}
+.desk-sidebar-item.standard-sidebar-item,
+.desk-sidebar-item .item-anchor {
+	border-radius: 999px !important;
+	color: var(--aurora-sidebar-text) !important;
+	transition: background 0.15s ease, transform 0.15s ease;
+}
+.desk-sidebar-item .item-anchor {
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	padding: 7px 10px !important;
+}
+.desk-sidebar-item .item-anchor:hover {
 	background: rgba(255, 255, 255, 0.08);
-	border-radius: 999px;
-	padding: 8px 14px;
-	color: var(--aurora-sidebar-muted);
-}
-.aurora-sidebar-search input {
-	background: transparent;
-	border: none;
-	outline: none;
-	color: #fff;
-	font-size: 13px;
-	flex: 1;
-}
-
-.aurora-sidebar-nav {
-	position: relative;
-	z-index: 1;
-	flex: 1;
-	overflow-y: auto;
-	padding: 6px 10px 16px;
-}
-
-.aurora-nav-item {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 9px 12px;
-	border-radius: 999px;
-	color: var(--aurora-sidebar-text);
-	font-size: 13px;
-	cursor: pointer;
-	transition: background 0.15s ease, transform 0.15s ease;
-	text-decoration: none;
-}
-.aurora-nav-item:hover {
-	background: rgba(255, 255, 255, 0.08);
-	color: #fff;
 	transform: translateX(2px);
 	text-decoration: none;
 }
-.aurora-nav-item.active {
-	background: linear-gradient(90deg, var(--aurora-primary), var(--aurora-accent));
+.sidebar-item-container.selected > .desk-sidebar-item,
+.sidebar-item-container.selected .item-anchor {
+	background: linear-gradient(90deg, var(--aurora-primary), var(--aurora-accent)) !important;
+	color: #fff !important;
+}
+.sidebar-item-icon svg {
+	color: var(--aurora-sidebar-muted);
+}
+.sidebar-item-container.selected .sidebar-item-icon svg {
 	color: #fff;
-	font-weight: 500;
 }
-.aurora-nav-item .aurora-nav-icon {
-	width: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
+.sidebar-item-control .btn {
+	color: var(--aurora-sidebar-muted);
 }
-.aurora-nav-children {
-	margin-left: 14px;
-	border-left: 1px solid rgba(255, 255, 255, 0.1);
-	padding-left: 6px;
+
+/* Nested/child workspace items */
+.sidebar-child-item .item-anchor {
+	padding-left: 26px !important;
+	font-size: 12.5px;
 }
 
 /* -------------------------------------------------------------------------
-   Navbar (pill search bar, floating above the content area)
+   Navbar
    ------------------------------------------------------------------------- */
-.aurora-navbar {
-	position: sticky;
-	top: 0;
-	z-index: 900;
+.navbar {
+	background: var(--aurora-surface) !important;
+	border-bottom: 1px solid var(--aurora-border);
+}
+.aurora-sidebar-toggle a,
+.aurora-dark-toggle a {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: 12px 24px;
-	background: var(--aurora-bg);
+	color: var(--aurora-text-muted);
+}
+.aurora-sidebar-toggle a:hover,
+.aurora-dark-toggle a:hover {
+	color: var(--aurora-primary);
 }
 
-.aurora-navbar-search {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	background: var(--aurora-surface);
-	border: 1px solid var(--aurora-border);
+/* -------------------------------------------------------------------------
+   Buttons, inputs, indicators — a light global pass so the theme reads
+   consistently beyond just the sidebar/tables
+   ------------------------------------------------------------------------- */
+.btn {
 	border-radius: 999px;
-	padding: 8px 16px;
-	color: var(--aurora-text-muted);
-	box-shadow: var(--aurora-shadow);
-	min-width: 320px;
+	font-weight: 500;
 }
-.aurora-navbar-search input {
-	border: none;
-	outline: none;
-	background: transparent;
-	flex: 1;
-	font-size: 13px;
-	color: var(--aurora-text);
+.btn-primary {
+	background: var(--aurora-primary) !important;
+	border-color: var(--aurora-primary) !important;
 }
-
-.aurora-navbar-actions {
-	display: flex;
-	align-items: center;
-	gap: 14px;
+.btn-primary:hover {
+	background: #4b2fc4 !important;
 }
-.aurora-navbar-actions .aurora-icon-btn {
-	width: 36px;
-	height: 36px;
-	border-radius: 50%;
-	background: var(--aurora-surface);
-	border: 1px solid var(--aurora-border);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--aurora-text-muted);
-	cursor: pointer;
+.form-control:focus,
+.input-with-feedback:focus {
+	border-color: var(--aurora-primary) !important;
+	box-shadow: 0 0 0 2px rgba(91, 60, 224, 0.15) !important;
 }
-.aurora-navbar-avatar {
-	width: 34px;
-	height: 34px;
-	border-radius: 50%;
-	background: linear-gradient(135deg, var(--aurora-primary), var(--aurora-secondary));
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #fff;
-	font-size: 12px;
+.indicator-pill,
+.filterable,
+.badge {
+	border-radius: 999px !important;
+}
+.indicator-pill.blue, .indicator-pill.green, .indicator-pill.orange,
+.indicator-pill.red, .indicator-pill.gray, .indicator-pill.purple {
 	font-weight: 600;
 }
 
-/* -------------------------------------------------------------------------
-   Content area offset for the fixed sidebar
-   ------------------------------------------------------------------------- */
-/* The sidebar is an overlay drawer now (see .aurora-sidebar above), so
-   content no longer needs to make room for it — it floats above the
-   page with a backdrop instead of shifting .page-container/.navbar. */
+/* Modals / dialogs */
+.modal-content {
+	border-radius: var(--aurora-radius-lg) !important;
+	border: none !important;
+	box-shadow: var(--aurora-shadow);
+}
+.modal-header {
+	border-bottom: 1px solid var(--aurora-border) !important;
+	font-family: var(--aurora-font-heading);
+}
+
+/* Page head / breadcrumbs */
+.page-head {
+	background: var(--aurora-bg) !important;
+	border-bottom: 1px solid var(--aurora-border);
+}
+.title-text, .page-title .title-text {
+	font-family: var(--aurora-font-heading);
+}
 
 /* -------------------------------------------------------------------------
-   Workspace cards — duotone icon badges instead of Naidapa's glass orbs
+   Workspace cards — duotone icon badges
    ------------------------------------------------------------------------- */
 .aurora-workspace-card {
 	background: var(--aurora-surface);
@@ -335,10 +283,6 @@ h1, h2, h3, h4, .navbar-brand, .page-title {
 .list-row-checkbox:checked ~ * ,
 .list-row-container.checked .list-row {
 	background: rgba(91, 60, 224, 0.1) !important;
-}
-.indicator-pill,
-.filterable {
-	border-radius: 999px !important;
 }
 
 /* Report View / data-grid tables (generic <table> inside .frappe-list,
@@ -435,6 +379,17 @@ table.report-table tbody tr:hover,
 }
 
 @media (max-width: 900px) {
-	.aurora-sidebar { width: 240px; }
-	.aurora-navbar { padding-left: 16px; padding-right: 16px; }
+	:root {
+		--aurora-sidebar-width: 230px;
+	}
+	body.aurora-sidebar-open .desk-sidebar-container,
+	body.aurora-sidebar-open .body-sidebar-container,
+	body.aurora-sidebar-open .sidebar-container.standard-sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		z-index: 960;
+		box-shadow: 24px 0 60px rgba(10, 6, 30, 0.35);
+	}
 }

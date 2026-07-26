@@ -1,14 +1,22 @@
 /**
  * Aurora Theme — Desk JS
  *
- * Builds a custom sidebar + navbar as an overlay on top of the stock Desk
- * DOM (same additive technique used throughout this theme family: nothing
- * here replaces core templates or routing, so workspace permissions and
- * navigation keep working exactly as ERPNext built them). Two things it
- * adds that core doesn't have:
- *   - Animated Iconify icons per workspace (from the `aurora_animated_icon`
- *     custom field, resolved server-side by events.sidebar.get_sidebar_pages)
- *   - Theme Settings-driven colors/fonts, dark mode, and a mobile drawer
+ * IMPORTANT: this app does NOT render its own sidebar. It only toggles and
+ * restyles ERPNext's real sidebar DOM (see aurora_theme.css for the
+ * `.desk-sidebar-container` / `.sidebar-item-container` rules). There is
+ * exactly one menu — the one ERPNext already builds, permission-checked
+ * and routed by core — this file just controls its visibility and adds
+ * animated icons on top of it.
+ *
+ * What this file does:
+ *   - Toggles `.aurora-sidebar-open` on <body>, which CSS uses to show
+ *     the (otherwise width:0, hidden-by-default) real sidebar.
+ *   - Injects an <iconify-icon> in front of each real sidebar item whose
+ *     workspace has an `aurora_animated_icon` set (from
+ *     events.sidebar.get_sidebar_pages), without touching anything else
+ *     about how that item works.
+ *   - Applies Theme Settings colors/fonts as CSS variables.
+ *   - Dark mode toggle.
  */
 
 frappe.provide("aurora_theme");
@@ -34,81 +42,21 @@ aurora_theme.toggleDarkMode = function () {
 	}
 };
 
+// Toggles ERPNext's OWN sidebar via a body class — no sidebar DOM is
+// created here, this only flips visibility of what core already rendered.
 aurora_theme.toggleSidebar = function () {
-	document.querySelector(".aurora-sidebar")?.classList.toggle("aurora-open");
-	document.querySelector(".aurora-sidebar-backdrop")?.classList.toggle("aurora-open");
+	document.body.classList.toggle("aurora-sidebar-open");
 };
 
 aurora_theme.closeSidebar = function () {
-	document.querySelector(".aurora-sidebar")?.classList.remove("aurora-open");
-	document.querySelector(".aurora-sidebar-backdrop")?.classList.remove("aurora-open");
+	document.body.classList.remove("aurora-sidebar-open");
 };
-
-function iconTag(code) {
-	return code ? `<iconify-icon icon="${code}" class="aurora-nav-icon"></iconify-icon>` : `<span class="aurora-nav-icon">•</span>`;
-}
-
-function renderNavItem(page, depth) {
-	const route = "/app/" + encodeURIComponent((page.title || page.name || "").toLowerCase().replace(/ /g, "-"));
-	const children = page.children || [];
-	return `
-		<a href="${route}" class="aurora-nav-item" data-label="${(page.title || "").toLowerCase()}" style="margin-left:${depth * 8}px">
-			${iconTag(page.animated_icon)}
-			<span>${frappe.utils.escape_html(page.title || page.name)}</span>
-		</a>
-		${children.length ? `<div class="aurora-nav-children">${children.map((c) => renderNavItem(c, 0)).join("")}</div>` : ""}
-	`;
-}
-
-function buildSidebar(pages) {
-	if (document.querySelector(".aurora-sidebar")) return;
-
-	const boot = frappe.boot && frappe.boot.aurora_theme;
-	const $backdrop = $(`<div class="aurora-sidebar-backdrop"></div>`);
-	const $sidebar = $(`
-		<div class="aurora-sidebar">
-			<div class="aurora-sidebar-header">
-				${boot && boot.sidebar_logo ? `<img src="${boot.sidebar_logo}" />` : ""}
-				<span class="aurora-sidebar-title">${frappe.utils.escape_html((boot && boot.sidebar_text) || "Aurora")}</span>
-			</div>
-			<div class="aurora-sidebar-search">
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-				<input type="text" placeholder="${__("Search workspaces...")}" />
-			</div>
-			<div class="aurora-sidebar-nav">
-				${pages.map((p) => renderNavItem(p, 0)).join("")}
-			</div>
-		</div>
-	`);
-	// Sidebar starts closed (see .aurora-sidebar default transform in CSS) —
-	// opened only via the navbar toggle, never automatically.
-	$("body").append($backdrop).append($sidebar);
-
-	$backdrop.on("click", aurora_theme.closeSidebar);
-	$sidebar.on("click", ".aurora-nav-item", aurora_theme.closeSidebar);
-
-	$sidebar.find("input").on("input", function () {
-		const q = $(this).val().toLowerCase();
-		$sidebar.find(".aurora-nav-item").each(function () {
-			const label = $(this).attr("data-label") || "";
-			$(this).toggle(!q || label.includes(q));
-		});
-	});
-}
 
 function buildNavbar() {
 	if (document.querySelector(".aurora-navbar-injected")) return;
 	const $stockNavbar = $(".navbar").first();
 	if (!$stockNavbar.length) return;
-	$stockNavbar.addClass("aurora-navbar aurora-navbar-injected");
-
-	const $darkToggle = $(`
-		<li class="nav-item aurora-dark-toggle" title="${__("Toggle dark mode")}" style="cursor:pointer;display:flex;align-items:center;padding:0 8px">
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-		</li>
-	`);
-	$darkToggle.on("click", aurora_theme.toggleDarkMode);
-	$stockNavbar.find(".navbar-nav").first().prepend($darkToggle);
+	$stockNavbar.addClass("aurora-navbar-injected");
 
 	const $sidebarToggle = $(`
 		<li class="nav-item aurora-sidebar-toggle" title="${__("Toggle sidebar")}" style="cursor:pointer;display:flex;align-items:center;padding:0 8px">
@@ -117,12 +65,68 @@ function buildNavbar() {
 	`);
 	$sidebarToggle.on("click", aurora_theme.toggleSidebar);
 	$stockNavbar.find(".navbar-nav").first().prepend($sidebarToggle);
+
+	const $darkToggle = $(`
+		<li class="nav-item aurora-dark-toggle" title="${__("Toggle dark mode")}" style="cursor:pointer;display:flex;align-items:center;padding:0 8px">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+		</li>
+	`);
+	$darkToggle.on("click", aurora_theme.toggleDarkMode);
+	$stockNavbar.find(".navbar-nav").first().prepend($darkToggle);
 }
 
-function loadSidebarData() {
+/**
+ * Finds each real sidebar item for a workspace and, if that workspace has
+ * an animated icon set, prepends an <iconify-icon> to its existing icon
+ * slot — the item, link, and click handler are all still core's, this
+ * only adds a visual. Matching is defensive (a couple of fallback
+ * strategies) since the exact attribute Frappe puts on the item wrapper
+ * has varied slightly across recent point releases; if none of these
+ * match on your version, the icons just won't appear — nothing else here
+ * depends on the match succeeding.
+ */
+function findSidebarItemContainer(page) {
+	let $container = $(`.sidebar-item-container[item-name="${page.name}"]`);
+	if ($container.length) return $container;
+
+	$container = $(`.sidebar-item-container[item-name="${page.title}"]`);
+	if ($container.length) return $container;
+
+	// Fallback: match by visible label text
+	const label = (page.title || page.name || "").trim();
+	$(".sidebar-item-label").each(function () {
+		if ($(this).text().trim() === label) {
+			$container = $(this).closest(".sidebar-item-container");
+			return false;
+		}
+	});
+	if ($container && $container.length) return $container;
+
+	// Fallback: match by link href containing the workspace's slug
+	const slug = (page.title || page.name || "").toLowerCase().replace(/ /g, "-");
+	return $(`.sidebar-item-container a[href*="${slug}"]`).closest(".sidebar-item-container");
+}
+
+function applyAnimatedIcons(pages) {
+	function walk(list) {
+		list.forEach((page) => {
+			if (page.animated_icon) {
+				const $container = findSidebarItemContainer(page);
+				const $iconSlot = $container.find(".sidebar-item-icon").first();
+				if ($iconSlot.length && !$iconSlot.find("iconify-icon").length) {
+					$iconSlot.prepend(`<iconify-icon icon="${page.animated_icon}" style="font-size:16px"></iconify-icon>`);
+				}
+			}
+			if (page.children && page.children.length) walk(page.children);
+		});
+	}
+	walk(pages || []);
+}
+
+function loadAnimatedIcons() {
 	frappe.call({
 		method: "aurora_theme.events.sidebar.get_sidebar_pages",
-		callback: (r) => buildSidebar(r.message || []),
+		callback: (r) => applyAnimatedIcons(r.message || []),
 	});
 }
 
@@ -137,8 +141,12 @@ function loadSidebarData() {
 	$(document).on("app_ready", function () {
 		aurora_theme.applySettings(frappe.boot && frappe.boot.aurora_theme);
 		buildNavbar();
-		loadSidebarData();
+		loadAnimatedIcons();
 	});
+
+	// Re-check for newly rendered sidebar items after each route change
+	// (workspace switches can re-render the sidebar item list).
+	frappe.router && frappe.router.on && frappe.router.on("change", () => setTimeout(loadAnimatedIcons, 300));
 
 	$(document).on("keydown", function (e) {
 		if (e.key === "Escape") aurora_theme.closeSidebar();

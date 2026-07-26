@@ -14,16 +14,32 @@ the palette, layout, and every file here are original.
   primary/secondary/accent colors, heading/body font, and login page copy
   (tag line, short notes, description). Colors apply instantly via CSS
   variables; no rebuild needed for a color change.
+- **One sidebar — ERPNext's own, restyled.** Earlier versions of this app
+  rendered a second, duplicate sidebar as a DOM overlay. That's gone. This
+  version targets and restyles the real sidebar ERPNext already builds
+  (`.sidebar-item-container`, `.desk-sidebar-item`, `.item-anchor`, etc. —
+  confirmed Frappe v15 class names) with the dark, gradient-lit Aurora
+  look. There is exactly one menu, permission-checked and routed by core,
+  same as stock ERPNext — this only changes how it looks and whether it's
+  visible.
+- **Hidden by default.** The sidebar is `width: 0` until you click the
+  navbar toggle, which adds `.aurora-sidebar-open` to `<body>` — pure CSS,
+  no duplicate markup. Press the toggle again or Esc to close it.
+  ⚠️ The exact outer wrapper class name for the sidebar (as opposed to the
+  individual item classes, which are stable) has shifted slightly across
+  recent v15 point releases — this CSS targets three known candidates
+  (`.desk-sidebar-container`, `.body-sidebar-container`,
+  `.sidebar-container.standard-sidebar`) for redundancy. If the toggle
+  doesn't hide/show anything on your exact version, open devtools,
+  right-click the sidebar, "Inspect", and send me the class on the
+  outermost wrapper div — it's a one-line CSS fix.
+- **Broader restyle pass** — buttons, form inputs, modals/dialogs, the
+  page header/breadcrumbs, and indicator pills now pick up the Aurora
+  palette too, not just the sidebar and tables.
 - **Animated workspace icons** — a `Pick Animated Icon` button on the
   Workspace form lets you choose an Iconify icon code (e.g.
-  `ph:rocket-launch-duotone`) with a live preview grid; free-text entry
-  also accepts any valid Iconify code beyond the starter set.
-- **Custom sidebar + navbar** — dark, gradient-lit sidebar with nested
-  workspaces, a pill search box, and dark-mode toggle. The sidebar is a
-  closed-by-default overlay drawer (not a permanently docked column) —
-  it never auto-opens; click the navbar toggle to slide it in over the
-  content with a backdrop, click outside or press Esc to close. This
-  keeps the full width available for list/report views by default.
+  `ph:rocket-launch-duotone`) with a live preview grid; the icon then gets
+  injected in front of that workspace's existing sidebar item icon.
 - **Tables** — Desk list view, report/grid view, and child-table grids all
   get a sticky header, zebra striping, and hover highlight in the Aurora
   palette (`.list-row-head`, `.frappe-list table`, `.grid-body` — no core
