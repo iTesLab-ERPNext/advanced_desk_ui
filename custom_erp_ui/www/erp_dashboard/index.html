@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ title }} | ERP Custom</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+
+	<link rel="stylesheet" href="/assets/custom_erp_ui/css/erp_dashboard.css">
+
+	{{ include_style("frappe-web.bundle.css") }}
+</head>
+<body class="erp-app" data-user="{{ frappe.session.user }}">
+
+	<div class="erp-shell" id="erpShell">
+
+		<!-- ============ SIDEBAR ============ -->
+		<aside class="erp-sidebar" id="erpSidebar">
+			<div class="erp-sidebar-header">
+				<div class="erp-logo">
+					<span class="erp-logo-mark">&#9679;</span>
+					<span class="erp-logo-text">ERP Custom</span>
+				</div>
+			</div>
+
+			<nav class="erp-nav">
+				{% for section in nav_sections %}
+				<div class="erp-nav-section">
+					<div class="erp-nav-section-label">{{ section.label }}</div>
+					{% for item in section.items %}
+					<a href="{{ item.route }}" class="erp-nav-item" data-tooltip="{{ item.label }}">
+						<span class="mdi mdi-{{ item.icon }} erp-nav-icon"></span>
+						<span class="erp-nav-label">{{ item.label }}</span>
+					</a>
+					{% endfor %}
+				</div>
+				{% endfor %}
+			</nav>
+
+			<div class="erp-sidebar-footer">
+				<button class="erp-collapse-btn" id="erpCollapseBtn" type="button">
+					<span class="mdi mdi-chevron-left"></span>
+					<span class="erp-collapse-label">Collapse</span>
+				</button>
+			</div>
+		</aside>
+
+		<!-- ============ MAIN ============ -->
+		<div class="erp-main">
+
+			<!-- NAVBAR -->
+			<header class="erp-navbar">
+				<div class="erp-navbar-left">
+					<button class="erp-icon-btn" id="erpSidebarToggle" type="button" aria-label="Toggle sidebar">
+						<span class="mdi mdi-menu"></span>
+					</button>
+					<div class="erp-search">
+						<span class="mdi mdi-magnify"></span>
+						<input type="text" id="erpGlobalSearch" placeholder="Search customers, orders, invoices...">
+						<div class="erp-search-results" id="erpSearchResults"></div>
+					</div>
+				</div>
+
+				<div class="erp-navbar-right">
+					<button class="erp-icon-btn" id="erpNotifBtn" type="button" aria-label="Notifications">
+						<span class="mdi mdi-bell-outline"></span>
+						<span class="erp-badge-dot" id="erpNotifDot" hidden></span>
+					</button>
+					<div class="erp-dropdown-panel" id="erpNotifPanel" hidden>
+						<div class="erp-dropdown-title">Notifications</div>
+						<div id="erpNotifList" class="erp-notif-list"></div>
+					</div>
+
+					<button class="erp-icon-btn" type="button" aria-label="Help">
+						<span class="mdi mdi-help-circle-outline"></span>
+					</button>
+
+					<div class="erp-user-menu">
+						<button class="erp-user-trigger" id="erpUserTrigger" type="button">
+							<span class="erp-avatar">{{ user_full_name[0] }}</span>
+							<span class="erp-user-name">{{ user_full_name }}</span>
+							<span class="mdi mdi-chevron-down"></span>
+						</button>
+						<div class="erp-dropdown-panel erp-user-dropdown" id="erpUserPanel" hidden>
+							<div class="erp-user-dropdown-header">
+								<div class="erp-avatar erp-avatar-lg">{{ user_full_name[0] }}</div>
+								<div>
+									<div class="erp-user-dropdown-name">{{ user_full_name }}</div>
+									<div class="erp-user-dropdown-role">{{ user_role }}</div>
+								</div>
+							</div>
+							<a href="/app/user-profile" class="erp-dropdown-item"><span class="mdi mdi-account-outline"></span> My Profile</a>
+							<a href="/app/system-settings" class="erp-dropdown-item"><span class="mdi mdi-cog-outline"></span> Settings</a>
+							<a href="/update-password" class="erp-dropdown-item"><span class="mdi mdi-lock-outline"></span> Change Password</a>
+							<div class="erp-dropdown-divider"></div>
+							<a href="/app/logout" class="erp-dropdown-item erp-dropdown-item-danger"><span class="mdi mdi-logout"></span> Logout</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- CONTENT -->
+			<main class="erp-content">
+				<div class="erp-breadcrumb">
+					<span>Dashboard</span>
+				</div>
+
+				<div class="erp-page-header">
+					<div>
+						<h1 class="erp-greeting" id="erpGreeting">Good day, {{ user_full_name.split(' ')[0] }} <span class="erp-wave">&#128075;</span></h1>
+						<p class="erp-page-subtitle">Here's what's happening with your business today.</p>
+					</div>
+				</div>
+
+				<!-- KPI CARDS -->
+				<section class="erp-kpi-grid" id="erpKpiGrid">
+					<!-- filled by JS; skeletons shown initially -->
+					<div class="erp-kpi-card erp-skeleton"></div>
+					<div class="erp-kpi-card erp-skeleton"></div>
+					<div class="erp-kpi-card erp-skeleton"></div>
+					<div class="erp-kpi-card erp-skeleton"></div>
+					<div class="erp-kpi-card erp-skeleton"></div>
+				</section>
+
+				<!-- QUICK ACTIONS -->
+				<section class="erp-section">
+					<div class="erp-section-header">
+						<div>
+							<h2 class="erp-section-title">Quick Actions</h2>
+							<p class="erp-section-subtitle">Frequently used operations</p>
+						</div>
+					</div>
+					<div class="erp-quick-actions" id="erpQuickActions"></div>
+				</section>
+
+				<!-- CHARTS + ACTIVITY -->
+				<section class="erp-dashboard-row">
+					<div class="erp-card erp-chart-card">
+						<div class="erp-card-title">Sales Overview</div>
+						<canvas id="erpSalesChart" height="220"></canvas>
+					</div>
+
+					<div class="erp-card erp-status-card">
+						<div class="erp-card-title">Order Status</div>
+						<div id="erpStatusBreakdown" class="erp-status-list"></div>
+					</div>
+				</section>
+
+				<section class="erp-dashboard-row erp-dashboard-row-single">
+					<div class="erp-card">
+						<div class="erp-card-title">Recent Activity</div>
+						<div id="erpActivityList" class="erp-activity-list"></div>
+					</div>
+				</section>
+
+			</main>
+		</div>
+	</div>
+
+	<div class="erp-toast-container" id="erpToastContainer"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+	{{ include_script("frappe-web.bundle.js") }}
+	<script src="/assets/custom_erp_ui/js/erp_dashboard.js"></script>
+</body>
+</html>

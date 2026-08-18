@@ -1,16 +1,14 @@
 from setuptools import find_packages, setup
 
 with open("requirements.txt") as f:
-	install_requires = [line.strip() for line in f if line.strip()]
-
-from aurora_theme import __version__ as version
+	install_requires = f.read().strip().split("\n")
 
 setup(
-	name="aurora_theme",
-	version=version,
-	description="A cool-toned, aurora-inspired ERPNext desk theme with animated workspace icons and a customer portal dashboard.",
+	name="custom_erp_ui",
+	version="0.1.0",
+	description="Modern dashboard UI layer for a custom Frappe/ERPNext app",
 	author="Your Company",
-	author_email="dev@yourcompany.com",
+	author_email="you@example.com",
 	packages=find_packages(),
 	zip_safe=False,
 	include_package_data=True,

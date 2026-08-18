@@ -1,130 +1,99 @@
-# Aurora Theme
+# custom_erp_ui — Modern ERP Dashboard for Frappe / ERPNext
 
-A cool-toned, "northern lights" ERPNext desk theme — violet, emerald, and
-cyan on a dark, gradient-lit sidebar, with the main content area kept
-bright. Built independently, inspired only by the *feature set* of
-[naidapa_theme](https://github.com/iammusabutt/naidapa_theme) (branding
-settings, animated workspace icons, a customer portal dashboard, a
-restyled login page) — no code, assets, or CSS from that repo are reused;
-the palette, layout, and every file here are original.
+A drop-in Frappe app that implements the modern blue/orange ERP dashboard
+design: dark navy collapsible sidebar, white navbar with global search,
+KPI cards, quick-action shortcuts, a sales chart, an order-status
+breakdown, and a recent-activity feed.
 
-## Features
+It's built as a **custom website route** (`/dashboard`) rather than a Desk
+page, so you get full control over the sidebar/navbar chrome described in
+the spec, while still running inside your Frappe site, reusing Frappe
+auth/sessions, and reading live data via whitelisted API calls.
 
-- **Theme Settings** (System Manager only) — sidebar logo, title, favicon,
-  primary/secondary/accent colors, heading/body font, and login page copy
-  (tag line, short notes, description). Colors apply instantly via CSS
-  variables; no rebuild needed for a color change.
-- **One sidebar — ERPNext's own, restyled.** Earlier versions of this app
-  rendered a second, duplicate sidebar as a DOM overlay. That's gone. This
-  version targets and restyles the real sidebar ERPNext already builds
-  (`.sidebar-item-container`, `.desk-sidebar-item`, `.item-anchor`, etc. —
-  confirmed Frappe v15 class names) with the dark, gradient-lit Aurora
-  look. There is exactly one menu, permission-checked and routed by core,
-  same as stock ERPNext — this only changes how it looks and whether it's
-  visible.
-- **Hidden by default.** The sidebar is `width: 0` until you click the
-  navbar toggle, which adds `.aurora-sidebar-open` to `<body>` — pure CSS,
-  no duplicate markup. Press the toggle again or Esc to close it.
-  ⚠️ The exact outer wrapper class name for the sidebar (as opposed to the
-  individual item classes, which are stable) has shifted slightly across
-  recent v15 point releases — this CSS targets three known candidates
-  (`.desk-sidebar-container`, `.body-sidebar-container`,
-  `.sidebar-container.standard-sidebar`) for redundancy. If the toggle
-  doesn't hide/show anything on your exact version, open devtools,
-  right-click the sidebar, "Inspect", and send me the class on the
-  outermost wrapper div — it's a one-line CSS fix.
-- **Broader restyle pass** — buttons, form inputs, modals/dialogs, the
-  page header/breadcrumbs, and indicator pills now pick up the Aurora
-  palette too, not just the sidebar and tables.
-- **Animated workspace icons** — a `Pick Animated Icon` button on the
-  Workspace form lets you choose an Iconify icon code (e.g.
-  `ph:rocket-launch-duotone`) with a live preview grid; the icon then gets
-  injected in front of that workspace's existing sidebar item icon.
-- **Tables** — Desk list view, report/grid view, and child-table grids all
-  get a sticky header, zebra striping, and hover highlight in the Aurora
-  palette (`.list-row-head`, `.frappe-list table`, `.grid-body` — no core
-  markup changes, just restyling). Portal tables match.
-- **Shortcuts** — Workspace shortcut cards get duotone gradient icon
-  badges and a lift-on-hover animation; a lighter pill variant
-  (`.aurora-shortcut-pill`) is available for custom pages/dashboards.
-- **Customer Portal Dashboard** (`/dashboard`) — order/invoice/outstanding/
-  open-issue stats for portal (Customer) users, resolved via the standard
-  User → Contact → Customer link.
-- **Login page** — aurora gradient background + dark-mode toggle layered
-  on top of Frappe's existing login form.
+## What's included
 
-## A deliberate architectural difference from Naidapa
+```
+custom_erp_ui/
+├── custom_erp_ui/
+│   ├── api/
+│   │   └── dashboard.py        # whitelisted endpoints: KPIs, activity, charts
+│   ├── public/
+│   │   ├── css/erp_dashboard.css   # full design system (colors, cards, badges, dark mode...)
+│   │   └── js/erp_dashboard.js     # sidebar/navbar behavior, data fetch + render
+│   ├── www/
+│   │   └── erp_dashboard/
+│   │       ├── index.html      # page shell: sidebar, navbar, KPI/chart/activity containers
+│   │       └── index.py        # auth check + server-rendered, permission-filtered nav
+│   └── hooks.py
+├── setup.py
+├── requirements.txt
+└── README.md
+```
 
-Naidapa fully overrides `www/app.py` **and** `www/app.html` — it replaces
-the entire Desk shell template. That's a legitimate technique, but it's
-also the highest-risk piece of a theme: get it wrong and the Desk renders
-blank for everyone, and it's very hard to verify without a live instance
-to test against.
+## How it works
 
-Aurora achieves the same *visible* result — a custom sidebar/navbar with
-animated icons — a different way: it renders them as a DOM overlay on top
-of the stock Desk (same technique proven out in this developer's other
-theme project), fed by a small whitelisted method
-(`events.sidebar.get_sidebar_pages`) that reuses Frappe's own
-`get_workspace_sidebar_items` / `get_desktop_page` APIs. Nothing here can
-break the underlying Desk boot — worst case, the overlay simply doesn't
-render and you see stock ERPNext.
+- **`www/erp_dashboard/index.py`** runs on every request to `/dashboard`
+  (aliased from `/erp_dashboard` via `website_route_rules` in `hooks.py`).
+  It blocks guests, and builds the sidebar nav server-side — each link is
+  only included if `frappe.has_permission(doctype, "read")` passes for the
+  logged-in user, so the frontend never advertises pages the user can't
+  open.
+- **`index.html`** is the Jinja template for the page shell. It pulls in
+  Frappe's own web bundle (`frappe-web.bundle.css/js`) so `frappe.csrf_token`
+  and session helpers are available, plus Google Fonts (Inter), Material
+  Design Icons, and Chart.js from CDN for the sales line chart.
+- **`erp_dashboard.js`** handles all client-side behavior: sidebar
+  collapse/expand (persisted in `localStorage`), the user/notification
+  dropdowns, debounced global search (via Frappe's built-in
+  `frappe.desk.search.search_link`), and rendering the KPI cards, quick
+  actions, sales chart, status breakdown, and activity feed from the API.
+- **`api/dashboard.py`** exposes four `@frappe.whitelist()` methods:
+  `get_kpis`, `get_recent_activity`, `get_sales_chart`,
+  `get_order_status_breakdown`. Each one is defensive — if a doctype
+  (e.g. `Sales Order`) isn't installed on the site, that KPI just reports
+  zero instead of raising, so the dashboard also works on a bare Frappe
+  install without ERPNext, and degrades gracefully rather than crashing.
 
-The one place this app *does* ship a full custom page is the Customer
-Portal Dashboard, because that route belongs entirely to this app — there
-is no core template to conflict with, so there's no equivalent risk.
-
-If you'd prefer the literal full-shell-override approach Naidapa uses,
-that's a bigger, riskier change I'd want to build and reason through
-carefully (and ideally test against a real site) rather than ship
-speculatively — say the word and we can do that as a follow-up.
-
-## Install
+## Installation
 
 ```bash
-bench get-app aurora_theme /path/to/this/repo
-bench --site your-site.local install-app aurora_theme
-bench build --app aurora_theme
-bench --site your-site.local clear-cache
+# from your bench directory
+bench get-app custom_erp_ui /path/to/custom_erp_ui   # or a git remote
+bench --site your-site.local install-app custom_erp_ui
+bench --site your-site.local migrate
+bench build --app custom_erp_ui
+bench restart
 ```
 
-Then go to **Aurora Theme → Theme Settings** to set your logo, colors,
-and login copy.
+Then visit `https://your-site.local/dashboard` while logged in.
 
-## Architecture
+## Customizing
 
-```
-aurora_theme/
-├── hooks.py                  # asset includes, boot session, doctype_js,
-│                              # portal route, install hooks
-├── boot.py                   # extend_bootinfo: pushes Theme Settings
-│                              # colors/fonts into frappe.boot
-├── install.py                 # adds the `aurora_animated_icon` custom
-│                              # field to Workspace
-├── events/
-│   └── sidebar.py             # get_sidebar_pages(): nested workspace +
-│                              # card + animated-icon data, reusing core
-│                              # desktop APIs (no duplicated logic)
-├── config/
-│   └── desktop.py             # module icon/label
-├── aurora_theme/               # ⚠ module folder — must match modules.txt
-│   └── doctype/
-│       └── theme_settings/    # Single doctype: branding, colors, fonts
-├── www/
-│   ├── portal_dashboard.py    # customer stats controller
-│   └── portal_dashboard.html  # extends templates/web.html
-└── public/
-    ├── css/
-    │   ├── aurora_theme.css   # desk sidebar/navbar/workspace-card design
-    │   ├── aurora_login.css   # login page overlay (background, toggle)
-    │   └── aurora_portal.css  # portal dashboard styling
-    └── js/
-        ├── aurora_theme.js         # sidebar/navbar overlay + dark mode
-        ├── aurora_login.js         # login page overlay
-        ├── aurora_portal.js        # stat counter animation
-        └── workspace_icon_picker.js # icon picker for the Workspace form
-```
+- **Colors** — every color in the spec is a CSS variable at the top of
+  `erp_dashboard.css` (`--erp-blue`, `--erp-orange`, `--erp-sidebar-bg`,
+  etc.). Change them once, they cascade everywhere including dark mode.
+- **Sidebar sections/links** — edit `nav_sections` in `index.py`. Icons
+  use [Material Design Icons](https://pictogrammers.com/library/mdi/)
+  names (e.g. `account-group`, `cart`, `warehouse`).
+- **Quick actions** — edit the `QUICK_ACTIONS` array in
+  `erp_dashboard.js`.
+- **KPIs** — add/remove cards in `get_kpis()` in `api/dashboard.py`; the
+  frontend renders whatever the API returns, so no JS changes needed for
+  a straightforward new KPI.
+- **Dark mode** — toggle by setting `data-theme="dark"` on `<body>` (wire
+  this up to a theme-switcher button in the navbar if you want a toggle;
+  the CSS variables are already in place).
 
-## License
+## Notes / assumptions
 
-MIT
+- This targets Frappe v14/v15-style app structure. If you're on a
+  different version, doctype field names for KPIs (e.g.
+  `transaction_date`, `posting_date`, `paid_amount`) may need small
+  adjustments — check against your site's actual ERPNext version.
+- The design intentionally keeps Frappe's Desk (`/app/...`) as the
+  system of record for actual CRUD — sidebar links and quick actions
+  route into Desk forms/lists rather than reimplementing them, per the
+  spec's instruction not to bypass Frappe permissions from the frontend.
+- Chart.js and MDI icons are loaded from CDN for simplicity; swap for
+  self-hosted assets under `public/` if you need to work offline or
+  behind a strict CSP.
