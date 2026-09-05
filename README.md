@@ -47,6 +47,12 @@ Theme Myrmex works through four official Frappe v15 extension points:
    subject to normal Frappe permissions (System Manager writes, everyone reads).
 4. **A standard Desk Page (`theme-builder`)** — the visual editor.
 
+Stylesheets are registered individually in `app_include_css` rather than
+through one entry file that `@import`s the rest. Frappe copies each style
+bundle into a temp directory before running postcss, so relative imports cannot
+resolve and `bench build` fails with `ENOENT ... myrmex-variables.css`. The
+hook list keeps the modular sources and makes the cascade order explicit.
+
 The CSS is built as a **variable bridge**. Myrmex declares its own
 `--myrmex-*` custom properties and then re-points Frappe's native variables
 (`--primary`, `--bg-color`, `--fg-color`, `--text-color`, `--border-color`, …)
@@ -70,20 +76,19 @@ theme_myrmex/
     ├── patches.txt
     ├── templates/
     ├── public/
-    │   ├── css/
-    │   │   ├── myrmex.bundle.css        # desk bundle entry
-    │   │   ├── myrmex-web.bundle.css    # login / website bundle entry
-    │   │   ├── myrmex-variables.css     # tokens + bridge to Frappe variables
-    │   │   ├── myrmex-base.css
-    │   │   ├── myrmex-sidebar.css
-    │   │   ├── myrmex-navbar.css
-    │   │   ├── myrmex-components.css
-    │   │   ├── myrmex-workspace.css
-    │   │   ├── myrmex-forms.css
-    │   │   ├── myrmex-lists.css
-    │   │   ├── myrmex-dark.css
-    │   │   ├── myrmex-responsive.css
-    │   │   └── myrmex-login.css
+    │   ├── css/                         # each file is its own esbuild bundle,
+    │   │   │                            # ordered by app_include_css in hooks.py
+    │   │   ├── myrmex-variables.bundle.css   # tokens + bridge to Frappe variables
+    │   │   ├── myrmex-base.bundle.css
+    │   │   ├── myrmex-navbar.bundle.css
+    │   │   ├── myrmex-sidebar.bundle.css
+    │   │   ├── myrmex-components.bundle.css
+    │   │   ├── myrmex-workspace.bundle.css
+    │   │   ├── myrmex-forms.bundle.css
+    │   │   ├── myrmex-lists.bundle.css
+    │   │   ├── myrmex-dark.bundle.css
+    │   │   ├── myrmex-responsive.bundle.css
+    │   │   └── myrmex-login.bundle.css       # login / website only
     │   └── js/
     │       ├── myrmex.bundle.js         # desk bundle entry
     │       ├── myrmex-web.bundle.js     # login / website bundle entry
@@ -136,6 +141,14 @@ bench restart
 ```
 
 In development, `bench watch` rebuilds the bundles on save.
+
+### If `bench build` fails
+
+`ENOENT: no such file or directory ... public/css/*.css` from the `postcss2`
+plugin means a style bundle is trying to `@import` a sibling file. Frappe's
+build cannot resolve those. Every stylesheet in this app is a standalone
+`*.bundle.css` listed in `app_include_css`; if you add one, follow the same
+pattern instead of importing it.
 
 ### Uninstalling
 

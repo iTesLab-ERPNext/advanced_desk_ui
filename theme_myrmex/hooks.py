@@ -10,14 +10,39 @@ app_license = "mit"
 # ---------------------------------------------------------------------------
 # Frappe v15 builds every file matching *.bundle.css / *.bundle.js found under
 # public/ with esbuild, and resolves the bundle name through assets.json.
+#
+# Each stylesheet is registered as its own bundle rather than a single entry
+# file that @imports the others. Frappe copies each style bundle into a temp
+# directory before running postcss (once per output variant), so an entry that
+# imports sibling files cannot resolve them and the build fails. Listing the
+# files here keeps the same modular sources and puts the cascade order under
+# explicit control: tokens first, then layers, then dark and responsive
+# overrides last.
+#
 # Nothing here overwrites a Frappe or ERPNext asset; the bundles are appended
 # after the core ones so the theme wins on equal specificity.
 
-app_include_css = "myrmex.bundle.css"
+app_include_css = [
+	"myrmex-variables.bundle.css",
+	"myrmex-base.bundle.css",
+	"myrmex-navbar.bundle.css",
+	"myrmex-sidebar.bundle.css",
+	"myrmex-components.bundle.css",
+	"myrmex-workspace.bundle.css",
+	"myrmex-forms.bundle.css",
+	"myrmex-lists.bundle.css",
+	"myrmex-dark.bundle.css",
+	"myrmex-responsive.bundle.css",
+]
+
 app_include_js = "myrmex.bundle.js"
 
 # Login page and any portal/website page.
-web_include_css = "myrmex-web.bundle.css"
+web_include_css = [
+	"myrmex-variables.bundle.css",
+	"myrmex-login.bundle.css",
+]
+
 web_include_js = "myrmex-web.bundle.js"
 
 # ---------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
- * Tokens
+ * Tokens — loaded first by app_include_css, so every later bundle sees them.
  * ---------------------------------------------------------------------------
  * These are the fallback values. At runtime myrmex-theme.js writes a
  * <style id="myrmex-theme-vars"> block with the values saved in Theme Settings,
