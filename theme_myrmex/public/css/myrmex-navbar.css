@@ -1,0 +1,157 @@
+/* Navbar. Selectors follow the Frappe v15 Desk markup; every native control
+ * (search, notifications, help, user dropdown) is restyled in place, none is
+ * removed or re-parented. */
+
+.myrmex-enabled .navbar {
+	height: var(--myrmex-navbar-height);
+	min-height: var(--myrmex-navbar-height);
+	background-color: var(--myrmex-navbar-background);
+	border-bottom: 1px solid var(--myrmex-navbar-border);
+	box-shadow: none;
+	padding: 0 var(--myrmex-space-4);
+	transition: box-shadow var(--myrmex-transition), background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .navbar.myrmex-scrolled {
+	box-shadow: var(--myrmex-shadow);
+}
+
+.myrmex-enabled .navbar .container {
+	max-width: none;
+	padding: 0;
+	gap: var(--myrmex-space-3);
+}
+
+.myrmex-enabled .navbar-brand {
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--myrmex-navbar-text);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--myrmex-space-2);
+}
+
+.myrmex-enabled .navbar-brand img,
+.myrmex-enabled .navbar-brand .app-logo {
+	height: 24px;
+	width: auto;
+}
+
+/* Our own drawer/collapse trigger, injected by myrmex-navbar.js. */
+.myrmex-enabled .myrmex-nav-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	margin-right: var(--myrmex-space-2);
+	border: none;
+	background: transparent;
+	border-radius: var(--myrmex-button-radius);
+	color: var(--myrmex-navbar-text);
+	cursor: pointer;
+	transition: background-color var(--myrmex-transition), color var(--myrmex-transition);
+}
+
+.myrmex-enabled .myrmex-nav-toggle:hover {
+	background-color: var(--myrmex-sidebar-hover);
+}
+
+.myrmex-enabled .myrmex-nav-toggle svg {
+	width: 18px;
+	height: 18px;
+}
+
+/* Search ------------------------------------------------------------------ */
+
+.myrmex-enabled .navbar .search-bar,
+.myrmex-enabled .navbar #navbar-search-container {
+	flex: 1 1 auto;
+	max-width: 520px;
+}
+
+.myrmex-enabled #navbar-search,
+.myrmex-enabled .navbar .search-bar input {
+	height: 36px;
+	width: 100%;
+	background-color: var(--myrmex-navbar-search-background);
+	border: 1px solid transparent;
+	border-radius: var(--myrmex-input-radius);
+	padding-left: 34px;
+	color: var(--myrmex-text);
+	transition: background-color var(--myrmex-transition), border-color var(--myrmex-transition),
+		box-shadow var(--myrmex-transition);
+}
+
+.myrmex-enabled #navbar-search::placeholder {
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled #navbar-search:focus,
+.myrmex-enabled .navbar .search-bar input:focus {
+	background-color: var(--myrmex-surface);
+	border-color: var(--myrmex-primary);
+	box-shadow: 0 0 0 3px var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .navbar .search-bar .search-icon,
+.myrmex-enabled .navbar .search-bar .fa-search {
+	color: var(--myrmex-muted);
+	left: 11px;
+}
+
+/* Right-hand controls ----------------------------------------------------- */
+
+.myrmex-enabled .navbar-nav {
+	align-items: center;
+	gap: var(--myrmex-space-1);
+}
+
+.myrmex-enabled .navbar-nav > .nav-item > .nav-link,
+.myrmex-enabled .navbar .dropdown-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 34px;
+	height: 34px;
+	padding: 0 var(--myrmex-space-2);
+	border-radius: var(--myrmex-button-radius);
+	color: var(--myrmex-navbar-text);
+	transition: background-color var(--myrmex-transition), color var(--myrmex-transition);
+}
+
+.myrmex-enabled .navbar-nav > .nav-item > .nav-link:hover,
+.myrmex-enabled .navbar-nav > .nav-item.show > .nav-link {
+	background-color: var(--myrmex-sidebar-hover);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .navbar .notifications-icon .badge,
+.myrmex-enabled .navbar .notification-badge {
+	background-color: var(--myrmex-error);
+	color: #fff;
+	font-weight: 600;
+	border: 2px solid var(--myrmex-navbar-background);
+}
+
+.myrmex-enabled .navbar .avatar,
+.myrmex-enabled .navbar .avatar-frame {
+	border-radius: 999px;
+	box-shadow: 0 0 0 2px var(--myrmex-border);
+	transition: box-shadow var(--myrmex-transition);
+}
+
+.myrmex-enabled .navbar .nav-item.show .avatar,
+.myrmex-enabled .navbar .avatar:hover {
+	box-shadow: 0 0 0 2px var(--myrmex-primary);
+}
+
+/* Navigation arrows and page actions in the header. */
+.myrmex-enabled .page-head .page-actions .btn-group .btn {
+	border-radius: var(--myrmex-button-radius);
+}
+
+.myrmex-enabled .navbar .dropdown-menu {
+	margin-top: var(--myrmex-space-2);
+	min-width: 220px;
+}

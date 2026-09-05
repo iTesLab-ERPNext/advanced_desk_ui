@@ -1,0 +1,213 @@
+/* List view, report view, tables, kanban and calendar. */
+
+/* Filters and search ------------------------------------------------------ */
+
+.myrmex-enabled .filter-section,
+.myrmex-enabled .standard-filter-section {
+	gap: var(--myrmex-space-2);
+}
+
+.myrmex-enabled .filter-selector .btn,
+.myrmex-enabled .sort-selector .btn,
+.myrmex-enabled .filter-button {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-button-radius);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .filter-selector .btn:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled .tag-filters-area .filter-pill,
+.myrmex-enabled .filter-area .filter-pill {
+	background-color: var(--myrmex-primary-soft);
+	color: var(--myrmex-primary);
+	border-radius: 999px;
+}
+
+/* List container ---------------------------------------------------------- */
+
+.myrmex-enabled .frappe-list .result,
+.myrmex-enabled .list-view-container .result {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+	overflow: hidden;
+	box-shadow: var(--myrmex-shadow);
+}
+
+.myrmex-enabled .list-row-head {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--myrmex-muted);
+	min-height: 40px;
+}
+
+.myrmex-enabled .list-row-container {
+	border-bottom: 1px solid var(--myrmex-border);
+	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .list-row-container:last-child {
+	border-bottom: none;
+}
+
+.myrmex-enabled .list-row {
+	min-height: var(--myrmex-row-height);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .list-row-container:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled .list-row-container:has(.list-row-checkbox:checked) {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .list-subject .level-item .ellipsis {
+	font-weight: 550;
+}
+
+.myrmex-enabled .list-row .list-row-col .text-muted {
+	color: var(--myrmex-muted);
+}
+
+/* Optional zebra striping, driven by the "Striped table rows" setting. */
+.myrmex-zebra.myrmex-enabled .list-row-container:nth-child(even) {
+	background-color: color-mix(in srgb, var(--myrmex-surface-alt) 60%, var(--myrmex-surface));
+}
+
+/* Bulk actions ------------------------------------------------------------ */
+
+.myrmex-enabled .list-paging-area,
+.myrmex-enabled .list-count {
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .bulk-actions-area .btn,
+.myrmex-enabled .list-actions .btn {
+	border-radius: var(--myrmex-button-radius);
+}
+
+/* Report view and generic tables ----------------------------------------- */
+
+.myrmex-enabled .dt-scrollable,
+.myrmex-enabled .datatable {
+	border-radius: var(--myrmex-card-radius);
+	overflow: hidden;
+	border: 1px solid var(--myrmex-border);
+	background-color: var(--myrmex-surface);
+}
+
+.myrmex-enabled .datatable .dt-header,
+.myrmex-enabled .datatable .dt-row-header {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	color: var(--myrmex-muted);
+	font-weight: 600;
+}
+
+.myrmex-enabled .datatable .dt-cell {
+	border-color: var(--myrmex-border);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .datatable .dt-cell--focus {
+	box-shadow: inset 0 0 0 2px var(--myrmex-primary);
+}
+
+.myrmex-enabled .datatable .dt-row:hover .dt-cell {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled table.table {
+	color: var(--myrmex-text);
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled table.table thead th {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	color: var(--myrmex-muted);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	padding: var(--myrmex-space-3);
+}
+
+.myrmex-enabled table.table td {
+	border-color: var(--myrmex-border);
+	padding: var(--myrmex-space-3);
+	vertical-align: middle;
+}
+
+.myrmex-enabled .myrmex-table-wrapper,
+.myrmex-enabled .report-wrapper,
+.myrmex-enabled .table-responsive {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border-radius: var(--myrmex-card-radius);
+}
+
+/* Kanban ------------------------------------------------------------------ */
+
+.myrmex-enabled .kanban .kanban-column {
+	background-color: var(--myrmex-surface-alt);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+}
+
+.myrmex-enabled .kanban .kanban-card,
+.myrmex-enabled .kanban-card.content {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-radius-md);
+	box-shadow: var(--myrmex-shadow);
+	transition: box-shadow var(--myrmex-transition), transform var(--myrmex-transition);
+}
+
+.myrmex-enabled .kanban .kanban-card:hover {
+	box-shadow: var(--myrmex-shadow-hover);
+}
+
+.myrmex-enabled .kanban .kanban-column-title {
+	font-weight: 600;
+	color: var(--myrmex-text);
+}
+
+/* Calendar and Gantt ------------------------------------------------------ */
+
+.myrmex-enabled .fc-view-container,
+.myrmex-enabled .fc-unthemed .fc-content,
+.myrmex-enabled .fc-unthemed td,
+.myrmex-enabled .fc-unthemed th {
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled .fc-toolbar h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .fc-event {
+	border-radius: var(--myrmex-radius-sm);
+	border: none;
+	background-color: var(--myrmex-primary);
+	color: var(--myrmex-primary-contrast);
+	padding: 2px 6px;
+}
+
+.myrmex-enabled .fc-unthemed .fc-today {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .gantt .bar {
+	fill: var(--myrmex-primary);
+}

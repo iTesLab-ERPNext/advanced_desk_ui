@@ -1,0 +1,238 @@
+/* Sidebar: expanded, collapsed rail, and mobile drawer.
+ *
+ * Three states, driven by classes that myrmex-sidebar.js puts on <html>:
+ *   (default)                    expanded
+ *   .myrmex-sidebar-collapsed    icon rail with hover tooltips
+ *   .myrmex-sidebar-open         drawer visible (mobile only)
+ *
+ * Frappe v15 renders the Desk sidebar as
+ *   .body-sidebar-container > .body-sidebar > .sidebar-item-container
+ * and the per-page sidebar as .layout-side-section. Both are handled. */
+
+.myrmex-enabled .body-sidebar-container,
+.myrmex-enabled .body-sidebar {
+	background-color: var(--myrmex-sidebar-background);
+	border-right: 1px solid var(--myrmex-border);
+	width: var(--myrmex-sidebar-width);
+	min-width: var(--myrmex-sidebar-width);
+	transition: width var(--myrmex-transition), min-width var(--myrmex-transition),
+		transform 220ms var(--myrmex-ease);
+}
+
+.myrmex-enabled .body-sidebar {
+	padding: var(--myrmex-space-3) var(--myrmex-space-2);
+	overflow-x: hidden;
+}
+
+/* Brand block, injected by myrmex-sidebar.js at the top of the sidebar. */
+.myrmex-enabled .myrmex-sidebar-brand {
+	display: flex;
+	align-items: center;
+	gap: var(--myrmex-space-2);
+	height: 44px;
+	padding: 0 var(--myrmex-space-3);
+	margin-bottom: var(--myrmex-space-3);
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.06em;
+	color: var(--myrmex-sidebar-text);
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.myrmex-enabled .myrmex-sidebar-brand .myrmex-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: var(--myrmex-radius-sm);
+	background-color: var(--myrmex-primary);
+	color: var(--myrmex-primary-contrast);
+	font-size: 14px;
+}
+
+/* Section headings ("Public", "Private", module groups). */
+.myrmex-enabled .standard-sidebar-label,
+.myrmex-enabled .body-sidebar .sidebar-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: var(--myrmex-muted);
+	padding: var(--myrmex-space-3) var(--myrmex-space-3) var(--myrmex-space-1);
+	margin: 0;
+}
+
+/* Items ------------------------------------------------------------------- */
+
+.myrmex-enabled .sidebar-item-container .desk-sidebar-item,
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item {
+	border-radius: var(--myrmex-radius-md);
+	margin: 2px var(--myrmex-space-1);
+	padding: 0;
+	color: var(--myrmex-sidebar-text);
+	transition: background-color var(--myrmex-transition), color var(--myrmex-transition);
+}
+
+.myrmex-enabled .sidebar-item-container .item-anchor {
+	display: flex;
+	align-items: center;
+	gap: var(--myrmex-space-3);
+	min-height: 38px;
+	padding: 0 var(--myrmex-space-3);
+	color: inherit;
+	font-weight: 500;
+	border-radius: inherit;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.myrmex-enabled .sidebar-item-container .sidebar-item-icon,
+.myrmex-enabled .sidebar-item-container .sidebar-item-icon .icon {
+	color: var(--myrmex-sidebar-icon);
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+}
+
+.myrmex-enabled .sidebar-item-container .sidebar-item-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: opacity var(--myrmex-transition);
+}
+
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item:hover,
+.myrmex-enabled .sidebar-item-container .desk-sidebar-item:hover {
+	background-color: var(--myrmex-sidebar-hover);
+}
+
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item.selected,
+.myrmex-enabled .sidebar-item-container .desk-sidebar-item.selected,
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item.active {
+	background-color: var(--myrmex-primary-soft);
+	color: var(--myrmex-sidebar-active);
+	font-weight: 600;
+	position: relative;
+}
+
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item.selected .sidebar-item-icon,
+.myrmex-enabled .sidebar-item-container .desk-sidebar-item.selected .sidebar-item-icon {
+	color: var(--myrmex-sidebar-active);
+}
+
+.myrmex-enabled .sidebar-item-container .standard-sidebar-item.selected::before,
+.myrmex-enabled .sidebar-item-container .desk-sidebar-item.selected::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 20%;
+	bottom: 20%;
+	width: 3px;
+	border-radius: 0 3px 3px 0;
+	background-color: var(--myrmex-sidebar-active);
+}
+
+/* Nested (child workspace) items sit one step in. */
+.myrmex-enabled .sidebar-item-container .sidebar-child-item .item-anchor {
+	padding-left: calc(var(--myrmex-space-3) + 20px);
+	font-weight: 450;
+}
+
+.myrmex-enabled .sidebar-item-container .drop-icon {
+	color: var(--myrmex-muted);
+	transition: transform var(--myrmex-transition);
+}
+
+/* Collapsed rail ---------------------------------------------------------- */
+
+.myrmex-sidebar-collapsed.myrmex-enabled .body-sidebar-container,
+.myrmex-sidebar-collapsed.myrmex-enabled .body-sidebar {
+	width: var(--myrmex-sidebar-rail-width);
+	min-width: var(--myrmex-sidebar-rail-width);
+}
+
+.myrmex-sidebar-collapsed.myrmex-enabled .sidebar-item-label,
+.myrmex-sidebar-collapsed.myrmex-enabled .standard-sidebar-label,
+.myrmex-sidebar-collapsed.myrmex-enabled .myrmex-sidebar-brand .myrmex-wordmark,
+.myrmex-sidebar-collapsed.myrmex-enabled .body-sidebar .drop-icon,
+.myrmex-sidebar-collapsed.myrmex-enabled .body-sidebar .edit-sidebar-link {
+	opacity: 0;
+	width: 0;
+	pointer-events: none;
+	position: absolute;
+}
+
+.myrmex-sidebar-collapsed.myrmex-enabled .sidebar-item-container .item-anchor {
+	justify-content: center;
+	padding: 0;
+}
+
+.myrmex-sidebar-collapsed.myrmex-enabled .myrmex-sidebar-brand {
+	justify-content: center;
+	padding: 0;
+}
+
+/* Tooltip for the rail. The label is copied into a data attribute by
+ * myrmex-sidebar.js, so no extra markup is inserted into Frappe's tree. */
+.myrmex-sidebar-collapsed.myrmex-enabled .sidebar-item-container[data-myrmex-label]:hover::after {
+	content: attr(data-myrmex-label);
+	position: absolute;
+	left: calc(var(--myrmex-sidebar-rail-width) - 8px);
+	z-index: 1030;
+	padding: 6px 10px;
+	border-radius: var(--myrmex-radius-sm);
+	background-color: var(--myrmex-text);
+	color: var(--myrmex-surface);
+	font-size: 12px;
+	font-weight: 500;
+	white-space: nowrap;
+	box-shadow: var(--myrmex-shadow-hover);
+	pointer-events: none;
+}
+
+.myrmex-enabled .sidebar-item-container {
+	position: relative;
+}
+
+/* Page-level sidebar (list view filters, form sidebar) -------------------- */
+
+.myrmex-enabled .layout-side-section {
+	padding-right: var(--myrmex-space-4);
+}
+
+.myrmex-enabled .layout-side-section .sidebar-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .list-sidebar .list-link > a,
+.myrmex-enabled .layout-side-section .list-link > a {
+	border-radius: var(--myrmex-radius-sm);
+	padding: 6px var(--myrmex-space-2);
+	color: var(--myrmex-text);
+	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .list-sidebar .list-link > a:hover {
+	background-color: var(--myrmex-sidebar-hover);
+}
+
+/* Mobile drawer ----------------------------------------------------------- */
+
+.myrmex-enabled .myrmex-sidebar-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1024;
+	background-color: rgba(15, 17, 23, 0.45);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 200ms var(--myrmex-ease), visibility 200ms;
+}
+
+.myrmex-sidebar-open.myrmex-enabled .myrmex-sidebar-overlay {
+	opacity: 1;
+	visibility: visible;
+}

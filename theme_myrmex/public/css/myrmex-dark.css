@@ -1,0 +1,74 @@
+/* Dark mode.
+ *
+ * Frappe v15 already sets data-theme="dark" on <html> through its own theme
+ * switcher, so Myrmex piggybacks on that attribute instead of introducing a
+ * competing toggle. The user menu keeps working exactly as before.
+ *
+ * The dark values themselves are written at runtime by myrmex-theme.js from the
+ * payload the server derives (accent colours carry over, surfaces are replaced).
+ * The rules below are the fallbacks plus the handful of places that need more
+ * than a variable swap. */
+
+.myrmex-enabled[data-theme="dark"] {
+	--myrmex-background: #0f1117;
+	--myrmex-surface: #171a21;
+	--myrmex-surface-alt: #1c202a;
+	--myrmex-text: #e5e7eb;
+	--myrmex-muted: #9aa3b2;
+	--myrmex-border: #272d3a;
+	--myrmex-sidebar-background: #12151c;
+	--myrmex-sidebar-text: #d7dce5;
+	--myrmex-sidebar-hover: rgba(255, 255, 255, 0.06);
+	--myrmex-sidebar-icon: #9aa3b2;
+	--myrmex-navbar-background: #12151c;
+	--myrmex-navbar-text: #e5e7eb;
+	--myrmex-navbar-border: #272d3a;
+	--myrmex-navbar-search-background: #1c202a;
+
+	/* Shadows read as noise on dark surfaces; borders do the work instead. */
+	--myrmex-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--myrmex-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+	--myrmex-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+.myrmex-enabled[data-theme="dark"] body {
+	color-scheme: dark;
+}
+
+.myrmex-enabled[data-theme="dark"] .widget,
+.myrmex-enabled[data-theme="dark"] .form-page .form-section,
+.myrmex-enabled[data-theme="dark"] .frappe-list .result,
+.myrmex-enabled[data-theme="dark"] .modal-content {
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled[data-theme="dark"] .myrmex-sidebar-overlay {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Images and charts can be over-bright against a dark canvas. */
+.myrmex-enabled[data-theme="dark"] .widget img:not([src$=".svg"]) {
+	filter: brightness(0.92);
+}
+
+.myrmex-enabled[data-theme="dark"] .frappe-chart .chart-label,
+.myrmex-enabled[data-theme="dark"] .frappe-chart text {
+	fill: var(--myrmex-muted);
+}
+
+/* Keep native icons legible without replacing the sprite. */
+.myrmex-enabled[data-theme="dark"] .sidebar-item-icon .icon,
+.myrmex-enabled[data-theme="dark"] .navbar .icon {
+	opacity: 0.92;
+}
+
+/* Frappe uses .text-muted widely; make sure it clears contrast in dark. */
+.myrmex-enabled[data-theme="dark"] .text-muted,
+.myrmex-enabled[data-theme="dark"] .control-label {
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled[data-theme="dark"] .form-control[disabled],
+.myrmex-enabled[data-theme="dark"] .form-control[readonly] {
+	background-color: var(--myrmex-surface-alt);
+}

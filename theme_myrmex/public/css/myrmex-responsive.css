@@ -1,0 +1,147 @@
+/* Responsive behaviour.
+ * Desktop: full sidebar. Tablet: rail. Mobile: off-canvas drawer. */
+
+/* Tablet ------------------------------------------------------------------ */
+
+@media (max-width: 1200px) {
+	.myrmex-enabled .body-sidebar-container,
+	.myrmex-enabled .body-sidebar {
+		width: var(--myrmex-sidebar-rail-width);
+		min-width: var(--myrmex-sidebar-rail-width);
+	}
+
+	.myrmex-enabled:not(.myrmex-sidebar-expanded) .sidebar-item-label,
+	.myrmex-enabled:not(.myrmex-sidebar-expanded) .standard-sidebar-label,
+	.myrmex-enabled:not(.myrmex-sidebar-expanded) .myrmex-sidebar-brand .myrmex-wordmark {
+		opacity: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.myrmex-enabled .sidebar-item-container .item-anchor {
+		justify-content: center;
+		padding: 0;
+	}
+
+	.myrmex-enabled .navbar .search-bar {
+		max-width: 320px;
+	}
+}
+
+/* Mobile ------------------------------------------------------------------ */
+
+@media (max-width: 991px) {
+	.myrmex-enabled .body-sidebar-container {
+		position: fixed;
+		top: var(--myrmex-navbar-height);
+		bottom: 0;
+		left: 0;
+		z-index: 1025;
+		width: min(84vw, var(--myrmex-sidebar-width));
+		min-width: 0;
+		transform: translateX(-100%);
+		box-shadow: var(--myrmex-shadow-lg);
+		overflow-y: auto;
+	}
+
+	.myrmex-sidebar-open.myrmex-enabled .body-sidebar-container {
+		transform: translateX(0);
+	}
+
+	/* In the drawer, always show labels — the rail makes no sense here. */
+	.myrmex-enabled .body-sidebar-container .sidebar-item-label,
+	.myrmex-enabled .body-sidebar-container .standard-sidebar-label {
+		opacity: 1;
+		width: auto;
+		position: static;
+		pointer-events: auto;
+	}
+
+	.myrmex-enabled .body-sidebar-container .item-anchor {
+		justify-content: flex-start;
+		padding: 0 var(--myrmex-space-3);
+	}
+
+	.myrmex-enabled .myrmex-nav-toggle {
+		display: inline-flex;
+	}
+
+	/* One column for cards and form sections. */
+	.myrmex-enabled .layout-main-section .widget-group .widget,
+	.myrmex-enabled .form-column {
+		width: 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.myrmex-enabled .layout-side-section {
+		padding-right: 0;
+	}
+
+	/* Tables scroll instead of squeezing. */
+	.myrmex-enabled .frappe-list .result,
+	.myrmex-enabled .datatable,
+	.myrmex-enabled table.table {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Comfortable touch targets. */
+	.myrmex-enabled .btn,
+	.myrmex-enabled .list-row,
+	.myrmex-enabled .sidebar-item-container .item-anchor,
+	.myrmex-enabled .dropdown-item {
+		min-height: 44px;
+	}
+
+	.myrmex-enabled .btn {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.myrmex-enabled .navbar {
+		padding: 0 var(--myrmex-space-3);
+	}
+
+	.myrmex-enabled .navbar .search-bar {
+		max-width: none;
+	}
+
+	.myrmex-enabled .page-head .page-title .title-text {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 575px) {
+	.myrmex-enabled .form-page .form-section,
+	.myrmex-enabled .widget {
+		padding: calc(var(--myrmex-card-padding) * 0.75);
+		border-radius: var(--myrmex-radius-md);
+	}
+
+	.myrmex-enabled .modal-body {
+		padding: var(--myrmex-space-4);
+	}
+
+	/* Hide the wordmark, keep the mark. */
+	.myrmex-enabled .navbar-brand .myrmex-wordmark {
+		display: none;
+	}
+}
+
+/* Print ------------------------------------------------------------------- */
+
+@media print {
+	.myrmex-enabled .body-sidebar-container,
+	.myrmex-enabled .navbar,
+	.myrmex-enabled .myrmex-sidebar-overlay,
+	.myrmex-enabled .page-actions {
+		display: none !important;
+	}
+
+	.myrmex-enabled .form-page .form-section {
+		box-shadow: none;
+		border-color: #ddd;
+	}
+}

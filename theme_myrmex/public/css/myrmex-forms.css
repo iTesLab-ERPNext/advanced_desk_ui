@@ -1,0 +1,177 @@
+/* Form view: sections, fields, tabs, grids, sidebar, timeline.
+ * Layout and field rendering stay Frappe's; only surface and rhythm change. */
+
+.myrmex-enabled .form-page {
+	background-color: transparent;
+}
+
+.myrmex-enabled .form-page .form-section,
+.myrmex-enabled .form-page .form-dashboard-section,
+.myrmex-enabled .form-page .form-tabs-sticky-down + .form-section {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+	padding: var(--myrmex-card-padding);
+	margin-bottom: var(--myrmex-space-4);
+	box-shadow: var(--myrmex-shadow);
+}
+
+.myrmex-enabled .form-page .section-head {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--myrmex-muted);
+	padding: 0 0 var(--myrmex-space-3);
+	margin: 0 0 var(--myrmex-space-3);
+	border-bottom: 1px solid var(--myrmex-border);
+}
+
+.myrmex-enabled .form-page .section-head.collapsed {
+	border-bottom-color: transparent;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.myrmex-enabled .form-page .section-head .collapse-indicator {
+	color: var(--myrmex-muted);
+	transition: transform var(--myrmex-transition);
+}
+
+.myrmex-enabled .frappe-control[data-fieldtype="Section Break"] > .section-body {
+	padding-top: 0;
+}
+
+.myrmex-enabled .form-column .frappe-control {
+	margin-bottom: var(--myrmex-space-4);
+}
+
+/* Title area and document status. */
+.myrmex-enabled .title-area .title-text,
+.myrmex-enabled .form-page .title-area h6 {
+	font-weight: 650;
+}
+
+.myrmex-enabled .form-message,
+.myrmex-enabled .form-dashboard .form-dashboard-wrapper {
+	border-radius: var(--myrmex-radius-md);
+	border: 1px solid var(--myrmex-border);
+	background-color: var(--myrmex-surface-alt);
+}
+
+/* Form tabs stick under the header. */
+.myrmex-enabled .form-tabs-list {
+	background-color: var(--myrmex-background);
+	border-bottom: 1px solid var(--myrmex-border);
+}
+
+.myrmex-enabled .form-tabs .nav-link {
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .form-tabs .nav-link.active {
+	color: var(--myrmex-primary);
+	border-bottom-color: var(--myrmex-primary);
+}
+
+/* Grids (child tables) ---------------------------------------------------- */
+
+.myrmex-enabled .form-grid {
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-radius-md);
+	overflow: hidden;
+	background-color: var(--myrmex-surface);
+}
+
+.myrmex-enabled .form-grid .grid-heading-row {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .form-grid .grid-row {
+	border-bottom: 1px solid var(--myrmex-border);
+	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .form-grid .grid-row:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled .form-grid .grid-row.grid-row-open {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .grid-footer .grid-add-row,
+.myrmex-enabled .grid-footer .btn {
+	border-radius: var(--myrmex-button-radius);
+}
+
+/* Form sidebar ------------------------------------------------------------ */
+
+.myrmex-enabled .form-sidebar .sidebar-section {
+	padding: var(--myrmex-space-3) 0;
+	border-bottom: 1px solid var(--myrmex-border);
+}
+
+.myrmex-enabled .form-sidebar .sidebar-label {
+	color: var(--myrmex-muted);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+}
+
+.myrmex-enabled .form-sidebar .form-assignments .avatar,
+.myrmex-enabled .form-sidebar .avatar-group .avatar {
+	box-shadow: 0 0 0 2px var(--myrmex-surface);
+}
+
+.myrmex-enabled .form-sidebar .sidebar-menu-item .btn {
+	border-radius: var(--myrmex-radius-sm);
+}
+
+/* Comments, attachments, activity ---------------------------------------- */
+
+.myrmex-enabled .comment-box,
+.myrmex-enabled .new-timeline .timeline-item .timeline-content {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-radius-md);
+	box-shadow: none;
+}
+
+.myrmex-enabled .new-timeline .timeline-dot {
+	background-color: var(--myrmex-surface);
+	border: 2px solid var(--myrmex-border);
+}
+
+.myrmex-enabled .new-timeline::before {
+	background-color: var(--myrmex-border);
+}
+
+.myrmex-enabled .timeline-actions .btn,
+.myrmex-enabled .comment-input-wrapper .btn {
+	border-radius: var(--myrmex-button-radius);
+}
+
+.myrmex-enabled .attachment-row,
+.myrmex-enabled .attachments .attachment-row {
+	border-radius: var(--myrmex-radius-sm);
+	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .attachment-row:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+/* Form toolbar ------------------------------------------------------------ */
+
+.myrmex-enabled .page-actions .btn-primary {
+	box-shadow: var(--myrmex-shadow);
+}
+
+.myrmex-enabled .indicator-pill.blue.myrmex-draft {
+	background-color: var(--myrmex-surface-alt);
+	color: var(--myrmex-muted);
+}

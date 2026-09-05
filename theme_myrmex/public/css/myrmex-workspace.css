@@ -1,0 +1,127 @@
+/* Workspaces. Widgets keep their native drag/drop and edit-mode behaviour;
+ * only their surface treatment changes. */
+
+.myrmex-enabled .layout-main-section-wrapper {
+	padding-top: var(--myrmex-space-2);
+}
+
+.myrmex-enabled .workspace-title,
+.myrmex-enabled .page-head .title-area .title-text {
+	font-size: 22px;
+	font-weight: 650;
+	letter-spacing: -0.02em;
+}
+
+.myrmex-enabled .layout-main-section .widget.shortcut-widget-box,
+.myrmex-enabled .layout-main-section .widget.links-widget-box,
+.myrmex-enabled .layout-main-section .widget.number-widget-box,
+.myrmex-enabled .layout-main-section .widget.chart-widget-box,
+.myrmex-enabled .layout-main-section .widget.onboarding-widget-box,
+.myrmex-enabled .layout-main-section .widget.quick-list-widget-box {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+	padding: var(--myrmex-card-padding);
+	box-shadow: var(--myrmex-shadow);
+}
+
+/* Shortcut tiles lift slightly; they are the primary click target. */
+.myrmex-enabled .shortcut-widget-box:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--myrmex-shadow-hover);
+	border-color: color-mix(in srgb, var(--myrmex-primary) 35%, var(--myrmex-border));
+}
+
+.myrmex-enabled .shortcut-widget-box .indicator-pill {
+	background-color: var(--myrmex-primary-soft);
+	color: var(--myrmex-primary);
+}
+
+/* Number cards: the figure is the content, so give it room. */
+.myrmex-enabled .number-widget-box .widget-content .number {
+	font-size: 30px;
+	font-weight: 650;
+	letter-spacing: -0.02em;
+	color: var(--myrmex-text);
+	line-height: 1.15;
+}
+
+.myrmex-enabled .number-widget-box .widget-head .widget-title {
+	color: var(--myrmex-muted);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.myrmex-enabled .number-widget-box .percentage-stat-area .percentage-stat.green {
+	color: var(--myrmex-success);
+}
+
+.myrmex-enabled .number-widget-box .percentage-stat-area .percentage-stat.red {
+	color: var(--myrmex-error);
+}
+
+/* Link groups inside a workspace. */
+.myrmex-enabled .links-widget-box .link-item {
+	border-radius: var(--myrmex-radius-sm);
+	padding: 6px var(--myrmex-space-2);
+	color: var(--myrmex-text);
+	transition: background-color var(--myrmex-transition), color var(--myrmex-transition);
+}
+
+.myrmex-enabled .links-widget-box .link-item:hover {
+	background-color: var(--myrmex-primary-soft);
+	color: var(--myrmex-primary);
+}
+
+.myrmex-enabled .links-widget-box .link-item .indicator-pill {
+	margin-left: auto;
+}
+
+/* Section headers between widget groups. */
+.myrmex-enabled .layout-main-section .widget-group .widget-group-head,
+.myrmex-enabled .layout-main-section .section-head {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--myrmex-muted);
+	border-bottom: 1px solid var(--myrmex-border);
+	padding-bottom: var(--myrmex-space-2);
+	margin-bottom: var(--myrmex-space-4);
+}
+
+/* Charts inherit the palette rather than shipping their own. */
+.myrmex-enabled .chart-widget-box .chart-container .title,
+.myrmex-enabled .frappe-chart .title {
+	fill: var(--myrmex-muted);
+}
+
+.myrmex-enabled .frappe-chart .chart-label,
+.myrmex-enabled .frappe-chart text {
+	fill: var(--myrmex-muted);
+}
+
+.myrmex-enabled .frappe-chart .chart-legend text {
+	fill: var(--myrmex-text);
+}
+
+/* Onboarding / empty states are an invitation to act, so keep them warm. */
+.myrmex-enabled .onboarding-widget-box {
+	border-color: color-mix(in srgb, var(--myrmex-primary) 25%, var(--myrmex-border));
+	background-color: color-mix(in srgb, var(--myrmex-primary) 4%, var(--myrmex-surface));
+}
+
+.myrmex-enabled .no-result,
+.myrmex-enabled .msg-box {
+	color: var(--myrmex-muted);
+}
+
+/* Workspace edit mode keeps its native affordances, just softened. */
+.myrmex-enabled .widget .widget-control .btn {
+	border-radius: var(--myrmex-radius-sm);
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .ce-block__content,
+.myrmex-enabled .codex-editor__redactor {
+	color: var(--myrmex-text);
+}

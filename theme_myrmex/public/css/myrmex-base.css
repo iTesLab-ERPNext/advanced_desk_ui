@@ -1,0 +1,154 @@
+/* Base layer: page canvas, typography, focus, scrollbars, icons.
+ * Everything is scoped under .myrmex-enabled, a class myrmex-theme.js puts on
+ * <html>. Turning the theme off in Theme Settings removes the class and the
+ * Desk returns to stock without an uninstall. */
+
+.myrmex-enabled body {
+	background-color: var(--myrmex-background);
+	color: var(--myrmex-text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.myrmex-enabled .page-head {
+	background-color: var(--myrmex-background);
+	border-bottom: 1px solid transparent;
+	transition: border-color var(--myrmex-transition), box-shadow var(--myrmex-transition);
+}
+
+.myrmex-enabled .page-head.myrmex-stuck {
+	border-bottom-color: var(--myrmex-border);
+	box-shadow: var(--myrmex-shadow);
+}
+
+.myrmex-enabled .page-title .title-text {
+	font-weight: 650;
+	letter-spacing: -0.015em;
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled h1,
+.myrmex-enabled h2,
+.myrmex-enabled h3,
+.myrmex-enabled h4,
+.myrmex-enabled h5,
+.myrmex-enabled h6 {
+	color: var(--myrmex-text);
+	letter-spacing: -0.01em;
+}
+
+.myrmex-enabled a {
+	color: var(--myrmex-primary);
+	transition: color var(--myrmex-transition);
+}
+
+.myrmex-enabled a:hover {
+	color: var(--myrmex-secondary);
+}
+
+/* Breadcrumbs ------------------------------------------------------------- */
+
+.myrmex-enabled .navbar .breadcrumb-container .breadcrumb {
+	background: transparent;
+	gap: var(--myrmex-space-1);
+}
+
+.myrmex-enabled .breadcrumb .breadcrumb-item a {
+	color: var(--myrmex-muted);
+	font-weight: 500;
+	border-radius: var(--myrmex-radius-sm);
+	padding: 2px 6px;
+	transition: background-color var(--myrmex-transition), color var(--myrmex-transition);
+}
+
+.myrmex-enabled .breadcrumb .breadcrumb-item a:hover {
+	background-color: var(--myrmex-sidebar-hover);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .breadcrumb .breadcrumb-item:last-child a {
+	color: var(--myrmex-text);
+}
+
+/* Icons -------------------------------------------------------------------
+ * The native Frappe/ERPNext SVG sprite is kept exactly as it is. Only colour,
+ * size and alignment are adjusted — the sprite itself is never swapped out. */
+
+.myrmex-enabled .icon {
+	vertical-align: middle;
+	transition: stroke var(--myrmex-transition), fill var(--myrmex-transition),
+		opacity var(--myrmex-transition), transform var(--myrmex-transition);
+}
+
+.myrmex-enabled .icon use {
+	/* Inherit, so an icon takes the colour of whatever it sits in. */
+	stroke: currentColor;
+}
+
+.myrmex-enabled .icon.icon-xs {
+	width: 12px;
+	height: 12px;
+}
+
+.myrmex-enabled .icon.icon-sm {
+	width: 14px;
+	height: 14px;
+}
+
+.myrmex-enabled .icon.icon-md {
+	width: 16px;
+	height: 16px;
+}
+
+.myrmex-enabled .icon.icon-lg {
+	width: 20px;
+	height: 20px;
+}
+
+/* Focus ------------------------------------------------------------------- */
+
+.myrmex-enabled :focus-visible {
+	outline: 2px solid var(--myrmex-primary);
+	outline-offset: 2px;
+	border-radius: var(--myrmex-radius-sm);
+}
+
+.myrmex-enabled .btn:focus,
+.myrmex-enabled .form-control:focus {
+	box-shadow: 0 0 0 3px var(--myrmex-primary-soft);
+}
+
+/* Scrollbars -------------------------------------------------------------- */
+
+.myrmex-enabled ::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.myrmex-enabled ::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.myrmex-enabled ::-webkit-scrollbar-thumb {
+	background-color: var(--myrmex-border);
+	border: 3px solid transparent;
+	background-clip: content-box;
+	border-radius: 999px;
+}
+
+.myrmex-enabled ::-webkit-scrollbar-thumb:hover {
+	background-color: var(--myrmex-muted);
+}
+
+/* Motion preferences ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+	.myrmex-enabled *,
+	.myrmex-enabled *::before,
+	.myrmex-enabled *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}

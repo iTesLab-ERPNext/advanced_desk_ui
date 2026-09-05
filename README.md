@@ -1,130 +1,220 @@
-# Aurora Theme
+# Theme Myrmex
 
-A cool-toned, "northern lights" ERPNext desk theme — violet, emerald, and
-cyan on a dark, gradient-lit sidebar, with the main content area kept
-bright. Built independently, inspired only by the *feature set* of
-[naidapa_theme](https://github.com/iammusabutt/naidapa_theme) (branding
-settings, animated workspace icons, a customer portal dashboard, a
-restyled login page) — no code, assets, or CSS from that repo are reused;
-the palette, layout, and every file here are original.
+A modern UI/UX layer for **ERPNext v15** running on **Frappe Framework v15**.
 
-## Features
+Theme Myrmex restyles the whole Desk — sidebar, navbar, workspaces, forms, list
+views, tables, dialogs — without touching a single line of Frappe or ERPNext
+source code. All business logic, permissions and the native ERPNext icon set are
+left exactly as they are.
 
-- **Theme Settings** (System Manager only) — sidebar logo, title, favicon,
-  primary/secondary/accent colors, heading/body font, and login page copy
-  (tag line, short notes, description). Colors apply instantly via CSS
-  variables; no rebuild needed for a color change.
-- **One sidebar — ERPNext's own, restyled.** Earlier versions of this app
-  rendered a second, duplicate sidebar as a DOM overlay. That's gone. This
-  version targets and restyles the real sidebar ERPNext already builds
-  (`.sidebar-item-container`, `.desk-sidebar-item`, `.item-anchor`, etc. —
-  confirmed Frappe v15 class names) with the dark, gradient-lit Aurora
-  look. There is exactly one menu, permission-checked and routed by core,
-  same as stock ERPNext — this only changes how it looks and whether it's
-  visible.
-- **Hidden by default.** The sidebar is `width: 0` until you click the
-  navbar toggle, which adds `.aurora-sidebar-open` to `<body>` — pure CSS,
-  no duplicate markup. Press the toggle again or Esc to close it.
-  ⚠️ The exact outer wrapper class name for the sidebar (as opposed to the
-  individual item classes, which are stable) has shifted slightly across
-  recent v15 point releases — this CSS targets three known candidates
-  (`.desk-sidebar-container`, `.body-sidebar-container`,
-  `.sidebar-container.standard-sidebar`) for redundancy. If the toggle
-  doesn't hide/show anything on your exact version, open devtools,
-  right-click the sidebar, "Inspect", and send me the class on the
-  outermost wrapper div — it's a one-line CSS fix.
-- **Broader restyle pass** — buttons, form inputs, modals/dialogs, the
-  page header/breadcrumbs, and indicator pills now pick up the Aurora
-  palette too, not just the sidebar and tables.
-- **Animated workspace icons** — a `Pick Animated Icon` button on the
-  Workspace form lets you choose an Iconify icon code (e.g.
-  `ph:rocket-launch-duotone`) with a live preview grid; the icon then gets
-  injected in front of that workspace's existing sidebar item icon.
-- **Tables** — Desk list view, report/grid view, and child-table grids all
-  get a sticky header, zebra striping, and hover highlight in the Aurora
-  palette (`.list-row-head`, `.frappe-list table`, `.grid-body` — no core
-  markup changes, just restyling). Portal tables match.
-- **Shortcuts** — Workspace shortcut cards get duotone gradient icon
-  badges and a lift-on-hover animation; a lighter pill variant
-  (`.aurora-shortcut-pill`) is available for custom pages/dashboards.
-- **Customer Portal Dashboard** (`/dashboard`) — order/invoice/outstanding/
-  open-issue stats for portal (Customer) users, resolved via the standard
-  User → Contact → Customer link.
-- **Login page** — aurora gradient background + dark-mode toggle layered
-  on top of Frappe's existing login form.
+---
 
-## A deliberate architectural difference from Naidapa
+## 1. What it does
 
-Naidapa fully overrides `www/app.py` **and** `www/app.html` — it replaces
-the entire Desk shell template. That's a legitimate technique, but it's
-also the highest-risk piece of a theme: get it wrong and the Desk renders
-blank for everyone, and it's very hard to verify without a live instance
-to test against.
+| Area | What changes |
+|---|---|
+| Sidebar | Modern spacing, active/hover states, collapsed rail mode, mobile drawer, persisted state |
+| Navbar | Taller, cleaner, restyled search, avatar, notifications, breadcrumbs |
+| Workspaces | Card-based dashboard look for widgets, shortcuts, number cards, charts |
+| Forms | Cleaner sections, labels, inputs, tabs, sidebar, comments, attachments |
+| List views | Restyled header, filters, rows, status pills, pagination, bulk actions |
+| Tables & grids | Better headers, row spacing, hover, optional zebra, horizontal scroll |
+| Components | Buttons, inputs, selects, dropdowns, dialogs, tabs, badges |
+| Theming | ~30 configurable colors/sizes as CSS custom properties |
+| Dark mode | Light / Dark / System, derived automatically from your palette |
+| Theme Builder | Visual editor with live preview, presets, save and reset |
 
-Aurora achieves the same *visible* result — a custom sidebar/navbar with
-animated icons — a different way: it renders them as a DOM overlay on top
-of the stock Desk (same technique proven out in this developer's other
-theme project), fed by a small whitelisted method
-(`events.sidebar.get_sidebar_pages`) that reuses Frappe's own
-`get_workspace_sidebar_items` / `get_desktop_page` APIs. Nothing here can
-break the underlying Desk boot — worst case, the overlay simply doesn't
-render and you see stock ERPNext.
+### What it deliberately does **not** do
 
-The one place this app *does* ship a full custom page is the Customer
-Portal Dashboard, because that route belongs entirely to this app — there
-is no core template to conflict with, so there's no equivalent risk.
+* It does not modify `frappe/` or `erpnext/`.
+* It does not replace the ERPNext icon system. Native SVG sprite icons are kept;
+  only size, alignment, spacing and colour are adjusted.
+* It does not hide, add or bypass any permission-controlled UI. Rendering is
+  still entirely Frappe's job.
+* It does not add React/Vue/Angular or any large UI library. Plain CSS + vanilla
+  JS on top of Frappe's own APIs.
 
-If you'd prefer the literal full-shell-override approach Naidapa uses,
-that's a bigger, riskier change I'd want to build and reason through
-carefully (and ideally test against a real site) rather than ship
-speculatively — say the word and we can do that as a follow-up.
+---
 
-## Install
+## 2. Architecture
+
+Theme Myrmex works through four official Frappe v15 extension points:
+
+1. **`app_include_css` / `app_include_js`** — esbuild bundles injected into the Desk.
+2. **`extend_bootinfo`** — the saved theme is delivered inside `frappe.boot`, so
+   there is no extra network round-trip and no flash of unstyled content.
+3. **A Single DocType (`Theme Settings`)** — stores the configuration and is
+   subject to normal Frappe permissions (System Manager writes, everyone reads).
+4. **A standard Desk Page (`theme-builder`)** — the visual editor.
+
+The CSS is built as a **variable bridge**. Myrmex declares its own
+`--myrmex-*` custom properties and then re-points Frappe's native variables
+(`--primary`, `--bg-color`, `--fg-color`, `--text-color`, `--border-color`, …)
+at them. That means a large part of the Desk is restyled by variables alone
+rather than by brittle selector overrides, and anything Myrmex does not
+explicitly target still inherits the palette.
+
+```
+theme_myrmex/
+├── pyproject.toml
+├── license.txt
+├── README.md
+└── theme_myrmex/
+    ├── __init__.py
+    ├── hooks.py
+    ├── boot.py                  # extend_bootinfo + website context
+    ├── api.py                   # whitelisted read/save/preset/reset endpoints
+    ├── presets.py               # the five shipped presets + variable map
+    ├── install.py               # after_install / after_migrate
+    ├── modules.txt
+    ├── patches.txt
+    ├── templates/
+    ├── public/
+    │   ├── css/
+    │   │   ├── myrmex.bundle.css        # desk bundle entry
+    │   │   ├── myrmex-web.bundle.css    # login / website bundle entry
+    │   │   ├── myrmex-variables.css     # tokens + bridge to Frappe variables
+    │   │   ├── myrmex-base.css
+    │   │   ├── myrmex-sidebar.css
+    │   │   ├── myrmex-navbar.css
+    │   │   ├── myrmex-components.css
+    │   │   ├── myrmex-workspace.css
+    │   │   ├── myrmex-forms.css
+    │   │   ├── myrmex-lists.css
+    │   │   ├── myrmex-dark.css
+    │   │   ├── myrmex-responsive.css
+    │   │   └── myrmex-login.css
+    │   └── js/
+    │       ├── myrmex.bundle.js         # desk bundle entry
+    │       ├── myrmex-web.bundle.js     # login / website bundle entry
+    │       ├── myrmex-utils.js          # namespace, route + observer helpers
+    │       ├── myrmex-theme.js          # applies variables, dark mode, body flags
+    │       ├── myrmex-sidebar.js
+    │       ├── myrmex-navbar.js
+    │       └── myrmex-workspace.js
+    └── myrmex/                          # the "Myrmex" module
+        ├── doctype/theme_settings/
+        └── page/theme_builder/
+```
+
+> Note on layout: the brief sketched `doctype/` and `page/` directly under the
+> app package. Frappe v15 requires them to live inside a **module folder** whose
+> name matches an entry in `modules.txt`, so they are under `theme_myrmex/myrmex/`
+> (module `Myrmex`). Everything else follows the brief.
+
+---
+
+## 3. Installation (Frappe v15)
 
 ```bash
-bench get-app aurora_theme /path/to/this/repo
-bench --site your-site.local install-app aurora_theme
-bench build --app aurora_theme
+cd ~/frappe-bench
+
+# 1. pull the app into the bench
+bench get-app /path/to/theme_myrmex
+# or: bench get-app https://your-git-host/theme_myrmex.git --branch main
+
+# 2. install it on the site
+bench --site your-site.local install-app theme_myrmex
+
+# 3. build the assets
+bench build --app theme_myrmex
+
+# 4. run migrations (creates Theme Settings + Theme Builder page)
+bench --site your-site.local migrate
+
+# 5. restart
+bench restart
+```
+
+If the theme does not appear immediately:
+
+```bash
 bench --site your-site.local clear-cache
+bench --site your-site.local clear-website-cache
+bench build --app theme_myrmex --force
+bench restart
 ```
 
-Then go to **Aurora Theme → Theme Settings** to set your logo, colors,
-and login copy.
+In development, `bench watch` rebuilds the bundles on save.
 
-## Architecture
+### Uninstalling
 
-```
-aurora_theme/
-├── hooks.py                  # asset includes, boot session, doctype_js,
-│                              # portal route, install hooks
-├── boot.py                   # extend_bootinfo: pushes Theme Settings
-│                              # colors/fonts into frappe.boot
-├── install.py                 # adds the `aurora_animated_icon` custom
-│                              # field to Workspace
-├── events/
-│   └── sidebar.py             # get_sidebar_pages(): nested workspace +
-│                              # card + animated-icon data, reusing core
-│                              # desktop APIs (no duplicated logic)
-├── config/
-│   └── desktop.py             # module icon/label
-├── aurora_theme/               # ⚠ module folder — must match modules.txt
-│   └── doctype/
-│       └── theme_settings/    # Single doctype: branding, colors, fonts
-├── www/
-│   ├── portal_dashboard.py    # customer stats controller
-│   └── portal_dashboard.html  # extends templates/web.html
-└── public/
-    ├── css/
-    │   ├── aurora_theme.css   # desk sidebar/navbar/workspace-card design
-    │   ├── aurora_login.css   # login page overlay (background, toggle)
-    │   └── aurora_portal.css  # portal dashboard styling
-    └── js/
-        ├── aurora_theme.js         # sidebar/navbar overlay + dark mode
-        ├── aurora_login.js         # login page overlay
-        ├── aurora_portal.js        # stat counter animation
-        └── workspace_icon_picker.js # icon picker for the Workspace form
+```bash
+bench --site your-site.local uninstall-app theme_myrmex
+bench --site your-site.local clear-cache
+bench restart
 ```
 
-## License
+Because nothing outside the app is patched, removing it returns the Desk to
+stock ERPNext.
 
-MIT
+---
+
+## 4. Using it
+
+**Theme Builder** — `/app/theme-builder` (System Manager only), or from the
+Awesomebar type "Theme Builder". Pick a preset, adjust colours and radii, watch
+the preview update live, then **Save theme**. Saved changes are pushed to every
+open session over Frappe's realtime channel.
+
+**Theme Settings** — `/app/theme-settings` is the raw DocType form for the same
+values, useful for scripting or `bench --site … set-config`-style automation.
+
+**Presets** — Myrmex Default, Myrmex Blue, Myrmex Dark, Myrmex Minimal,
+Myrmex Enterprise.
+
+**Dark mode** — Myrmex piggybacks on Frappe's own theme switcher
+(`data-theme="dark"` on `<html>`), so the user menu → *Toggle theme* keeps
+working. Dark values are derived from your palette automatically; your accent
+colours carry over.
+
+**Custom CSS** — the *Advanced* section of Theme Settings takes raw CSS that is
+appended last, for site-specific tweaks.
+
+---
+
+## 5. Testing checklist
+
+Run through this after installing or after changing colours.
+
+- [ ] Login page renders with the theme palette
+- [ ] Desk loads with no flash of unstyled content
+- [ ] Sidebar: expand, collapse, tooltips in collapsed mode, active item
+- [ ] Sidebar state survives a full page reload
+- [ ] Navbar: search, notifications, help, user menu, avatar dropdown
+- [ ] Breadcrumbs and back navigation
+- [ ] Workspace: cards, shortcuts, number cards, charts, links, recent documents
+- [ ] Workspace edit mode still works (drag, add widget, save)
+- [ ] List view: search, filters, sort, sidebar, status pills, pagination
+- [ ] List view: row selection, bulk actions, "Edit" bulk dialog
+- [ ] Report view, Kanban, Calendar, Gantt
+- [ ] Form: sections, tabs, collapsible sections, grids, comments, attachments
+- [ ] Form: save, submit, cancel, amend; grid row expand dialog
+- [ ] Dialogs, dropdowns, awesomplete suggestions, date picker, multiselect
+- [ ] Dark mode across every screen above; contrast is readable
+- [ ] Theme Builder: preset, live preview, save, reset
+- [ ] Colour change reflected in another open browser tab without reload
+- [ ] Responsive: desktop, tablet (compact sidebar), mobile (drawer)
+- [ ] Permissions: log in as a limited user — no extra links or actions appear
+- [ ] Standard ERPNext flows: Sales Order → Delivery Note → Sales Invoice
+
+---
+
+## 6. Compatibility notes
+
+* Targets Frappe v15 and ERPNext v15 only. Selector names in
+  `myrmex-sidebar.css` / `myrmex-navbar.css` follow the v15 Desk markup.
+* Text on primary-coloured surfaces is chosen by comparing real WCAG contrast
+  ratios, so a mid-tone brand colour gets dark text rather than white. That can
+  look unfamiliar next to stock Frappe, but it is the readable choice; override
+  `--myrmex-primary-contrast` in Custom CSS if you need the other one.
+* Nothing is module-specific; the theme applies across Accounting, Selling,
+  Buying, Stock, Manufacturing, CRM, Projects, HR, Assets, Support and Website.
+* The JS never uses timed guesses. It listens to `frappe.router.on("change")`
+  and the `page-change` event, and where a MutationObserver is genuinely needed
+  it is scoped to one container, guarded against double-init and disconnected on
+  route change (see `myrmex-utils.js`).
+
+## 7. Licence
+
+MIT — see `license.txt`.

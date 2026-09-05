@@ -1,0 +1,136 @@
+/* ---------------------------------------------------------------------------
+ * Tokens
+ * ---------------------------------------------------------------------------
+ * These are the fallback values. At runtime myrmex-theme.js writes a
+ * <style id="myrmex-theme-vars"> block with the values saved in Theme Settings,
+ * which lands after this file and therefore wins.
+ *
+ * The second half of the file is the bridge: Frappe v15's own custom properties
+ * are re-pointed at the Myrmex tokens. That is what restyles the parts of the
+ * Desk this theme never names explicitly.
+ * ------------------------------------------------------------------------- */
+
+:root {
+	/* Brand */
+	--myrmex-primary: #1da1f2;
+	--myrmex-secondary: #1426a9;
+	--myrmex-primary-soft: rgba(29, 161, 242, 0.1);
+	--myrmex-primary-contrast: #ffffff;
+
+	/* Surfaces */
+	--myrmex-background: #f7f7f9;
+	--myrmex-surface: #ffffff;
+	--myrmex-surface-alt: #fbfbfc;
+
+	/* Text */
+	--myrmex-text: #111827;
+	--myrmex-muted: #6b7280;
+	--myrmex-border: #e5e7eb;
+
+	/* Status */
+	--myrmex-success: #22c55e;
+	--myrmex-warning: #f59e0b;
+	--myrmex-error: #ef4444;
+
+	/* Sidebar */
+	--myrmex-sidebar-background: #ffffff;
+	--myrmex-sidebar-text: #111827;
+	--myrmex-sidebar-active: #1da1f2;
+	--myrmex-sidebar-hover: #f1f5f9;
+	--myrmex-sidebar-icon: #6b7280;
+	--myrmex-sidebar-width: 260px;
+	--myrmex-sidebar-rail-width: 72px;
+
+	/* Navbar */
+	--myrmex-navbar-background: #ffffff;
+	--myrmex-navbar-text: #111827;
+	--myrmex-navbar-border: #e5e7eb;
+	--myrmex-navbar-search-background: #f3f4f6;
+	--myrmex-navbar-height: 60px;
+
+	/* Shape */
+	--myrmex-radius-sm: 6px;
+	--myrmex-radius-md: 10px;
+	--myrmex-radius-lg: 14px;
+	--myrmex-card-radius: 14px;
+	--myrmex-button-radius: 8px;
+	--myrmex-input-radius: 8px;
+	--myrmex-card-padding: 20px;
+
+	/* Elevation */
+	--myrmex-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+	--myrmex-shadow-hover: 0 6px 16px rgba(16, 24, 40, 0.12);
+	--myrmex-shadow-lg: 0 16px 40px rgba(16, 24, 40, 0.16);
+
+	/* Rhythm */
+	--myrmex-space-1: 4px;
+	--myrmex-space-2: 8px;
+	--myrmex-space-3: 12px;
+	--myrmex-space-4: 16px;
+	--myrmex-space-5: 24px;
+	--myrmex-space-6: 32px;
+	--myrmex-row-height: 42px;
+
+	/* Motion */
+	--myrmex-transition: 150ms ease;
+	--myrmex-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Compact density: the same layout on a tighter vertical rhythm. */
+:root[data-myrmex-density="compact"] {
+	--myrmex-card-padding: 14px;
+	--myrmex-space-5: 18px;
+	--myrmex-space-6: 24px;
+	--myrmex-row-height: 36px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Bridge to Frappe v15 variables
+ * ---------------------------------------------------------------------------
+ * Frappe declares these in its own stylesheet; re-declaring them here overrides
+ * the value, not the definition, so no core file is touched and every core
+ * component that reads them updates with the palette. */
+
+.myrmex-enabled {
+	--primary: var(--myrmex-primary);
+	--primary-color: var(--myrmex-primary);
+	--text-on-primary: var(--myrmex-primary-contrast);
+
+	--bg-color: var(--myrmex-background);
+	--fg-color: var(--myrmex-surface);
+	--card-bg: var(--myrmex-surface);
+	--subtle-fg: var(--myrmex-surface-alt);
+	--subtle-accent: var(--myrmex-surface-alt);
+	--control-bg: var(--myrmex-surface);
+	--disabled-control-bg: var(--myrmex-surface-alt);
+	--modal-bg: var(--myrmex-surface);
+	--awesomplete-hover-bg: var(--myrmex-primary-soft);
+
+	--text-color: var(--myrmex-text);
+	--heading-color: var(--myrmex-text);
+	--text-muted: var(--myrmex-muted);
+	--text-light: var(--myrmex-muted);
+	--invert-neutral: var(--myrmex-text);
+
+	--border-color: var(--myrmex-border);
+	--dark-border-color: var(--myrmex-border);
+	--table-border-color: var(--myrmex-border);
+
+	--green-avatar-color: var(--myrmex-success);
+	--alert-text-danger: var(--myrmex-error);
+	--alert-text-warning: var(--myrmex-warning);
+	--alert-text-success: var(--myrmex-success);
+
+	--border-radius: var(--myrmex-radius-sm);
+	--border-radius-sm: var(--myrmex-radius-sm);
+	--border-radius-md: var(--myrmex-radius-md);
+	--border-radius-lg: var(--myrmex-radius-lg);
+	--border-radius-full: 999px;
+
+	--shadow-base: var(--myrmex-shadow);
+	--shadow-sm: var(--myrmex-shadow);
+	--shadow-md: var(--myrmex-shadow-hover);
+	--shadow-lg: var(--myrmex-shadow-lg);
+
+	--navbar-height: var(--myrmex-navbar-height);
+}
