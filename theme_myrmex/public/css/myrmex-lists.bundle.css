@@ -1,0 +1,289 @@
+/* List view, report view, tables, kanban and calendar.
+ *
+ * v15 list pages: .layout-main-section.frappe-card holds, in order,
+ *   .page-form (standard filters), .frappe-list > .filter-section,
+ *   .result (.list-row-head + .list-row-container…), .list-paging-area.
+ * The outer card carries the surface; the table sits flat inside it, so there
+ * is one card, not a card within a card. */
+
+.myrmex-enabled .layout-main-section.frappe-card {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+	box-shadow: var(--myrmex-shadow);
+	/* No overflow:hidden here: filter and sort menus open inside this card. */
+}
+
+/* Filters and search ------------------------------------------------------ */
+
+.myrmex-enabled .frappe-card .page-form {
+	margin: 0;
+	padding: var(--myrmex-space-3) var(--myrmex-space-4);
+	border-bottom: 1px solid var(--myrmex-border);
+	background-color: transparent;
+	gap: var(--myrmex-space-2) 0;
+}
+
+.myrmex-enabled .frappe-list .filter-section,
+.myrmex-enabled .frappe-list .standard-filter-section {
+	gap: var(--myrmex-space-2);
+}
+
+.myrmex-enabled .frappe-list .filter-section {
+	padding: var(--myrmex-space-2) var(--myrmex-space-4);
+}
+
+.myrmex-enabled .filter-selector .btn,
+.myrmex-enabled .sort-selector .btn,
+.myrmex-enabled .filter-button {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-button-radius);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .filter-selector .btn:hover,
+.myrmex-enabled .sort-selector .btn:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+/* An applied filter turns the button into a visible state. */
+.myrmex-enabled .filter-button.btn-primary-light {
+	background-color: var(--myrmex-primary-soft);
+	border-color: color-mix(in srgb, var(--myrmex-primary) 30%, transparent);
+	color: var(--myrmex-primary);
+}
+
+.myrmex-enabled .filter-x-button {
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled .tag-filters-area .filter-pill,
+.myrmex-enabled .filter-area .filter-pill {
+	background-color: var(--myrmex-primary-soft);
+	color: var(--myrmex-primary);
+	border-radius: var(--myrmex-radius-pill);
+}
+
+/* Rows -------------------------------------------------------------------- */
+
+.myrmex-enabled .frappe-list .result {
+	background-color: var(--myrmex-surface);
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.myrmex-enabled .list-row-head {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	font-size: var(--myrmex-text-sm);
+	font-weight: var(--myrmex-weight-semibold);
+	color: var(--myrmex-muted);
+	min-height: 40px;
+}
+
+.myrmex-enabled .list-row-container {
+	border-bottom: 1px solid var(--myrmex-border);
+	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .list-row-container:last-child {
+	border-bottom: none;
+}
+
+/* v15 draws its own row separator; the container border replaces it. */
+.myrmex-enabled .list-row-container .list-row-border {
+	display: none;
+}
+
+.myrmex-enabled .list-row {
+	min-height: var(--myrmex-row-height);
+	color: var(--myrmex-text);
+	border-radius: 0;
+}
+
+.myrmex-enabled .list-row-container:hover,
+.myrmex-enabled .list-row-container:hover .list-row {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled .list-row-container:has(.list-row-checkbox:checked),
+.myrmex-enabled .list-row-container:has(.list-row-checkbox:checked) .list-row {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .list-row-container:has(.list-row-checkbox:checked) {
+	box-shadow: inset 3px 0 0 var(--myrmex-primary);
+}
+
+.myrmex-enabled .list-subject .level-item .ellipsis,
+.myrmex-enabled .list-subject a {
+	font-weight: var(--myrmex-weight-medium);
+}
+
+.myrmex-enabled .list-subject a:hover {
+	color: var(--myrmex-primary);
+}
+
+.myrmex-enabled .list-row .list-row-col .text-muted,
+.myrmex-enabled .list-row .modified {
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .list-row .list-row-col {
+	font-variant-numeric: tabular-nums;
+}
+
+/* Optional zebra striping, driven by the "Striped table rows" setting. */
+.myrmex-zebra.myrmex-enabled .list-row-container:nth-child(even) {
+	background-color: color-mix(in srgb, var(--myrmex-surface-alt) 60%, var(--myrmex-surface));
+}
+
+/* Paging and bulk actions -------------------------------------------------- */
+
+.myrmex-enabled .list-paging-area {
+	padding: var(--myrmex-space-3) var(--myrmex-space-4);
+	border-top: 1px solid var(--myrmex-border);
+	color: var(--myrmex-muted);
+}
+
+.myrmex-enabled .list-count {
+	color: var(--myrmex-muted);
+	font-variant-numeric: tabular-nums;
+}
+
+.myrmex-enabled .list-paging-area .btn-paging.btn-info {
+	background-color: var(--myrmex-primary-soft);
+	border-color: transparent;
+	color: var(--myrmex-primary);
+}
+
+.myrmex-enabled .bulk-actions-area .btn,
+.myrmex-enabled .list-actions .btn {
+	border-radius: var(--myrmex-button-radius);
+}
+
+/* Report view and generic tables ------------------------------------------ */
+
+.myrmex-enabled .datatable {
+	border-radius: var(--myrmex-radius-md);
+	overflow: hidden;
+	border-color: var(--myrmex-border);
+	background-color: var(--myrmex-surface);
+}
+
+.myrmex-enabled .datatable .dt-header,
+.myrmex-enabled .datatable .dt-row-header .dt-cell {
+	background-color: var(--myrmex-surface-alt);
+	color: var(--myrmex-muted);
+	font-weight: var(--myrmex-weight-semibold);
+}
+
+.myrmex-enabled .datatable .dt-cell {
+	border-color: var(--myrmex-border);
+	color: var(--myrmex-text);
+	background-color: var(--myrmex-surface);
+}
+
+.myrmex-enabled .datatable .dt-cell--focus {
+	box-shadow: inset 0 0 0 2px var(--myrmex-primary);
+}
+
+.myrmex-enabled .datatable .dt-row:hover .dt-cell {
+	background-color: var(--myrmex-surface-alt);
+}
+
+.myrmex-enabled .datatable .dt-row--highlight .dt-cell {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled table.table {
+	color: var(--myrmex-text);
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled table.table thead th {
+	background-color: var(--myrmex-surface-alt);
+	border-bottom: 1px solid var(--myrmex-border);
+	color: var(--myrmex-muted);
+	font-size: var(--myrmex-text-sm);
+	font-weight: var(--myrmex-weight-semibold);
+	padding: var(--myrmex-space-3);
+}
+
+.myrmex-enabled table.table td {
+	border-color: var(--myrmex-border);
+	padding: var(--myrmex-space-3);
+	vertical-align: middle;
+}
+
+.myrmex-enabled table.table-hover tbody tr:hover {
+	background-color: var(--myrmex-surface-alt);
+}
+
+/* Wide tables get their own horizontal scroll instead of pushing the page. */
+.myrmex-enabled .myrmex-table-wrapper,
+.myrmex-enabled .report-wrapper,
+.myrmex-enabled .table-responsive {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+}
+
+/* Kanban ------------------------------------------------------------------- */
+
+.myrmex-enabled .kanban .kanban-column {
+	background-color: var(--myrmex-surface-alt);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-card-radius);
+}
+
+.myrmex-enabled .kanban .kanban-card,
+.myrmex-enabled .kanban-card.content {
+	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-border);
+	border-radius: var(--myrmex-radius-md);
+	box-shadow: var(--myrmex-shadow);
+	transition: box-shadow var(--myrmex-transition), transform var(--myrmex-transition);
+}
+
+.myrmex-enabled .kanban .kanban-card:hover {
+	box-shadow: var(--myrmex-shadow-hover);
+}
+
+.myrmex-enabled .kanban .kanban-column-title {
+	font-weight: var(--myrmex-weight-semibold);
+	color: var(--myrmex-text);
+}
+
+/* Calendar and Gantt -------------------------------------------------------- */
+
+.myrmex-enabled .fc-view-container,
+.myrmex-enabled .fc-unthemed .fc-content,
+.myrmex-enabled .fc-unthemed td,
+.myrmex-enabled .fc-unthemed th {
+	border-color: var(--myrmex-border);
+}
+
+.myrmex-enabled .fc-toolbar h2 {
+	font-size: var(--myrmex-text-lg);
+	font-weight: var(--myrmex-weight-semibold);
+	color: var(--myrmex-text);
+}
+
+.myrmex-enabled .fc-event {
+	border-radius: var(--myrmex-radius-sm);
+	border: none;
+	background-color: var(--myrmex-primary);
+	color: var(--myrmex-primary-contrast);
+	padding: 2px 6px;
+}
+
+.myrmex-enabled .fc-unthemed .fc-today {
+	background-color: var(--myrmex-primary-soft);
+}
+
+.myrmex-enabled .gantt .bar {
+	fill: var(--myrmex-primary);
+}
