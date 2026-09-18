@@ -133,42 +133,64 @@
 	font-weight: var(--myrmex-weight-semibold);
 }
 
-/* Grids (child tables) ---------------------------------------------------- */
+/* Grids (child tables) ----------------------------------------------------
+ * Child tables follow Theme Builder → Table Styles, like every other table. */
 
 .myrmex-enabled .form-grid-container {
-	border-radius: var(--myrmex-radius-md);
+	border-radius: var(--myrmex-table-radius);
 }
 
 .myrmex-enabled .form-grid {
-	border: 1px solid var(--myrmex-border);
-	border-radius: var(--myrmex-radius-md);
-	background-color: var(--myrmex-surface);
+	border: 1px solid var(--myrmex-table-border);
+	border-radius: var(--myrmex-table-radius);
+	background-color: var(--myrmex-table-row-bg);
 }
 
 .myrmex-enabled .form-grid .grid-heading-row {
-	background-color: var(--myrmex-surface-alt);
-	border-bottom: 1px solid var(--myrmex-border);
-	border-radius: var(--myrmex-radius-md) var(--myrmex-radius-md) 0 0;
+	background-color: var(--myrmex-table-header-bg);
+	border-bottom: var(--myrmex-table-row-border-width) solid var(--myrmex-table-border);
+	border-radius: var(--myrmex-table-radius) var(--myrmex-table-radius) 0 0;
 	font-size: var(--myrmex-text-sm);
-	font-weight: var(--myrmex-weight-semibold);
-	color: var(--myrmex-muted);
+	font-weight: var(--myrmex-table-header-weight);
+	text-transform: var(--myrmex-table-header-transform);
+	letter-spacing: var(--myrmex-table-header-tracking);
+	color: var(--myrmex-table-header-text);
 }
 
 .myrmex-enabled .form-grid .grid-row {
-	border-bottom: 1px solid var(--myrmex-border);
+	border-bottom: var(--myrmex-table-row-border-width) solid var(--myrmex-table-border);
+	color: var(--myrmex-table-row-text);
 	transition: background-color var(--myrmex-transition);
+}
+
+.myrmex-enabled .form-grid .grid-row > .row,
+.myrmex-enabled .form-grid .grid-heading-row > .row {
+	padding-inline: calc(var(--myrmex-table-cell-padding) / 2);
+}
+
+.myrmex-enabled .form-grid .grid-row .col {
+	border-inline-start: var(--myrmex-table-cell-border-width) solid var(--myrmex-table-border);
+}
+
+.myrmex-enabled .form-grid .grid-row .col:first-child {
+	border-inline-start: none;
 }
 
 .myrmex-enabled .form-grid .grid-body .grid-row:last-child {
 	border-bottom: none;
 }
 
-.myrmex-enabled .form-grid .grid-body .grid-row:hover {
-	background-color: var(--myrmex-surface-alt);
+.myrmex-enabled[data-myrmex-table-hover="tint"] .form-grid .grid-body .grid-row:hover,
+.myrmex-enabled[data-myrmex-table-hover="accent"] .form-grid .grid-body .grid-row:hover {
+	background-color: var(--myrmex-table-hover-bg);
+}
+
+.myrmex-zebra.myrmex-enabled .form-grid .grid-body .grid-row:nth-child(even) {
+	background-color: var(--myrmex-table-stripe-bg);
 }
 
 .myrmex-enabled .form-grid .grid-row.grid-row-open {
-	background-color: var(--myrmex-primary-soft);
+	background-color: var(--myrmex-table-selected-bg);
 }
 
 .myrmex-enabled .form-grid .grid-empty {

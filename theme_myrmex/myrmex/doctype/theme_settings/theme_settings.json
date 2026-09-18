@@ -51,7 +51,31 @@
   "components_col_1",
   "card_padding",
   "shadow_size",
+  "tables_section",
+  "table_header_background",
+  "table_header_text",
+  "table_header_weight",
+  "table_header_uppercase",
+  "tables_col_1",
+  "table_row_background",
+  "table_row_text",
   "zebra_tables",
+  "table_stripe_background",
+  "tables_col_2",
+  "table_hover_effect",
+  "table_row_hover",
+  "table_selected_background",
+  "tables_borders_section",
+  "table_border_style",
+  "table_border_color",
+  "table_border_width",
+  "tables_borders_col_1",
+  "table_radius",
+  "table_row_height",
+  "table_cell_padding",
+  "tables_borders_col_2",
+  "table_pagination_style",
+  "table_pagination_align",
   "advanced_section",
   "custom_css"
  ],
@@ -310,10 +334,151 @@
    "options": "None\nSmall\nMedium\nLarge"
   },
   {
+   "description": "Applies to list views, report views, child tables and grids.",
+   "fieldname": "tables_section",
+   "fieldtype": "Section Break",
+   "label": "Table Styles"
+  },
+  {
+   "default": "#FBFBFC",
+   "fieldname": "table_header_background",
+   "fieldtype": "Color",
+   "label": "Header background"
+  },
+  {
+   "default": "#6B7280",
+   "fieldname": "table_header_text",
+   "fieldtype": "Color",
+   "label": "Header text"
+  },
+  {
+   "default": "Semibold",
+   "fieldname": "table_header_weight",
+   "fieldtype": "Select",
+   "label": "Header weight",
+   "options": "Regular\nMedium\nSemibold"
+  },
+  {
+   "default": "0",
+   "fieldname": "table_header_uppercase",
+   "fieldtype": "Check",
+   "label": "Uppercase headers"
+  },
+  {
+   "fieldname": "tables_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#FFFFFF",
+   "fieldname": "table_row_background",
+   "fieldtype": "Color",
+   "label": "Row background"
+  },
+  {
+   "default": "#111827",
+   "fieldname": "table_row_text",
+   "fieldtype": "Color",
+   "label": "Row text"
+  },
+  {
    "default": "0",
    "fieldname": "zebra_tables",
    "fieldtype": "Check",
-   "label": "Striped table rows"
+   "label": "Striped rows"
+  },
+  {
+   "default": "#F8F8FA",
+   "fieldname": "table_stripe_background",
+   "fieldtype": "Color",
+   "label": "Stripe background"
+  },
+  {
+   "fieldname": "tables_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Background tint",
+   "fieldname": "table_hover_effect",
+   "fieldtype": "Select",
+   "label": "Row hover",
+   "options": "None\nBackground tint\nAccent edge"
+  },
+  {
+   "default": "#F6F7F9",
+   "fieldname": "table_row_hover",
+   "fieldtype": "Color",
+   "label": "Hover background"
+  },
+  {
+   "default": "#E8F5FE",
+   "fieldname": "table_selected_background",
+   "fieldtype": "Color",
+   "label": "Selected row"
+  },
+  {
+   "fieldname": "tables_borders_section",
+   "fieldtype": "Section Break",
+   "label": "Borders and spacing"
+  },
+  {
+   "default": "Horizontal lines",
+   "fieldname": "table_border_style",
+   "fieldtype": "Select",
+   "label": "Borders",
+   "options": "All borders\nHorizontal lines\nNone"
+  },
+  {
+   "default": "#E5E7EB",
+   "fieldname": "table_border_color",
+   "fieldtype": "Color",
+   "label": "Border colour"
+  },
+  {
+   "default": "1",
+   "fieldname": "table_border_width",
+   "fieldtype": "Int",
+   "label": "Border width (px)"
+  },
+  {
+   "fieldname": "tables_borders_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "10",
+   "description": "Rounding of report tables, child tables and grids. List views follow the card radius.",
+   "fieldname": "table_radius",
+   "fieldtype": "Int",
+   "label": "Table radius (px)"
+  },
+  {
+   "default": "42",
+   "fieldname": "table_row_height",
+   "fieldtype": "Int",
+   "label": "Row height (px)"
+  },
+  {
+   "default": "16",
+   "fieldname": "table_cell_padding",
+   "fieldtype": "Int",
+   "label": "Cell padding (px)"
+  },
+  {
+   "fieldname": "tables_borders_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pills",
+   "fieldname": "table_pagination_style",
+   "fieldtype": "Select",
+   "label": "Pagination style",
+   "options": "Pills\nButtons\nMinimal"
+  },
+  {
+   "default": "Edges",
+   "fieldname": "table_pagination_align",
+   "fieldtype": "Select",
+   "label": "Pagination alignment",
+   "options": "Edges\nLeft\nCentre\nRight"
   },
   {
    "collapsible": 1,

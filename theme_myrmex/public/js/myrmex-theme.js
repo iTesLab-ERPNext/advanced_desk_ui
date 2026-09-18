@@ -40,6 +40,11 @@ myrmex.theme = {
 		myrmex.ROOT.classList.add("myrmex-enabled");
 		myrmex.ROOT.dataset.myrmexDensity = (payload.density || "Comfortable").toLowerCase();
 		myrmex.ROOT.classList.toggle("myrmex-zebra", !!payload.zebra_tables);
+		// Table hover and pagination need a selector rather than a variable,
+		// so they travel as attributes on <html>.
+		const table = payload.table || {};
+		myrmex.ROOT.dataset.myrmexTableHover = table.hover || "tint";
+		myrmex.ROOT.dataset.myrmexTablePaging = table.pagination || "pills";
 		this.writeVariables(payload);
 		this.applyDefaultAppearance(payload.appearance);
 	},

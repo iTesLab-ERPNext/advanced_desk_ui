@@ -260,6 +260,132 @@
 	background-color: var(--myrmex-surface, #fff);
 }
 
+/* Preview: table -----------------------------------------------------------
+ * Mirrors what the Table Styles tab controls, using the same tokens the Desk
+ * uses, so the preview and the real thing cannot drift apart. The "hover" row
+ * is painted permanently, since a preview cannot be hovered meaningfully. */
+
+.myrmex-preview__table {
+	grid-column: 1 / -1;
+	border: 1px solid var(--myrmex-table-border, #e5e7eb);
+	border-radius: var(--myrmex-table-radius, 10px);
+	overflow: hidden;
+	background-color: var(--myrmex-table-row-bg, #fff);
+	font-size: 12px;
+}
+
+.myrmex-preview__thead,
+.myrmex-preview__trow {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr 0.8fr;
+	align-items: center;
+	gap: 8px;
+	padding-inline: var(--myrmex-table-cell-padding, 16px);
+	min-height: var(--myrmex-table-row-height, 42px);
+}
+
+.myrmex-preview__thead {
+	background-color: var(--myrmex-table-header-bg, #fbfbfc);
+	color: var(--myrmex-table-header-text, #6b7280);
+	font-weight: var(--myrmex-table-header-weight, 600);
+	text-transform: var(--myrmex-table-header-transform, none);
+	letter-spacing: var(--myrmex-table-header-tracking, 0);
+	border-bottom: var(--myrmex-table-row-border-width, 1px) solid var(--myrmex-table-border, #e5e7eb);
+	min-height: calc(var(--myrmex-table-row-height, 42px) - 4px);
+}
+
+.myrmex-preview__trow {
+	color: var(--myrmex-table-row-text, #111827);
+	border-bottom: var(--myrmex-table-row-border-width, 1px) solid var(--myrmex-table-border, #e5e7eb);
+}
+
+.myrmex-preview__thead span + span,
+.myrmex-preview__trow span + span {
+	border-inline-start: var(--myrmex-table-cell-border-width, 0px) solid var(--myrmex-table-border, #e5e7eb);
+	padding-inline-start: calc(var(--myrmex-table-cell-border-width, 0px) * 8);
+}
+
+.myrmex-preview__trow .num {
+	text-align: end;
+	font-variant-numeric: tabular-nums;
+}
+
+.myrmex-preview.is-zebra .myrmex-preview__trow:nth-of-type(odd):not(.is-selected) {
+	background-color: var(--myrmex-table-stripe-bg, #f8f8fa);
+}
+
+.myrmex-preview__trow.is-selected {
+	background-color: var(--myrmex-table-selected-bg, #e8f5fe);
+	box-shadow: inset 3px 0 0 var(--myrmex-primary, #1da1f2);
+}
+
+[data-myrmex-table-hover="tint"] .myrmex-preview__trow.is-hover,
+[data-myrmex-table-hover="accent"] .myrmex-preview__trow.is-hover {
+	background-color: var(--myrmex-table-hover-bg, #f6f7f9);
+}
+
+[data-myrmex-table-hover="accent"] .myrmex-preview__trow.is-hover {
+	box-shadow: inset 3px 0 0 var(--myrmex-primary, #1da1f2);
+}
+
+.myrmex-preview__paging {
+	display: flex;
+	align-items: center;
+	justify-content: var(--myrmex-table-paging-justify, space-between);
+	gap: 6px;
+	padding: 8px var(--myrmex-table-cell-padding, 16px);
+	border-top: var(--myrmex-table-row-border-width, 1px) solid var(--myrmex-table-border, #e5e7eb);
+}
+
+.myrmex-preview__page {
+	border: 1px solid var(--myrmex-border, #e5e7eb);
+	background-color: var(--myrmex-surface, #fff);
+	color: var(--myrmex-muted, #6b7280);
+	padding: 3px 10px;
+	font-size: 11px;
+}
+
+[data-myrmex-table-paging="pills"] .myrmex-preview__page {
+	border-radius: 999px;
+}
+
+[data-myrmex-table-paging="buttons"] .myrmex-preview__page {
+	border-radius: var(--myrmex-button-radius, 8px);
+}
+
+[data-myrmex-table-paging="pills"] .myrmex-preview__page.is-active,
+[data-myrmex-table-paging="buttons"] .myrmex-preview__page.is-active {
+	background-color: var(--myrmex-primary-soft, rgba(29, 161, 242, 0.1));
+	border-color: transparent;
+	color: var(--myrmex-primary, #1da1f2);
+	font-weight: 600;
+}
+
+[data-myrmex-table-paging="minimal"] .myrmex-preview__page {
+	border-color: transparent;
+	background-color: transparent;
+	padding-inline: 6px;
+}
+
+[data-myrmex-table-paging="minimal"] .myrmex-preview__page.is-active {
+	color: var(--myrmex-text, #111827);
+	font-weight: 600;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* Subheadings inside a settings group. */
+.myrmex-builder__subhead {
+	margin: 18px 0 6px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--myrmex-muted, #6b7280);
+}
+
+.myrmex-builder__subhead:first-child {
+	margin-top: 0;
+}
+
 @media (max-width: 1100px) {
 	.myrmex-builder {
 		grid-template-columns: 1fr;

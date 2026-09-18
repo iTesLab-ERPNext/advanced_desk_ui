@@ -9,7 +9,7 @@ chat panel that answers questions using only what the signed-in user is allowed
 to see. No line of Frappe or ERPNext source is modified. Business logic,
 permissions and the native icon set stay exactly as they are.
 
-Version **1.1.0**. See [CHANGELOG.md](CHANGELOG.md) for what changed since 1.0.
+Version **1.2.0**. See [CHANGELOG.md](CHANGELOG.md) for the history.
 
 ---
 
@@ -42,6 +42,7 @@ Version **1.1.0**. See [CHANGELOG.md](CHANGELOG.md) for what changed since 1.0.
 | Workspaces | Card treatment for number cards (tabular figures, trend pills), shortcut tiles that respond to hover, link cards, quick lists, charts, onboarding |
 | Forms | Follows v15's single-card form: tab bar joined to the card, clear section headings, validation colours, child tables, sidebar, comments and timeline |
 | Lists and reports | One card holding filters, table and paging; selected-row state; accessible status pills; datatable, kanban, calendar and Gantt |
+| Table Styles | A dedicated Theme Builder section: header, row and hover colours, striping, borders and radius, row height and cell padding, and pagination style and alignment, applied to list views, report tables, child tables and plain tables alike |
 | States | Shimmer skeletons, empty states, the freeze overlay, message dialogs, "not found" pages, toasts |
 | Dark mode | Follows Frappe's own theme switcher; dark palette derived from yours |
 | Responsive | Desktop, laptop (narrower sidebar), tablet and phone (drawer, touch targets, full-width dialogs) |
@@ -184,7 +185,7 @@ bench restart            # production (supervisor)
 
 Then hard-refresh the browser (Ctrl+Shift+R) so the new bundles load.
 
-### Upgrading from 1.0
+### Upgrading from an earlier version
 
 ```bash
 bench update --apps theme_myrmex        # or git pull in apps/theme_myrmex
@@ -193,7 +194,9 @@ bench build --app theme_myrmex
 bench restart
 ```
 
-Your saved Theme Settings are kept. The assistant is installed **disabled**.
+Your saved Theme Settings are kept; fields added by a new version (the Table
+Styles values in 1.2) fall back to their defaults until you change them. The
+assistant is installed **disabled**.
 
 ### Uninstalling
 
@@ -224,13 +227,48 @@ the sidebar to an icon rail, remembered per browser. On list and form pages the
 shortcut triggers Frappe's own sidebar toggle. The shortcut is ignored while
 typing in a field or editor, so Ctrl+B still means bold there.
 
+### Table Styles
+
+**Theme Builder → Table Styles** (or the *Table Styles* section of Theme
+Settings) controls every table in the Desk from one place: list views, report
+and datatable views, child tables on forms, and plain tables. The preview on the
+right of the Theme Builder shows the result as you change it.
+
+| Group | Setting | Notes |
+|---|---|---|
+| Header | Header background, Header text | Header colours |
+| | Header weight | Regular, Medium or Semibold |
+| | Uppercase headers | Column labels only; the row count and bulk-action controls keep their casing |
+| Rows | Row background, Row text | |
+| | Striped rows, Stripe background | Alternating rows; the selected row keeps its own colour |
+| | Selected row | Background for checked rows and highlighted report rows |
+| Hover | Row hover | None, Background tint, or Accent edge (tint plus a leading accent bar) |
+| | Hover background | |
+| Borders | Borders | All borders, Horizontal lines, or None |
+| | Border colour, Border width (px) | 0 to 3 px |
+| | Table radius (px) | Report tables, child tables and grids; list views follow the card radius, since the table fills the page card |
+| Spacing | Row height (px) | 28 to 64 |
+| | Cell padding (px) | 4 to 28, the horizontal padding inside cells |
+| Pagination | Pagination style | Pills, Buttons, or Minimal (text only, active size underlined) |
+| | Pagination alignment | Edges (page sizes one side, "Load more" the other), Left, Centre, or Right |
+
+Each preset ships table styling that matches it: Enterprise uses uppercase
+headers with full borders, Minimal uses compact rows with minimal pagination.
+Changing any table setting flags the preset as *Custom*, like every other value.
+
+In dark mode the table surfaces follow the dark palette rather than custom light
+colours, exactly as the rest of the theme does; the selected row keeps your
+brand colour as a tint. Numeric values (row height, padding, radius, border
+width) are clamped to a usable range on save and again when the payload is
+built, so a value typed straight into Theme Settings cannot break the layout.
+
 **Custom CSS**: the *Advanced* section of Theme Settings is appended last.
 Useful tokens to override:
 
 ```css
 :root {
 	--myrmex-sidebar-rail-width: 64px;
-	--myrmex-row-height: 38px;
+	--myrmex-table-row-height: 38px;
 	--myrmex-control-height: 32px;
 	--myrmex-primary-contrast: #ffffff; /* force white text on primary */
 }
@@ -452,6 +490,10 @@ Theme
 - [ ] Navbar: search, notifications panel, help, user menu, breadcrumbs
 - [ ] List: standard filters, filter/sort menus open fully, selection, bulk actions, paging, sidebar group-by
 - [ ] Report view, Kanban, Calendar, Gantt
+- [ ] Table Styles: header colours and weight, uppercase (row count stays sentence case)
+- [ ] Table Styles: striped rows, hover tint and accent edge, selected row still distinct
+- [ ] Table Styles: all borders / horizontal / none, radius, row height, cell padding
+- [ ] Table Styles: each pagination style and alignment; the same settings on a child table and a report view
 - [ ] Form: tabs (sticky while scrolling), sections, collapsible sections, mandatory errors, child tables, row edit dialog, comments, attachments
 - [ ] Save, submit, cancel, amend; dialogs, dropdowns, date picker, awesomplete
 - [ ] Empty list, loading skeletons, "not permitted" page

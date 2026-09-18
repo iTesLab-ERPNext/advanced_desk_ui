@@ -91,7 +91,67 @@ const GROUPS = [
 				type: "select",
 				options: ["None", "Small", "Medium", "Large"],
 			},
-			{ fieldname: "zebra_tables", label: __("Striped table rows"), type: "check" },
+		],
+	},
+	{
+		key: "tables",
+		label: __("Table Styles"),
+		fields: [
+			{ type: "heading", label: __("Header") },
+			{ fieldname: "table_header_background", label: __("Header background"), type: "color" },
+			{ fieldname: "table_header_text", label: __("Header text"), type: "color" },
+			{
+				fieldname: "table_header_weight",
+				label: __("Header weight"),
+				type: "select",
+				options: ["Regular", "Medium", "Semibold"],
+			},
+			{ fieldname: "table_header_uppercase", label: __("Uppercase headers"), type: "check" },
+
+			{ type: "heading", label: __("Rows") },
+			{ fieldname: "table_row_background", label: __("Row background"), type: "color" },
+			{ fieldname: "table_row_text", label: __("Row text"), type: "color" },
+			{ fieldname: "zebra_tables", label: __("Striped rows"), type: "check" },
+			{ fieldname: "table_stripe_background", label: __("Stripe background"), type: "color" },
+			{ fieldname: "table_selected_background", label: __("Selected row"), type: "color" },
+
+			{ type: "heading", label: __("Hover") },
+			{
+				fieldname: "table_hover_effect",
+				label: __("Row hover"),
+				type: "select",
+				options: ["None", "Background tint", "Accent edge"],
+			},
+			{ fieldname: "table_row_hover", label: __("Hover background"), type: "color" },
+
+			{ type: "heading", label: __("Borders") },
+			{
+				fieldname: "table_border_style",
+				label: __("Borders"),
+				type: "select",
+				options: ["All borders", "Horizontal lines", "None"],
+			},
+			{ fieldname: "table_border_color", label: __("Border colour"), type: "color" },
+			{ fieldname: "table_border_width", label: __("Border width (px)"), type: "number", min: 0, max: 3 },
+			{ fieldname: "table_radius", label: __("Table radius (px)"), type: "number", min: 0, max: 24 },
+
+			{ type: "heading", label: __("Spacing") },
+			{ fieldname: "table_row_height", label: __("Row height (px)"), type: "number", min: 28, max: 64 },
+			{ fieldname: "table_cell_padding", label: __("Cell padding (px)"), type: "number", min: 4, max: 28 },
+
+			{ type: "heading", label: __("Pagination") },
+			{
+				fieldname: "table_pagination_style",
+				label: __("Pagination style"),
+				type: "select",
+				options: ["Pills", "Buttons", "Minimal"],
+			},
+			{
+				fieldname: "table_pagination_align",
+				label: __("Pagination alignment"),
+				type: "select",
+				options: ["Edges", "Left", "Centre", "Right"],
+			},
 		],
 	},
 	{
@@ -182,6 +242,27 @@ class ThemeBuilder {
 								<div class="label">${__("Sales Orders")}</div>
 								<div class="value">782</div>
 							</div>
+							<div class="myrmex-preview__table">
+								<div class="myrmex-preview__thead">
+									<span>${__("Title")}</span>
+									<span>${__("Status")}</span>
+									<span class="num">${__("Amount")}</span>
+								</div>
+								<div class="myrmex-preview__trow">
+									<span>SO-00348</span><span>${__("Draft")}</span><span class="num">12,400</span>
+								</div>
+								<div class="myrmex-preview__trow is-selected">
+									<span>SO-00347</span><span>${__("Submitted")}</span><span class="num">3,150</span>
+								</div>
+								<div class="myrmex-preview__trow is-hover">
+									<span>SO-00346</span><span>${__("Draft")}</span><span class="num">880</span>
+								</div>
+								<div class="myrmex-preview__paging">
+									<span class="myrmex-preview__page is-active">20</span>
+									<span class="myrmex-preview__page">100</span>
+									<span class="myrmex-preview__page">500</span>
+								</div>
+							</div>
 							<div class="myrmex-preview__row">
 								<span class="myrmex-preview__btn primary">${__("Create")}</span>
 								<span class="myrmex-preview__btn secondary">${__("Filter")}</span>
@@ -236,6 +317,10 @@ class ThemeBuilder {
 	}
 
 	render_field(field) {
+		if (field.type === "heading") {
+			return $('<p class="myrmex-builder__subhead"></p>').text(field.label);
+		}
+
 		const value = this.settings[field.fieldname];
 		const row = $('<div class="myrmex-builder__field"></div>');
 		$("<label></label>").text(field.label).appendTo(row);
@@ -336,6 +421,13 @@ class ThemeBuilder {
 				for (const [name, value] of Object.entries(vars)) {
 					preview.style.setProperty(name, value);
 				}
+
+				// Table hover and pagination are selector-driven; the preview
+				// carries the same attributes the Desk puts on <html>.
+				const table = r.message.table || {};
+				preview.dataset.myrmexTableHover = table.hover || "tint";
+				preview.dataset.myrmexTablePaging = table.pagination || "pills";
+				preview.classList.toggle("is-zebra", !!r.message.zebra_tables);
 			},
 		});
 	}

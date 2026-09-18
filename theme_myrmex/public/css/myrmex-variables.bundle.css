@@ -97,6 +97,29 @@
 	--myrmex-leading: 1.5;
 	--myrmex-tracking-tight: -0.015em;
 
+	/* Tables ---------------------------------------------------------------
+	 * Configurable from Theme Builder → Table Styles. These fallbacks match
+	 * the shipped defaults, so tables look right before anything is saved.
+	 * Row height is its own token rather than --myrmex-row-height, so an
+	 * explicit table setting is not overridden by the density preset. */
+	--myrmex-table-header-bg: #fbfbfc;
+	--myrmex-table-header-text: #6b7280;
+	--myrmex-table-header-weight: 600;
+	--myrmex-table-header-transform: none;
+	--myrmex-table-header-tracking: 0;
+	--myrmex-table-row-bg: #ffffff;
+	--myrmex-table-row-text: #111827;
+	--myrmex-table-stripe-bg: #f8f8fa;
+	--myrmex-table-hover-bg: #f6f7f9;
+	--myrmex-table-selected-bg: #e8f5fe;
+	--myrmex-table-border: #e5e7eb;
+	--myrmex-table-row-border-width: 1px;
+	--myrmex-table-cell-border-width: 0px;
+	--myrmex-table-radius: 10px;
+	--myrmex-table-row-height: 42px;
+	--myrmex-table-cell-padding: 16px;
+	--myrmex-table-paging-justify: space-between;
+
 	/* Rhythm --------------------------------------------------------------- */
 	--myrmex-space-1: 4px;
 	--myrmex-space-2: 8px;
@@ -168,7 +191,6 @@
 
 	--border-color: var(--myrmex-border);
 	--dark-border-color: var(--myrmex-border-strong);
-	--table-border-color: var(--myrmex-border);
 
 	--green-avatar-color: var(--myrmex-success);
 	--alert-text-danger: var(--myrmex-error-text);
@@ -188,4 +210,5 @@
 	--focus-default: var(--myrmex-focus-ring);
 
 	--navbar-height: var(--myrmex-navbar-height);
+	--table-border-color: var(--myrmex-table-border);
 }

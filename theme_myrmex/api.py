@@ -12,16 +12,24 @@ from theme_myrmex.presets import (
 	COLOR_VARIABLE_MAP,
 	DARK_SURFACES,
 	DEFAULTS,
+	NUMBER_BOUNDS,
 	PRESET_NAMES,
 	PRESETS,
 	SHADOWS,
 	SIZE_VARIABLE_MAP,
+	TABLE_BORDER_EDGES,
+	TABLE_HEADER_WEIGHTS,
+	TABLE_HOVER_MODES,
+	TABLE_PAGINATION_ALIGN,
+	TABLE_PAGINATION_STYLES,
 )
 
 CACHE_KEY = "myrmex_theme_payload"
 
 # Fields that carry a unit when written to CSS.
 PX_FIELDS = set(SIZE_VARIABLE_MAP.keys())
+
+
 
 # Accent colours that survive the switch to dark mode.
 DARK_SAFE_COLORS = (
@@ -76,12 +84,15 @@ def build_payload(settings: dict | None = None) -> dict:
 	dark_vars["--myrmex-sidebar-icon"] = DARK_SURFACES["--myrmex-muted"]
 	dark_vars["--myrmex-primary-soft"] = _with_alpha(settings.get("primary_color"), 0.18)
 	dark_vars["--myrmex-primary-contrast"] = _readable_on(settings.get("primary_color"))
+	# The selected row keeps the brand colour in dark mode, as a tint.
+	dark_vars["--myrmex-table-selected-bg"] = _with_alpha(settings.get("primary_color"), 0.22)
 
 	shared_vars = {}
 	for field, variable in SIZE_VARIABLE_MAP.items():
-		value = settings.get(field) or DEFAULTS.get(field)
-		shared_vars[variable] = f"{int(value)}px" if field in PX_FIELDS else str(value)
+		value = _number(settings, field)
+		shared_vars[variable] = f"{value}px" if field in PX_FIELDS else str(value)
 
+	shared_vars.update(_table_vars(settings))
 	shared_vars.update(SHADOWS.get(settings.get("shadow_size") or "Medium", SHADOWS["Medium"]))
 	shared_vars["--myrmex-transition"] = (
 		"150ms ease" if frappe.utils.cint(settings.get("enable_animations")) else "0ms linear"
@@ -89,6 +100,14 @@ def build_payload(settings: dict | None = None) -> dict:
 
 	return {
 		"enabled": bool(frappe.utils.cint(settings.get("enable_theme"))),
+		"table": {
+			"hover": TABLE_HOVER_MODES.get(
+				settings.get("table_hover_effect") or "", TABLE_HOVER_MODES["Background tint"]
+			),
+			"pagination": TABLE_PAGINATION_STYLES.get(
+				settings.get("table_pagination_style") or "", TABLE_PAGINATION_STYLES["Pills"]
+			),
+		},
 		"appearance": settings.get("default_appearance") or "System",
 		"density": settings.get("density") or "Comfortable",
 		"zebra_tables": bool(frappe.utils.cint(settings.get("zebra_tables"))),
@@ -100,6 +119,46 @@ def build_payload(settings: dict | None = None) -> dict:
 		"dark_vars": dark_vars,
 		"shared_vars": shared_vars,
 		"custom_css": settings.get("custom_css") or "",
+	}
+
+
+def _number(settings: dict, field: str) -> int:
+	"""Read a numeric setting, falling back to the default and clamping it."""
+	value = settings.get(field)
+	if value in (None, ""):
+		value = DEFAULTS.get(field, 0)
+	try:
+		number = int(float(value))
+	except (TypeError, ValueError):
+		number = int(DEFAULTS.get(field, 0) or 0)
+
+	low, high = NUMBER_BOUNDS.get(field, (None, None))
+	if low is not None:
+		number = max(low, min(high, number))
+	return number
+
+
+def _table_vars(settings: dict) -> dict:
+	"""Table settings that are values rather than colours or plain sizes."""
+	width = _number(settings, "table_border_width")
+	edges = TABLE_BORDER_EDGES.get(
+		settings.get("table_border_style") or "", TABLE_BORDER_EDGES["Horizontal lines"]
+	)
+	uppercase = frappe.utils.cint(settings.get("table_header_uppercase"))
+
+	return {
+		# Row rules and cell separators are separate, so "Horizontal lines" is
+		# one variable set to 0 rather than a different rule.
+		"--myrmex-table-row-border-width": f"{width if 'row' in edges else 0}px",
+		"--myrmex-table-cell-border-width": f"{width if 'cell' in edges else 0}px",
+		"--myrmex-table-header-weight": TABLE_HEADER_WEIGHTS.get(
+			settings.get("table_header_weight") or "", TABLE_HEADER_WEIGHTS["Semibold"]
+		),
+		"--myrmex-table-header-transform": "uppercase" if uppercase else "none",
+		"--myrmex-table-header-tracking": "0.04em" if uppercase else "0",
+		"--myrmex-table-paging-justify": TABLE_PAGINATION_ALIGN.get(
+			settings.get("table_pagination_align") or "", TABLE_PAGINATION_ALIGN["Edges"]
+		),
 	}
 
 

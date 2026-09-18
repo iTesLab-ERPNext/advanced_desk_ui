@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.2.0
+
+### Added
+- **Table Styles** section in the Theme Builder and in Theme Settings: header
+  background, text and weight, uppercase headers, row and stripe colours,
+  selected row, hover mode (none, background tint, accent edge) and colour,
+  border style, colour and width, table radius, row height, cell padding, and
+  pagination style and alignment.
+- The Theme Builder preview now includes a table, so the new settings are
+  visible while editing, and settings groups can carry subheadings.
+- Table styling in every shipped preset (Enterprise: uppercase headers and full
+  borders; Minimal: compact rows and minimal pagination).
+- French and Arabic translations for the new section.
+
+### Changed
+- List rows, report tables, datatables, child-table grids and plain tables all
+  read the same table tokens, so one setting changes them together.
+- Numeric theme values are clamped in one place, shared by the Theme Settings
+  validation and the payload builder.
+- "Striped table rows" moved from Components to Table Styles and is now
+  "Striped rows". The stored value is unchanged.
+
+### Fixed
+- A striped row no longer covers the selected-row colour.
+
 ## 1.1.0
 
 ### Added

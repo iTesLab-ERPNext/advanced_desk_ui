@@ -24,6 +24,14 @@
 	--myrmex-navbar-text: #e5e7eb;
 	--myrmex-navbar-border: #272d3a;
 	--myrmex-navbar-search-background: #1c202a;
+	--myrmex-table-header-bg: #1c202a;
+	--myrmex-table-header-text: #9aa3b2;
+	--myrmex-table-row-bg: #171a21;
+	--myrmex-table-row-text: #e5e7eb;
+	--myrmex-table-stripe-bg: #1b2029;
+	--myrmex-table-hover-bg: #1f2430;
+	--myrmex-table-selected-bg: rgba(29, 161, 242, 0.22);
+	--myrmex-table-border: #272d3a;
 
 	/* On dark surfaces the status fills are bright enough to read as text,
 	 * and mixing them toward the (light) text colour would wash them out. */

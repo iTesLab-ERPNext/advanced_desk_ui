@@ -2,9 +2,12 @@
 AI provider,مزوّد الذكاء الاصطناعي
 API endpoint,عنوان واجهة البرمجة (API)
 Accent colour,لون التمييز
+Accent edge,حافة ملوّنة
 "Add at least one page pattern, or show the assistant everywhere.",أضف نمط صفحة واحدًا على الأقل، أو اعرض المساعد في كل الصفحات.
+All borders,كل الحدود
 Allowed roles,الأدوار المسموح بها
 Application context,سياق التطبيق
+"Applies to list views, report views, child tables and grids.",ينطبق على شاشات القوائم والتقارير والجداول الفرعية والشبكات.
 Ask a question…,اطرح سؤالًا…
 Assistant hidden for this session. Open it again from your user menu.,تم إخفاء المساعد لهذه الجلسة. يمكنك فتحه مجددًا من قائمة المستخدم.
 Assistant is typing,المساعد يكتب
@@ -14,9 +17,17 @@ Assistant not ready,المساعد غير جاهز
 Assistant said:,قال المساعد:
 Azure OpenAI needs the full chat completions URL as the API endpoint.,يتطلب Azure OpenAI عنوان chat/completions الكامل كعنوان لواجهة البرمجة.
 Back to conversation,العودة إلى المحادثة
+Background tint,تظليل الخلفية
 Between 0 and 50.,بين 0 و50.
+Border colour,لون الحدود
+Border width (px),سماكة الحدود (px)
+Borders,الحدود
+Borders and spacing,الحدود والتباعد
 Bottom left,أسفل اليسار
 Bottom right,أسفل اليمين
+Buttons,أزرار
+Cell padding (px),الحشو الداخلي للخلايا (px)
+Centre,في الوسط
 Chatbot Conversation,محادثة المساعد
 Chatbot Message,رسالة المساعد
 Chatbot Settings,إعدادات المساعد
@@ -41,6 +52,7 @@ Delete idle conversations after (days),حذف المحادثات غير النش
 Delete this conversation? This cannot be undone.,هل تريد حذف هذه المحادثة؟ لا يمكن التراجع عن ذلك.
 Document: form views. List: list and report views.,مستند: شاشات النماذج. قائمة: شاشات القوائم والتقارير.
 Don't share,عدم المشاركة
+Edges,عند الطرفين
 Empty shows the suggestion in every language.,إذا تُرك فارغًا يظهر الاقتراح بكل اللغات.
 Enable assistant,تفعيل المساعد
 "Enter to send, Shift+Enter for a new line",Enter للإرسال، وShift+Enter لسطر جديد
@@ -49,8 +61,15 @@ Everywhere except listed pages,في كل مكان باستثناء الصفحا�
 Expand sidebar,توسيع الشريط الجانبي
 Fields of the open document,حقول المستند المفتوح
 Fill in {0} before enabling the assistant.,املأ {0} قبل تفعيل المساعد.
+Header,الرأس
+Header background,خلفية الرأس
+Header text,نص الرأس
+Header weight,سماكة خط الرأس
 Hello {0}! How can I help you today?,مرحبًا {0}! كيف يمكنني مساعدتك اليوم؟
 Hello! How can I help you today?,مرحبًا! كيف يمكنني مساعدتك اليوم؟
+Horizontal lines,خطوط أفقية
+Hover,التمرير
+Hover background,الخلفية عند التمرير
 Invalid message role: {0},دور رسالة غير صالح: {0}
 Keep conversation history,الاحتفاظ بسجل المحادثات
 Last message,آخر رسالة
@@ -63,6 +82,7 @@ Maximum reply tokens,الحد الأقصى لرموز الرد
 Messages per conversation,الرسائل لكل محادثة
 Messages per user per day,الرسائل لكل مستخدم يوميًا
 Messages per user per minute,الرسائل لكل مستخدم في الدقيقة
+Minimal,مبسّط
 Minimize,تصغير
 Myrmex Assistant,مساعد Myrmex
 Never share these DocTypes,عدم مشاركة أنواع المستندات هذه أبدًا
@@ -79,9 +99,12 @@ Open {0},فتح {0}
 "OpenAI Compatible also covers Ollama, vLLM, LM Studio, Mistral, Groq and similar services.",يشمل OpenAI Compatible أيضًا Ollama وvLLM وLM Studio وMistral وGroq والخدمات المشابهة.
 Page not shared,الصفحة غير مُشارَكة
 Page patterns,أنماط الصفحات
+Pagination alignment,محاذاة ترقيم الصفحات
+Pagination style,نمط ترقيم الصفحات
 Panel background,خلفية اللوحة
 Panel height (px),ارتفاع اللوحة (px)
 Panel width (px),عرض اللوحة (px)
+Pills,أزرار دائرية
 Please log in to use the assistant.,يرجى تسجيل الدخول لاستخدام المساعد.
 Previous messages sent with each question,الرسائل السابقة المرسلة مع كل سؤال
 Prompt sent,النص المُرسَل
@@ -93,7 +116,15 @@ Reply language,لغة الردود
 Reply tokens,رموز الرد
 Request timeout (seconds),مهلة الطلب (ثوانٍ)
 Restore default suggestions,استعادة الاقتراحات الافتراضية
+"Rounding of report tables, child tables and grids. List views follow the card radius.",استدارة جداول التقارير والجداول الفرعية والشبكات. أما شاشات القوائم فتتبع استدارة البطاقات.
+Row background,خلفية الصفوف
+Row height (px),ارتفاع الصفوف (px)
+Row hover,تمرير المؤشر فوق الصفوف
+Row text,نص الصفوف
+Rows,الصفوف
 Search or type a command,ابحث أو اكتب أمرًا
+Selected row,الصف المحدد
+Semibold,شبه عريض
 Send message,إرسال الرسالة
 Set a model and test the connection before saving.,حدّد نموذجًا واختبر الاتصال قبل الحفظ.
 Share page,مشاركة الصفحة
@@ -104,15 +135,20 @@ Show suggested prompts,عرض الاقتراحات
 Show typing indicator,عرض مؤشر الكتابة
 "Shown when a conversation starts. Leave empty for the built-in, translated greeting.",يظهر عند بدء المحادثة. اتركه فارغًا لاستخدام التحية المدمجة المترجمة.
 Something went wrong.,حدث خطأ ما.
+Spacing,التباعد
 "Square image. Without one, the assistant uses the Myrmex mark with its initial.",صورة مربعة. بدونها يستخدم المساعد شعار Myrmex مع الحرف الأول من اسمه.
 Start a conversation,بدء محادثة
 Start a new conversation,بدء محادثة جديدة
 Started on page,بدأت في الصفحة
 Stop sharing this page with the assistant,إيقاف مشاركة هذه الصفحة مع المساعد
 Stored encrypted and only used on the server. It is never sent to browsers.,يُخزَّن مشفّرًا ويُستخدم على الخادم فقط، ولا يُرسَل إلى المتصفحات أبدًا.
+Stripe background,خلفية الصفوف المخططة
+Striped rows,صفوف مخططة
 Suggested prompts,الاقتراحات
 Suggested questions,أسئلة مقترحة
 System prompt,تعليمات النظام
+Table Styles,أنماط الجداول
+Table radius (px),استدارة الجداول (px)
 Test connection,اختبار الاتصال
 That conversation no longer exists.,هذه المحادثة لم تعد موجودة.
 The AI provider is busy right now. Try again in a minute.,مزوّد الذكاء الاصطناعي مشغول حاليًا. حاول مجددًا بعد دقيقة.
@@ -143,6 +179,7 @@ Type a message first.,اكتب رسالة أولًا.
 Unknown AI provider: {0},مزوّد ذكاء اصطناعي غير معروف: {0}
 Unknown error,خطأ غير معروف
 Untitled conversation,محادثة بلا عنوان
+Uppercase headers,رؤوس بأحرف كبيرة
 Use at most 100 page patterns.,استخدم 100 نمط صفحة على الأكثر.
 User language,لغة المستخدم
 User language follows each person's language setting in Frappe.,لغة المستخدم تتبع إعداد اللغة الخاص بكل شخص في Frappe.
