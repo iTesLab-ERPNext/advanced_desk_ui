@@ -1,0 +1,165 @@
+400,400
+500,500
+600,600
+700,700
+Accounting,المحاسبة
+Active,نشط
+Advanced,متقدم
+All,الكل
+Appended after every ItesLab stylesheet. Use it for site-specific tweaks.,يُضاف بعد كل ورقة أنماط ItesLab. استخدمه للتعديلات الخاصة بالموقع.
+Applied the first time a user opens the Desk. Their own choice always wins afterwards.,يُطبَّق عند فتح المستخدم لسطح المكتب أول مرة. ويبقى اختياره الشخصي هو المعتمد بعد ذلك.
+"Applies to list view headers, report tables, child-table grids and datatables.",يُطبَّق على رؤوس عروض القوائم وجداول التقارير وشبكات الجداول الفرعية وجداول البيانات.
+"Applies to list views, report tables, child tables and datatables.",يُطبَّق على عروض القوائم وجداول التقارير والجداول الفرعية وجداول البيانات.
+Are you sure you want to log out?,هل تريد تسجيل الخروج؟
+Background,الخلفية
+Border,الحدود
+Borders,الحدود
+Button height (px),ارتفاع الأزرار (بكسل)
+Button label weight,سماكة نص الأزرار
+Button radius (px),نصف قطر الأزرار (بكسل)
+Buttons,الأزرار
+Cancel,إلغاء
+Card padding (px),الحشو الداخلي للبطاقات (بكسل)
+Card radius (px),نصف قطر البطاقات (بكسل)
+Cards,البطاقات
+Cell padding (px),حشو الخلايا (بكسل)
+Changes preview on the right. Nothing is applied to the Desk until you save.,تظهر التغييرات في المعاينة على اليسار. لا يُطبَّق شيء على سطح المكتب حتى تحفظ.
+Clear,مسح
+Colours,الألوان
+"Colours, sizes and behaviour for the Theme ItesLab UI layer.",الألوان والأحجام وسلوك طبقة واجهة Theme ItesLab.
+Comfortable,مريح
+Compact,مضغوط
+Could not log out. Check your connection and try again.,تعذّر تسجيل الخروج. تحقق من اتصالك وأعد المحاولة.
+Create,إنشاء
+Custom,مخصّص
+Custom CSS,CSS مخصّص
+Customer,العميل
+Customers,العملاء
+Dark,داكن
+Dark background,خلفية داكنة
+Dark border,حدود داكنة
+Dark Mode,الوضع الداكن
+Dark surface,سطح داكن
+Dark text,نص داكن
+Date,التاريخ
+Default appearance,المظهر الافتراضي
+Density,الكثافة
+derived,مُشتق
+Discard changes,تجاهل التغييرات
+Enable Theme ItesLab,تفعيل Theme ItesLab
+Enter a hex colour like #1DA1F2,أدخل لونًا سداسيًا مثل ‎#1DA1F2
+Error,خطأ
+Filter,تصفية
+Forms,النماذج
+General,عام
+Header background,خلفية الرأس
+Header font size (px),حجم خط الرأس (بكسل)
+Header text,نص الرأس
+Height (px),الارتفاع (بكسل)
+Home,الرئيسية
+Horizontal,أفقية
+Horizontal draws row separators only — usually the quietest choice.,«أفقية» ترسم فواصل الصفوف فقط — وهو الخيار الأهدأ عادةً.
+Hover,عند التمرير
+Icon,الأيقونة
+Input height (px),ارتفاع الحقول (بكسل)
+Input radius (px),نصف قطر الحقول (بكسل)
+Keep header visible,إبقاء الرأس ظاهرًا
+Label weight,سماكة النص
+Large,كبير
+Last week,الأسبوع الماضي
+Leave a colour empty to derive it from the palette.,اترك اللون فارغًا ليُشتق من لوحة الألوان.
+Leave empty to derive it from the palette.,اتركه فارغًا ليُشتق من لوحة الألوان.
+Light,فاتح
+Loading theme,جارٍ تحميل السمة
+Logging out...,جارٍ تسجيل الخروج…
+Logout failed,فشل تسجيل الخروج
+Medium,متوسط
+Muted text,نص خافت
+ItesLab Blue,ItesLab Blue
+ItesLab Dark,ItesLab Dark
+ItesLab Default,ItesLab Default
+ItesLab Enterprise,ItesLab Enterprise
+ItesLab Minimal,ItesLab Minimal
+ItesLab styling stops after you save and reload.,سيتوقف تنسيق ItesLab بعد الحفظ وإعادة التحميل.
+Navbar,شريط التنقل
+Navbar background,خلفية شريط التنقل
+Navbar border,حدود شريط التنقل
+Navbar height (px),ارتفاع شريط التنقل (بكسل)
+Navbar text,نص شريط التنقل
+None,بلا
+Open Theme Builder,فتح مُنشئ السمة
+Open Theme Settings,فتح إعدادات السمة
+Padding (px),الحشو الداخلي (بكسل)
+Pending,قيد الانتظار
+Preset,إعداد مسبق
+Presets,الإعدادات المسبقة
+Primary,أساسي
+Primary colour,اللون الأساسي
+Quotations,عروض الأسعار
+Radius (px),نصف القطر (بكسل)
+Replace the current palette with ItesLab Default?,هل تريد استبدال لوحة الألوان الحالية بـ ItesLab Default؟
+Reset,إعادة تعيين
+Reset to default,إعادة التعيين إلى الافتراضي
+Reset to ItesLab Default,إعادة التعيين إلى ItesLab Default
+Resetting theme,جارٍ إعادة تعيين السمة
+Row height (px),ارتفاع الصف (بكسل)
+Row hover,تمرير المؤشر على الصف
+Sales Orders,أوامر البيع
+Save,حفظ
+Save theme,حفظ السمة
+Saved,تم الحفظ
+Saving theme,جارٍ حفظ السمة
+Search,بحث
+Search background,خلفية البحث
+Secondary,ثانوي
+Secondary colour,اللون الثانوي
+Selling,المبيعات
+Settings,الإعدادات
+Shadow,الظل
+Sidebar,الشريط الجانبي
+Sidebar active,العنصر النشط في الشريط الجانبي
+Sidebar background,خلفية الشريط الجانبي
+Sidebar hover,التمرير في الشريط الجانبي
+Sidebar icon,أيقونة الشريط الجانبي
+Sidebar text,نص الشريط الجانبي
+Sidebar width (px),عرض الشريط الجانبي (بكسل)
+Small,صغير
+Space between sections (px),المسافة بين الأقسام (بكسل)
+Start collapsed,البدء مطويًا
+Status,الحالة
+Stock,المخزون
+Stripe,التظليل
+Stripe colour,لون التظليل
+Striped rows,صفوف متناوبة
+Submit,ترحيل
+Success,نجاح
+Surface,السطح
+System,النظام
+Table border,حدود الجدول
+Tables,الجداول
+Text,النص
+The header stays put while the table body scrolls.,يبقى الرأس ثابتًا أثناء تمرير محتوى الجدول.
+Theme Builder,مُنشئ السمة
+Theme enabled,السمة مفعّلة
+"Theme ItesLab supports Frappe v15 and v16. This site reports v{0}, so the theme may not match the Desk.",يدعم Theme ItesLab الإصداريْن 15 و16 من Frappe. يُبلّغ هذا الموقع عن الإصدار {0}، لذا قد لا تتطابق السمة مع سطح المكتب.
+Theme reset,تمت إعادة تعيين السمة
+Theme saved,تم حفظ السمة
+Theme Settings,إعدادات السمة
+Theme updated,تم تحديث السمة
+Today,اليوم
+Toggle dark preview,تبديل المعاينة الداكنة
+Toggle sidebar,إظهار/إخفاء الشريط الجانبي
+Turn the theme off to fall back to the stock ERPNext look without uninstalling the app.,عطّل السمة للعودة إلى مظهر ERPNext الأصلي دون إلغاء تثبيت التطبيق.
+Unknown preset: {0},إعداد مسبق غير معروف: {0}
+Unsaved,غير محفوظ
+Unsupported Frappe version,إصدار Frappe غير مدعوم
+Uppercase headers,رؤوس بأحرف كبيرة
+Use transitions,استخدام التأثيرات الانتقالية
+Used only when striped rows are on.,يُستخدم فقط عند تفعيل الصفوف المتناوبة.
+v15 only — on v16 the sidebar has its own resize handle.,الإصدار 15 فقط — في الإصدار 16 يملك الشريط الجانبي مقبض تحجيم خاصًا به.
+v15 only. v16 has no top navbar — its shell lives in the sidebar.,الإصدار 15 فقط. لا يحتوي الإصدار 16 على شريط تنقل علوي — واجهته موجودة في الشريط الجانبي.
+Warning,تحذير
+Width (px),العرض (بكسل)
+Yesterday,أمس
+{0} is not a valid hex colour: {1},{0} ليس لونًا سداسيًا صالحًا: {1}
+{0} loaded — save to apply,تم تحميل {0} — احفظ للتطبيق

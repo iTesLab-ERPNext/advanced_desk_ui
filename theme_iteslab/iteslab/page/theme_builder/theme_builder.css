@@ -1,0 +1,426 @@
+/* Theme Builder layout: a control panel beside a live sample styled by the same
+ * variables as the rest of the Desk.
+ *
+ * RTL note: Frappe injects this file inline via Page.load_assets(), so unlike
+ * the *.bundle.css files it is NEVER processed by rtlcss. Directional rules are
+ * therefore written with logical properties (inline-start/end, text-align:
+ * start), which follow the document direction on their own — no [dir="rtl"]
+ * duplicates to keep in sync. */
+
+.iteslab-builder {
+	display: grid;
+	grid-template-columns: minmax(320px, 420px) 1fr;
+	gap: var(--iteslab-space-5, 24px);
+	align-items: start;
+	padding-bottom: 48px;
+}
+
+.iteslab-builder__panel {
+	background-color: var(--iteslab-surface, #fff);
+	border: 1px solid var(--iteslab-border, #e5e7eb);
+	border-radius: var(--iteslab-card-radius, 14px);
+	padding: var(--iteslab-card-padding, 20px);
+	box-shadow: var(--iteslab-shadow, none);
+}
+
+.iteslab-builder__tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-bottom: 16px;
+}
+
+.iteslab-builder__tab {
+	border: 1px solid transparent;
+	background: transparent;
+	border-radius: 999px;
+	padding: 6px 12px;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--iteslab-muted, #6b7280);
+	cursor: pointer;
+	transition: background-color 150ms ease, color 150ms ease;
+}
+
+.iteslab-builder__tab:hover {
+	background-color: var(--iteslab-sidebar-hover, #f1f5f9);
+	color: var(--iteslab-text, #111827);
+}
+
+.iteslab-builder__tab[aria-selected="true"] {
+	background-color: var(--iteslab-primary-soft, rgba(29, 161, 242, 0.1));
+	color: var(--iteslab-primary, #1da1f2);
+}
+
+.iteslab-builder__group {
+	display: none;
+}
+
+.iteslab-builder__group.is-active {
+	display: block;
+}
+
+.iteslab-builder__field {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 9px 0;
+	border-bottom: 1px solid var(--iteslab-border, #e5e7eb);
+}
+
+/* Same reason: the label may wrap, the control keeps its size. */
+.iteslab-builder__field label {
+	min-width: 0;
+}
+
+.iteslab-builder__control {
+	flex: 0 0 auto;
+}
+
+.iteslab-builder__field:last-child {
+	border-bottom: none;
+}
+
+.iteslab-builder__field label {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--iteslab-text, #111827);
+	margin: 0;
+}
+
+.iteslab-builder__control {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.iteslab-builder__swatch {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: 1px solid var(--iteslab-border, #e5e7eb);
+	border-radius: 8px;
+	background: none;
+	cursor: pointer;
+}
+
+.iteslab-builder__hex {
+	width: 96px;
+	font-family: var(--font-stack-mono, monospace);
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.iteslab-builder__number {
+	width: 96px;
+}
+
+.iteslab-builder__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--iteslab-border, #e5e7eb);
+}
+
+/* Translated labels run longer than the English ones ("Reset to default" is
+ * "Réinitialiser aux valeurs par défaut"), so the buttons wrap onto another row
+ * rather than squeezing their text into two cramped lines. */
+.iteslab-builder__actions .btn {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+.iteslab-builder__hint {
+	font-size: 12px;
+	color: var(--iteslab-muted, #6b7280);
+	margin: 0 0 14px;
+}
+
+/* Preview ----------------------------------------------------------------- */
+
+.iteslab-preview {
+	position: sticky;
+	top: 16px;
+	border: 1px solid var(--iteslab-border, #e5e7eb);
+	border-radius: var(--iteslab-card-radius, 14px);
+	overflow: hidden;
+	background-color: var(--iteslab-background, #f7f7f9);
+}
+
+.iteslab-preview__bar {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 48px;
+	padding: 0 14px;
+	background-color: var(--iteslab-navbar-background, #fff);
+	border-bottom: 1px solid var(--iteslab-navbar-border, #e5e7eb);
+	color: var(--iteslab-navbar-text, #111827);
+	font-weight: 600;
+}
+
+.iteslab-preview__search {
+	flex: 1;
+	height: 30px;
+	border-radius: var(--iteslab-input-radius, 8px);
+	background-color: var(--iteslab-navbar-search-background, #f3f4f6);
+}
+
+.iteslab-preview__body {
+	display: grid;
+	grid-template-columns: 180px 1fr;
+	min-height: 320px;
+}
+
+.iteslab-preview__rail {
+	background-color: var(--iteslab-sidebar-background, #fff);
+	border-inline-end: 1px solid var(--iteslab-border, #e5e7eb);
+	padding: 12px 8px;
+}
+
+.iteslab-preview__item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 34px;
+	padding: 0 10px;
+	margin-bottom: 4px;
+	border-radius: var(--iteslab-radius-md, 10px);
+	color: var(--iteslab-sidebar-text, #111827);
+	font-size: 13px;
+}
+
+.iteslab-preview__item .dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 999px;
+	background-color: var(--iteslab-sidebar-icon, #6b7280);
+}
+
+.iteslab-preview__item.is-active {
+	background-color: var(--iteslab-primary-soft, rgba(29, 161, 242, 0.1));
+	color: var(--iteslab-sidebar-active, #1da1f2);
+	font-weight: 600;
+}
+
+.iteslab-preview__item.is-active .dot {
+	background-color: var(--iteslab-sidebar-active, #1da1f2);
+}
+
+.iteslab-preview__main {
+	padding: 16px;
+	display: grid;
+	gap: 12px;
+	grid-template-columns: repeat(3, 1fr);
+	align-content: start;
+}
+
+.iteslab-preview__card {
+	background-color: var(--iteslab-surface, #fff);
+	border: 1px solid var(--iteslab-border, #e5e7eb);
+	border-radius: var(--iteslab-card-radius, 14px);
+	padding: calc(var(--iteslab-card-padding, 20px) * 0.7);
+	box-shadow: var(--iteslab-shadow, none);
+}
+
+.iteslab-preview__card .label {
+	font-size: 12px;
+	color: var(--iteslab-muted, #6b7280);
+}
+
+.iteslab-preview__card .value {
+	font-size: 22px;
+	font-weight: 650;
+	color: var(--iteslab-text, #111827);
+}
+
+.iteslab-preview__row {
+	grid-column: 1 / -1;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.iteslab-preview__btn {
+	border: 1px solid transparent;
+	border-radius: var(--iteslab-button-radius, 8px);
+	padding: 7px 14px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: default;
+}
+
+.iteslab-preview__btn.primary {
+	background-color: var(--iteslab-primary, #1da1f2);
+	color: var(--iteslab-primary-contrast, #fff);
+}
+
+.iteslab-preview__btn.secondary {
+	background-color: var(--iteslab-surface, #fff);
+	border-color: var(--iteslab-border, #e5e7eb);
+	color: var(--iteslab-text, #111827);
+}
+
+.iteslab-preview__btn.success {
+	background-color: var(--iteslab-success, #22c55e);
+	color: #fff;
+}
+
+.iteslab-preview__btn.danger {
+	background-color: var(--iteslab-error, #ef4444);
+	color: #fff;
+}
+
+.iteslab-preview__input {
+	height: 34px;
+	flex: 1;
+	min-width: 160px;
+	border: 1px solid var(--iteslab-border, #e5e7eb);
+	border-radius: var(--iteslab-input-radius, 8px);
+	background-color: var(--iteslab-surface, #fff);
+}
+
+@media (max-width: 1100px) {
+	.iteslab-builder {
+		grid-template-columns: 1fr;
+	}
+
+	.iteslab-preview {
+		position: static;
+	}
+}
+
+/* Notes: a tab-level or field-level caveat, e.g. "v15 only". */
+
+.iteslab-builder__note {
+	font-size: 12px;
+	line-height: 1.45;
+	color: var(--iteslab-muted, #6b7280);
+	margin: 0 0 12px;
+}
+
+.iteslab-builder__note--field {
+	margin: -4px 0 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--iteslab-border, #e5e7eb);
+}
+
+.iteslab-builder__field-wrap + .iteslab-builder__field {
+	border-top: none;
+}
+
+.iteslab-builder__field-wrap .iteslab-builder__field {
+	border-bottom: none;
+}
+
+.iteslab-builder__control .btn-xs {
+	padding: 2px 8px;
+	font-size: 11px;
+	border-radius: 6px;
+}
+
+/* The tables tab has the most controls; keep the panel scrollable rather than
+ * letting it push the preview off screen. */
+.iteslab-builder__groups {
+	max-height: min(62vh, 620px);
+	overflow-y: auto;
+	/* Bottom padding so the last control is not sliced by the scroll edge;
+	 * inline-end keeps the scrollbar gutter on the correct side in RTL. */
+	padding-block-end: 8px;
+	padding-inline-end: 4px;
+}
+
+/* Sample table in the preview -------------------------------------------- */
+
+.iteslab-preview__tablewrap {
+	grid-column: 1 / -1;
+	border: 1px solid var(--iteslab-table-border, #e5e7eb);
+	border-radius: var(--iteslab-card-radius, 14px);
+	overflow: hidden;
+	background-color: var(--iteslab-surface, #fff);
+}
+
+.iteslab-preview__table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+	color: var(--iteslab-text, #111827);
+}
+
+.iteslab-preview__table th {
+	background-color: var(--iteslab-table-header-bg, #fbfbfc);
+	color: var(--iteslab-table-header-text, #6b7280);
+	font-size: var(--iteslab-table-header-size, 12px);
+	font-weight: 600;
+	text-align: start;
+	padding: var(--iteslab-table-cell-padding, 12px);
+	border-bottom: 1px solid var(--iteslab-table-border, #e5e7eb);
+}
+
+.iteslab-preview__table td {
+	padding: var(--iteslab-table-cell-padding, 12px);
+	height: var(--iteslab-table-row-height, 42px);
+	border-bottom: 1px solid var(--iteslab-table-border, #e5e7eb);
+}
+
+.iteslab-preview__table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.iteslab-preview__table tbody tr:hover td {
+	background-color: var(--iteslab-table-row-hover, #f7f7f9);
+}
+
+/* The class-driven options, mirrored from the payload by refresh_preview(). */
+
+.iteslab-preview--zebra .iteslab-preview__table tbody tr:nth-child(even) td {
+	background-color: var(--iteslab-table-stripe, #fafafb);
+}
+
+.iteslab-preview--zebra .iteslab-preview__table tbody tr:nth-child(even):hover td {
+	background-color: var(--iteslab-table-row-hover, #f7f7f9);
+}
+
+.iteslab-preview--upper .iteslab-preview__table th {
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.iteslab-preview--borders-all .iteslab-preview__table th,
+.iteslab-preview--borders-all .iteslab-preview__table td {
+	border: 1px solid var(--iteslab-table-border, #e5e7eb);
+}
+
+.iteslab-preview--borders-none .iteslab-preview__table th,
+.iteslab-preview--borders-none .iteslab-preview__table td {
+	border: none;
+}
+
+.iteslab-preview--borders-none .iteslab-preview__table th {
+	border-bottom: 1px solid var(--iteslab-table-border, #e5e7eb);
+}
+
+/* Buttons and inputs in the sample follow the Buttons / Forms tabs. */
+
+.iteslab-preview__btn {
+	min-height: var(--iteslab-button-height, 32px);
+	display: inline-flex;
+	align-items: center;
+	font-weight: var(--iteslab-button-weight, 500);
+}
+
+.iteslab-preview__input {
+	height: var(--iteslab-input-height, 34px);
+}
+
+/* Colour codes and pixel values are Latin-numeric: they must not inherit the
+ * paragraph direction, or "#1DA1F2" renders with its parts reordered. */
+.iteslab-builder__hex,
+.iteslab-builder__number {
+	direction: ltr;
+	text-align: start;
+}

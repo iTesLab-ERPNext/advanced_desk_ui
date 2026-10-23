@@ -1,0 +1,153 @@
+/* ---------------------------------------------------------------------------
+ * Tokens — loaded first by app_include_css, so every later bundle sees them.
+ * ---------------------------------------------------------------------------
+ * These are the fallback values. At runtime iteslab-theme.js writes a
+ * <style id="iteslab-theme-vars"> block with the values saved in Theme Settings,
+ * which lands after this file and therefore wins.
+ *
+ * The second half of the file is the bridge: Frappe v15's own custom properties
+ * are re-pointed at the ItesLab tokens. That is what restyles the parts of the
+ * Desk this theme never names explicitly.
+ * ------------------------------------------------------------------------- */
+
+:root {
+	/* Brand */
+	--iteslab-primary: #1da1f2;
+	--iteslab-secondary: #1426a9;
+	--iteslab-primary-soft: rgba(29, 161, 242, 0.1);
+	--iteslab-primary-contrast: #ffffff;
+
+	/* Surfaces */
+	--iteslab-background: #f7f7f9;
+	--iteslab-surface: #ffffff;
+	--iteslab-surface-alt: #fbfbfc;
+
+	/* Text */
+	--iteslab-text: #111827;
+	--iteslab-muted: #6b7280;
+	--iteslab-border: #e5e7eb;
+
+	/* Status */
+	--iteslab-success: #22c55e;
+	--iteslab-warning: #f59e0b;
+	--iteslab-error: #ef4444;
+
+	/* Sidebar */
+	--iteslab-sidebar-background: #ffffff;
+	--iteslab-sidebar-text: #111827;
+	--iteslab-sidebar-active: #1da1f2;
+	--iteslab-sidebar-hover: #f1f5f9;
+	--iteslab-sidebar-icon: #6b7280;
+	--iteslab-sidebar-width: 260px;
+	--iteslab-sidebar-rail-width: 72px;
+
+	/* Navbar */
+	--iteslab-navbar-background: #ffffff;
+	--iteslab-navbar-text: #111827;
+	--iteslab-navbar-border: #e5e7eb;
+	--iteslab-navbar-search-background: #f3f4f6;
+	--iteslab-navbar-height: 60px;
+
+	/* Tables. Overridden at runtime from the Tables tab. */
+	--iteslab-table-header-bg: #fbfbfc;
+	--iteslab-table-header-text: #6b7280;
+	--iteslab-table-border: #e5e7eb;
+	--iteslab-table-row-hover: #f7f7f9;
+	--iteslab-table-stripe: #fafafb;
+	--iteslab-table-row-height: 42px;
+	--iteslab-table-cell-padding: 12px;
+	--iteslab-table-header-size: 12px;
+
+	/* Controls */
+	--iteslab-button-height: 32px;
+	--iteslab-button-weight: 500;
+	--iteslab-input-height: 32px;
+	--iteslab-form-section-gap: 16px;
+
+	/* Shape */
+	--iteslab-radius-sm: 6px;
+	--iteslab-radius-md: 10px;
+	--iteslab-radius-lg: 14px;
+	--iteslab-card-radius: 14px;
+	--iteslab-button-radius: 8px;
+	--iteslab-input-radius: 8px;
+	--iteslab-card-padding: 20px;
+
+	/* Elevation */
+	--iteslab-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+	--iteslab-shadow-hover: 0 6px 16px rgba(16, 24, 40, 0.12);
+	--iteslab-shadow-lg: 0 16px 40px rgba(16, 24, 40, 0.16);
+
+	/* Rhythm */
+	--iteslab-space-1: 4px;
+	--iteslab-space-2: 8px;
+	--iteslab-space-3: 12px;
+	--iteslab-space-4: 16px;
+	--iteslab-space-5: 24px;
+	--iteslab-space-6: 32px;
+
+	/* Motion */
+	--iteslab-transition: 150ms ease;
+	--iteslab-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Compact density: the same layout on a tighter vertical rhythm. */
+:root[data-iteslab-density="compact"] {
+	--iteslab-card-padding: 14px;
+	--iteslab-space-5: 18px;
+	--iteslab-space-6: 24px;
+	/* Table row height is deliberately NOT touched here: it is an explicit
+	 * setting on the Tables tab, and silently overriding it would make that
+	 * setting look broken. Density adjusts surrounding spacing only. */
+}
+
+/* ---------------------------------------------------------------------------
+ * Bridge to Frappe v15 variables
+ * ---------------------------------------------------------------------------
+ * Frappe declares these in its own stylesheet; re-declaring them here overrides
+ * the value, not the definition, so no core file is touched and every core
+ * component that reads them updates with the palette. */
+
+.iteslab-enabled {
+	--primary: var(--iteslab-primary);
+	--primary-color: var(--iteslab-primary);
+	--text-on-primary: var(--iteslab-primary-contrast);
+
+	--bg-color: var(--iteslab-background);
+	--fg-color: var(--iteslab-surface);
+	--card-bg: var(--iteslab-surface);
+	--subtle-fg: var(--iteslab-surface-alt);
+	--subtle-accent: var(--iteslab-surface-alt);
+	--control-bg: var(--iteslab-surface);
+	--disabled-control-bg: var(--iteslab-surface-alt);
+	--modal-bg: var(--iteslab-surface);
+	--awesomplete-hover-bg: var(--iteslab-primary-soft);
+
+	--text-color: var(--iteslab-text);
+	--heading-color: var(--iteslab-text);
+	--text-muted: var(--iteslab-muted);
+	--text-light: var(--iteslab-muted);
+	--invert-neutral: var(--iteslab-text);
+
+	--border-color: var(--iteslab-border);
+	--dark-border-color: var(--iteslab-border);
+	--table-border-color: var(--iteslab-table-border);
+
+	--green-avatar-color: var(--iteslab-success);
+	--alert-text-danger: var(--iteslab-error);
+	--alert-text-warning: var(--iteslab-warning);
+	--alert-text-success: var(--iteslab-success);
+
+	--border-radius: var(--iteslab-radius-sm);
+	--border-radius-sm: var(--iteslab-radius-sm);
+	--border-radius-md: var(--iteslab-radius-md);
+	--border-radius-lg: var(--iteslab-radius-lg);
+	--border-radius-full: 999px;
+
+	--shadow-base: var(--iteslab-shadow);
+	--shadow-sm: var(--iteslab-shadow);
+	--shadow-md: var(--iteslab-shadow-hover);
+	--shadow-lg: var(--iteslab-shadow-lg);
+
+	--navbar-height: var(--iteslab-navbar-height);
+}

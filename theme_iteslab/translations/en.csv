@@ -1,0 +1,165 @@
+400,400
+500,500
+600,600
+700,700
+Accounting,Accounting
+Active,Active
+Advanced,Advanced
+All,All
+Appended after every ItesLab stylesheet. Use it for site-specific tweaks.,Appended after every ItesLab stylesheet. Use it for site-specific tweaks.
+Applied the first time a user opens the Desk. Their own choice always wins afterwards.,Applied the first time a user opens the Desk. Their own choice always wins afterwards.
+"Applies to list view headers, report tables, child-table grids and datatables.","Applies to list view headers, report tables, child-table grids and datatables."
+"Applies to list views, report tables, child tables and datatables.","Applies to list views, report tables, child tables and datatables."
+Are you sure you want to log out?,Are you sure you want to log out?
+Background,Background
+Border,Border
+Borders,Borders
+Button height (px),Button height (px)
+Button label weight,Button label weight
+Button radius (px),Button radius (px)
+Buttons,Buttons
+Cancel,Cancel
+Card padding (px),Card padding (px)
+Card radius (px),Card radius (px)
+Cards,Cards
+Cell padding (px),Cell padding (px)
+Changes preview on the right. Nothing is applied to the Desk until you save.,Changes preview on the right. Nothing is applied to the Desk until you save.
+Clear,Clear
+Colours,Colours
+"Colours, sizes and behaviour for the Theme ItesLab UI layer.","Colours, sizes and behaviour for the Theme ItesLab UI layer."
+Comfortable,Comfortable
+Compact,Compact
+Could not log out. Check your connection and try again.,Could not log out. Check your connection and try again.
+Create,Create
+Custom,Custom
+Custom CSS,Custom CSS
+Customer,Customer
+Customers,Customers
+Dark,Dark
+Dark background,Dark background
+Dark border,Dark border
+Dark Mode,Dark Mode
+Dark surface,Dark surface
+Dark text,Dark text
+Date,Date
+Default appearance,Default appearance
+Density,Density
+derived,derived
+Discard changes,Discard changes
+Enable Theme ItesLab,Enable Theme ItesLab
+Enter a hex colour like #1DA1F2,Enter a hex colour like #1DA1F2
+Error,Error
+Filter,Filter
+Forms,Forms
+General,General
+Header background,Header background
+Header font size (px),Header font size (px)
+Header text,Header text
+Height (px),Height (px)
+Home,Home
+Horizontal,Horizontal
+Horizontal draws row separators only — usually the quietest choice.,Horizontal draws row separators only — usually the quietest choice.
+Hover,Hover
+Icon,Icon
+Input height (px),Input height (px)
+Input radius (px),Input radius (px)
+Keep header visible,Keep header visible
+Label weight,Label weight
+Large,Large
+Last week,Last week
+Leave a colour empty to derive it from the palette.,Leave a colour empty to derive it from the palette.
+Leave empty to derive it from the palette.,Leave empty to derive it from the palette.
+Light,Light
+Loading theme,Loading theme
+Logging out...,Logging out...
+Logout failed,Logout failed
+Medium,Medium
+Muted text,Muted text
+ItesLab Blue,ItesLab Blue
+ItesLab Dark,ItesLab Dark
+ItesLab Default,ItesLab Default
+ItesLab Enterprise,ItesLab Enterprise
+ItesLab Minimal,ItesLab Minimal
+ItesLab styling stops after you save and reload.,ItesLab styling stops after you save and reload.
+Navbar,Navbar
+Navbar background,Navbar background
+Navbar border,Navbar border
+Navbar height (px),Navbar height (px)
+Navbar text,Navbar text
+None,None
+Open Theme Builder,Open Theme Builder
+Open Theme Settings,Open Theme Settings
+Padding (px),Padding (px)
+Pending,Pending
+Preset,Preset
+Presets,Presets
+Primary,Primary
+Primary colour,Primary colour
+Quotations,Quotations
+Radius (px),Radius (px)
+Replace the current palette with ItesLab Default?,Replace the current palette with ItesLab Default?
+Reset,Reset
+Reset to default,Reset to default
+Reset to ItesLab Default,Reset to ItesLab Default
+Resetting theme,Resetting theme
+Row height (px),Row height (px)
+Row hover,Row hover
+Sales Orders,Sales Orders
+Save,Save
+Save theme,Save theme
+Saved,Saved
+Saving theme,Saving theme
+Search,Search
+Search background,Search background
+Secondary,Secondary
+Secondary colour,Secondary colour
+Selling,Selling
+Settings,Settings
+Shadow,Shadow
+Sidebar,Sidebar
+Sidebar active,Sidebar active
+Sidebar background,Sidebar background
+Sidebar hover,Sidebar hover
+Sidebar icon,Sidebar icon
+Sidebar text,Sidebar text
+Sidebar width (px),Sidebar width (px)
+Small,Small
+Space between sections (px),Space between sections (px)
+Start collapsed,Start collapsed
+Status,Status
+Stock,Stock
+Stripe,Stripe
+Stripe colour,Stripe colour
+Striped rows,Striped rows
+Submit,Submit
+Success,Success
+Surface,Surface
+System,System
+Table border,Table border
+Tables,Tables
+Text,Text
+The header stays put while the table body scrolls.,The header stays put while the table body scrolls.
+Theme Builder,Theme Builder
+Theme enabled,Theme enabled
+"Theme ItesLab supports Frappe v15 and v16. This site reports v{0}, so the theme may not match the Desk.","Theme ItesLab supports Frappe v15 and v16. This site reports v{0}, so the theme may not match the Desk."
+Theme reset,Theme reset
+Theme saved,Theme saved
+Theme Settings,Theme Settings
+Theme updated,Theme updated
+Today,Today
+Toggle dark preview,Toggle dark preview
+Toggle sidebar,Toggle sidebar
+Turn the theme off to fall back to the stock ERPNext look without uninstalling the app.,Turn the theme off to fall back to the stock ERPNext look without uninstalling the app.
+Unknown preset: {0},Unknown preset: {0}
+Unsaved,Unsaved
+Unsupported Frappe version,Unsupported Frappe version
+Uppercase headers,Uppercase headers
+Use transitions,Use transitions
+Used only when striped rows are on.,Used only when striped rows are on.
+v15 only — on v16 the sidebar has its own resize handle.,v15 only — on v16 the sidebar has its own resize handle.
+v15 only. v16 has no top navbar — its shell lives in the sidebar.,v15 only. v16 has no top navbar — its shell lives in the sidebar.
+Warning,Warning
+Width (px),Width (px)
+Yesterday,Yesterday
+{0} is not a valid hex colour: {1},{0} is not a valid hex colour: {1}
+{0} loaded — save to apply,{0} loaded — save to apply

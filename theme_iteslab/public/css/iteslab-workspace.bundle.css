@@ -1,0 +1,127 @@
+/* Workspaces. Widgets keep their native drag/drop and edit-mode behaviour;
+ * only their surface treatment changes. */
+
+.iteslab-enabled .layout-main-section-wrapper {
+	padding-top: var(--iteslab-space-2);
+}
+
+.iteslab-enabled .workspace-title,
+.iteslab-enabled .page-head .title-area .title-text {
+	font-size: 22px;
+	font-weight: 650;
+	letter-spacing: -0.02em;
+}
+
+.iteslab-enabled .layout-main-section .widget.shortcut-widget-box,
+.iteslab-enabled .layout-main-section .widget.links-widget-box,
+.iteslab-enabled .layout-main-section .widget.number-widget-box,
+.iteslab-enabled .layout-main-section .widget.chart-widget-box,
+.iteslab-enabled .layout-main-section .widget.onboarding-widget-box,
+.iteslab-enabled .layout-main-section .widget.quick-list-widget-box {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	padding: var(--iteslab-card-padding);
+	box-shadow: var(--iteslab-shadow);
+}
+
+/* Shortcut tiles lift slightly; they are the primary click target. */
+.iteslab-enabled .shortcut-widget-box:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--iteslab-shadow-hover);
+	border-color: color-mix(in srgb, var(--iteslab-primary) 35%, var(--iteslab-border));
+}
+
+.iteslab-enabled .shortcut-widget-box .indicator-pill {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+/* Number cards: the figure is the content, so give it room. */
+.iteslab-enabled .number-widget-box .widget-content .number {
+	font-size: 30px;
+	font-weight: 650;
+	letter-spacing: -0.02em;
+	color: var(--iteslab-text);
+	line-height: 1.15;
+}
+
+.iteslab-enabled .number-widget-box .widget-head .widget-title {
+	color: var(--iteslab-muted);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.iteslab-enabled .number-widget-box .percentage-stat-area .percentage-stat.green {
+	color: var(--iteslab-success);
+}
+
+.iteslab-enabled .number-widget-box .percentage-stat-area .percentage-stat.red {
+	color: var(--iteslab-error);
+}
+
+/* Link groups inside a workspace. */
+.iteslab-enabled .links-widget-box .link-item {
+	border-radius: var(--iteslab-radius-sm);
+	padding: 6px var(--iteslab-space-2);
+	color: var(--iteslab-text);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .links-widget-box .link-item:hover {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .links-widget-box .link-item .indicator-pill {
+	margin-left: auto;
+}
+
+/* Section headers between widget groups. */
+.iteslab-enabled .layout-main-section .widget-group .widget-group-head,
+.iteslab-enabled .layout-main-section .section-head {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--iteslab-muted);
+	border-bottom: 1px solid var(--iteslab-border);
+	padding-bottom: var(--iteslab-space-2);
+	margin-bottom: var(--iteslab-space-4);
+}
+
+/* Charts inherit the palette rather than shipping their own. */
+.iteslab-enabled .chart-widget-box .chart-container .title,
+.iteslab-enabled .frappe-chart .title {
+	fill: var(--iteslab-muted);
+}
+
+.iteslab-enabled .frappe-chart .chart-label,
+.iteslab-enabled .frappe-chart text {
+	fill: var(--iteslab-muted);
+}
+
+.iteslab-enabled .frappe-chart .chart-legend text {
+	fill: var(--iteslab-text);
+}
+
+/* Onboarding / empty states are an invitation to act, so keep them warm. */
+.iteslab-enabled .onboarding-widget-box {
+	border-color: color-mix(in srgb, var(--iteslab-primary) 25%, var(--iteslab-border));
+	background-color: color-mix(in srgb, var(--iteslab-primary) 4%, var(--iteslab-surface));
+}
+
+.iteslab-enabled .no-result,
+.iteslab-enabled .msg-box {
+	color: var(--iteslab-muted);
+}
+
+/* Workspace edit mode keeps its native affordances, just softened. */
+.iteslab-enabled .widget .widget-control .btn {
+	border-radius: var(--iteslab-radius-sm);
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .ce-block__content,
+.iteslab-enabled .codex-editor__redactor {
+	color: var(--iteslab-text);
+}

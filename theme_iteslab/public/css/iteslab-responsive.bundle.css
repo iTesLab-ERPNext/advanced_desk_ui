@@ -1,0 +1,103 @@
+/* Responsive behaviour — shared by both shells.
+ *
+ * Sidebar responsiveness is shell-specific and lives in the shell files:
+ * v15 hides `.layout-side-section` below lg and our drawer brings it back;
+ * v16 already collapses `.body-sidebar-container` and ships its own overlay.
+ * What is left here applies to page content, which is the same in both. */
+
+/* Tablet ------------------------------------------------------------------ */
+
+@media (max-width: 1200px) {
+	.iteslab-enabled .navbar .search-bar {
+		max-width: 320px;
+	}
+
+	.iteslab-enabled .form-page .form-section,
+	.iteslab-enabled .widget {
+		padding: calc(var(--iteslab-card-padding) * 0.85);
+	}
+}
+
+/* Mobile ------------------------------------------------------------------ */
+
+@media (max-width: 991px) {
+	/* One column for cards and form sections. */
+	.iteslab-enabled .layout-main-section .widget-group .widget,
+	.iteslab-enabled .form-column {
+		width: 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.iteslab-enabled .layout-side-section {
+		padding-right: 0;
+	}
+
+	/* Tables scroll instead of squeezing. */
+	.iteslab-enabled .frappe-list .result,
+	.iteslab-enabled .datatable,
+	.iteslab-enabled table.table {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Comfortable touch targets. */
+	.iteslab-enabled .btn,
+	.iteslab-enabled .list-row,
+	.iteslab-enabled .sidebar-item-container .item-anchor,
+	.iteslab-enabled .dropdown-item,
+	.iteslab-enabled .sidebar-header-menu .dropdown-menu-item {
+		min-height: 44px;
+	}
+
+	.iteslab-enabled .btn {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.iteslab-enabled .navbar {
+		padding: 0 var(--iteslab-space-3);
+	}
+
+	.iteslab-enabled .navbar .search-bar {
+		max-width: none;
+	}
+
+	.iteslab-enabled .page-head .page-title .title-text {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 575px) {
+	.iteslab-enabled .form-page .form-section,
+	.iteslab-enabled .widget {
+		padding: calc(var(--iteslab-card-padding) * 0.75);
+		border-radius: var(--iteslab-radius-md);
+	}
+
+	.iteslab-enabled .modal-body {
+		padding: var(--iteslab-space-4);
+	}
+
+	/* Hide the wordmark, keep the mark. */
+	.iteslab-enabled .navbar-brand .iteslab-wordmark {
+		display: none;
+	}
+}
+
+/* Print ------------------------------------------------------------------- */
+
+@media print {
+	.iteslab-enabled .body-sidebar-container,
+	.iteslab-enabled .layout-side-section,
+	.iteslab-enabled .navbar,
+	.iteslab-enabled .iteslab-sidebar-overlay,
+	.iteslab-enabled .page-actions {
+		display: none !important;
+	}
+
+	.iteslab-enabled .form-page .form-section {
+		box-shadow: none;
+		border-color: #ddd;
+	}
+}

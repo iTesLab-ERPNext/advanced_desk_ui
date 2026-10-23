@@ -1,0 +1,171 @@
+/* Form view: sections, fields, tabs, grids, sidebar, timeline.
+ * Layout and field rendering stay Frappe's; only surface and rhythm change. */
+
+.iteslab-enabled .form-page {
+	background-color: transparent;
+}
+
+.iteslab-enabled .form-page .form-section,
+.iteslab-enabled .form-page .form-dashboard-section,
+.iteslab-enabled .form-page .form-tabs-sticky-down + .form-section {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	padding: var(--iteslab-card-padding);
+	margin-bottom: var(--iteslab-form-section-gap);
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .form-page .section-head {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--iteslab-muted);
+	padding: 0 0 var(--iteslab-space-3);
+	margin: 0 0 var(--iteslab-space-3);
+	border-bottom: 1px solid var(--iteslab-border);
+}
+
+.iteslab-enabled .form-page .section-head.collapsed {
+	border-bottom-color: transparent;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.iteslab-enabled .form-page .section-head .collapse-indicator {
+	color: var(--iteslab-muted);
+	transition: transform var(--iteslab-transition);
+}
+
+.iteslab-enabled .frappe-control[data-fieldtype="Section Break"] > .section-body {
+	padding-top: 0;
+}
+
+.iteslab-enabled .form-column .frappe-control {
+	margin-bottom: var(--iteslab-space-4);
+}
+
+/* Title area and document status. */
+.iteslab-enabled .title-area .title-text,
+.iteslab-enabled .form-page .title-area h6 {
+	font-weight: 650;
+}
+
+.iteslab-enabled .form-message,
+.iteslab-enabled .form-dashboard .form-dashboard-wrapper {
+	border-radius: var(--iteslab-radius-md);
+	border: 1px solid var(--iteslab-border);
+	background-color: var(--iteslab-surface-alt);
+}
+
+/* Form tabs stick under the header. */
+.iteslab-enabled .form-tabs-list {
+	background-color: var(--iteslab-background);
+	border-bottom: 1px solid var(--iteslab-border);
+}
+
+.iteslab-enabled .form-tabs .nav-link {
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .form-tabs .nav-link.active {
+	color: var(--iteslab-primary);
+	border-bottom-color: var(--iteslab-primary);
+}
+
+/* Grids (child tables) ----------------------------------------------------
+ * Surface and palette live in iteslab-lists.bundle.css, which loads after this
+ * file, so a child table always matches the other tables. Only the structural
+ * bits stay here. */
+
+.iteslab-enabled .form-grid {
+	border: 1px solid var(--iteslab-table-border);
+	border-radius: var(--iteslab-radius-md);
+	overflow: hidden;
+	background-color: var(--iteslab-surface);
+}
+
+.iteslab-enabled .form-grid .grid-heading-row {
+	font-weight: 600;
+}
+
+.iteslab-enabled .form-grid .grid-row {
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .form-grid .grid-row.grid-row-open {
+	background-color: var(--iteslab-primary-soft);
+}
+
+.iteslab-enabled .grid-footer .grid-add-row,
+.iteslab-enabled .grid-footer .btn {
+	border-radius: var(--iteslab-button-radius);
+}
+
+/* Form sidebar ------------------------------------------------------------ */
+
+.iteslab-enabled .form-sidebar .sidebar-section {
+	padding: var(--iteslab-space-3) 0;
+	border-bottom: 1px solid var(--iteslab-border);
+}
+
+.iteslab-enabled .form-sidebar .sidebar-label {
+	color: var(--iteslab-muted);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+}
+
+.iteslab-enabled .form-sidebar .form-assignments .avatar,
+.iteslab-enabled .form-sidebar .avatar-group .avatar {
+	box-shadow: 0 0 0 2px var(--iteslab-surface);
+}
+
+.iteslab-enabled .form-sidebar .sidebar-menu-item .btn {
+	border-radius: var(--iteslab-radius-sm);
+}
+
+/* Comments, attachments, activity ---------------------------------------- */
+
+.iteslab-enabled .comment-box,
+.iteslab-enabled .new-timeline .timeline-item .timeline-content {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-radius-md);
+	box-shadow: none;
+}
+
+.iteslab-enabled .new-timeline .timeline-dot {
+	background-color: var(--iteslab-surface);
+	border: 2px solid var(--iteslab-border);
+}
+
+.iteslab-enabled .new-timeline::before {
+	background-color: var(--iteslab-border);
+}
+
+.iteslab-enabled .timeline-actions .btn,
+.iteslab-enabled .comment-input-wrapper .btn {
+	border-radius: var(--iteslab-button-radius);
+}
+
+.iteslab-enabled .attachment-row,
+.iteslab-enabled .attachments .attachment-row {
+	border-radius: var(--iteslab-radius-sm);
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .attachment-row:hover {
+	background-color: var(--iteslab-surface-alt);
+}
+
+/* Form toolbar ------------------------------------------------------------ */
+
+.iteslab-enabled .page-actions .btn-primary {
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .indicator-pill.blue.iteslab-draft {
+	background-color: var(--iteslab-surface-alt);
+	color: var(--iteslab-muted);
+}

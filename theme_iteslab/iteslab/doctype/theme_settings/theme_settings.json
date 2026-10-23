@@ -1,0 +1,557 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-01-01 00:00:00.000000",
+ "description": "Colours, sizes and behaviour for the Theme ItesLab UI layer.",
+ "doctype": "DocType",
+ "documentation": "",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "general_section",
+  "enable_theme",
+  "theme_preset",
+  "general_col_1",
+  "density",
+  "enable_animations",
+  "colors_section",
+  "primary_color",
+  "secondary_color",
+  "background_color",
+  "surface_color",
+  "colors_col_1",
+  "text_color",
+  "muted_text_color",
+  "border_color",
+  "colors_col_2",
+  "success_color",
+  "warning_color",
+  "error_color",
+  "sidebar_section",
+  "sidebar_background",
+  "sidebar_text",
+  "sidebar_active",
+  "sidebar_col_1",
+  "sidebar_hover",
+  "sidebar_icon",
+  "sidebar_width",
+  "collapse_sidebar_by_default",
+  "navbar_section",
+  "navbar_background",
+  "navbar_text",
+  "navbar_col_1",
+  "navbar_border",
+  "navbar_search_background",
+  "navbar_height",
+  "cards_section",
+  "card_radius",
+  "card_padding",
+  "cards_col_1",
+  "shadow_size",
+  "buttons_section",
+  "button_radius",
+  "button_height",
+  "buttons_col_1",
+  "button_font_weight",
+  "forms_section",
+  "input_radius",
+  "input_height",
+  "forms_col_1",
+  "form_section_spacing",
+  "tables_section",
+  "table_header_background",
+  "table_header_text",
+  "table_border_color",
+  "tables_col_1",
+  "table_row_hover",
+  "table_stripe_color",
+  "zebra_tables",
+  "tables_col_2",
+  "table_row_height",
+  "table_cell_padding",
+  "table_header_font_size",
+  "table_border_style",
+  "table_sticky_header",
+  "table_header_uppercase",
+  "dark_mode_section",
+  "default_appearance",
+  "dark_background_color",
+  "dark_surface_color",
+  "dark_col_1",
+  "dark_text_color",
+  "dark_border_color",
+  "advanced_section",
+  "custom_css"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "default": "1",
+   "description": "Turn the theme off to fall back to the stock ERPNext look without uninstalling the app.",
+   "fieldname": "enable_theme",
+   "fieldtype": "Check",
+   "label": "Enable Theme ItesLab"
+  },
+  {
+   "default": "ItesLab Default",
+   "fieldname": "theme_preset",
+   "fieldtype": "Select",
+   "label": "Preset",
+   "options": "ItesLab Default\nItesLab Blue\nItesLab Dark\nItesLab Minimal\nItesLab Enterprise\nCustom"
+  },
+  {
+   "fieldname": "general_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Comfortable",
+   "fieldname": "density",
+   "fieldtype": "Select",
+   "label": "Density",
+   "options": "Comfortable\nCompact"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_animations",
+   "fieldtype": "Check",
+   "label": "Use transitions"
+  },
+  {
+   "fieldname": "colors_section",
+   "fieldtype": "Section Break",
+   "label": "Colours"
+  },
+  {
+   "default": "#1DA1F2",
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Primary colour"
+  },
+  {
+   "default": "#1426A9",
+   "fieldname": "secondary_color",
+   "fieldtype": "Color",
+   "label": "Secondary colour"
+  },
+  {
+   "default": "#F7F7F9",
+   "fieldname": "background_color",
+   "fieldtype": "Color",
+   "label": "Background"
+  },
+  {
+   "default": "#FFFFFF",
+   "fieldname": "surface_color",
+   "fieldtype": "Color",
+   "label": "Surface"
+  },
+  {
+   "fieldname": "colors_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#111827",
+   "fieldname": "text_color",
+   "fieldtype": "Color",
+   "label": "Text"
+  },
+  {
+   "default": "#6B7280",
+   "fieldname": "muted_text_color",
+   "fieldtype": "Color",
+   "label": "Muted text"
+  },
+  {
+   "default": "#E5E7EB",
+   "fieldname": "border_color",
+   "fieldtype": "Color",
+   "label": "Border"
+  },
+  {
+   "fieldname": "colors_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#22C55E",
+   "fieldname": "success_color",
+   "fieldtype": "Color",
+   "label": "Success"
+  },
+  {
+   "default": "#F59E0B",
+   "fieldname": "warning_color",
+   "fieldtype": "Color",
+   "label": "Warning"
+  },
+  {
+   "default": "#EF4444",
+   "fieldname": "error_color",
+   "fieldtype": "Color",
+   "label": "Error"
+  },
+  {
+   "fieldname": "sidebar_section",
+   "fieldtype": "Section Break",
+   "label": "Sidebar"
+  },
+  {
+   "default": "#FFFFFF",
+   "fieldname": "sidebar_background",
+   "fieldtype": "Color",
+   "label": "Sidebar background"
+  },
+  {
+   "default": "#111827",
+   "fieldname": "sidebar_text",
+   "fieldtype": "Color",
+   "label": "Sidebar text"
+  },
+  {
+   "default": "#1DA1F2",
+   "fieldname": "sidebar_active",
+   "fieldtype": "Color",
+   "label": "Sidebar active"
+  },
+  {
+   "fieldname": "sidebar_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#F1F5F9",
+   "fieldname": "sidebar_hover",
+   "fieldtype": "Color",
+   "label": "Sidebar hover"
+  },
+  {
+   "default": "#6B7280",
+   "fieldname": "sidebar_icon",
+   "fieldtype": "Color",
+   "label": "Sidebar icon"
+  },
+  {
+   "default": "260",
+   "description": "v15 only \u2014 on v16 the sidebar has its own resize handle.",
+   "fieldname": "sidebar_width",
+   "fieldtype": "Int",
+   "label": "Sidebar width (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "collapse_sidebar_by_default",
+   "fieldtype": "Check",
+   "label": "Start collapsed"
+  },
+  {
+   "fieldname": "navbar_section",
+   "fieldtype": "Section Break",
+   "label": "Navbar"
+  },
+  {
+   "default": "#FFFFFF",
+   "fieldname": "navbar_background",
+   "fieldtype": "Color",
+   "label": "Navbar background"
+  },
+  {
+   "default": "#111827",
+   "fieldname": "navbar_text",
+   "fieldtype": "Color",
+   "label": "Navbar text"
+  },
+  {
+   "fieldname": "navbar_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#E5E7EB",
+   "fieldname": "navbar_border",
+   "fieldtype": "Color",
+   "label": "Navbar border"
+  },
+  {
+   "default": "#F3F4F6",
+   "fieldname": "navbar_search_background",
+   "fieldtype": "Color",
+   "label": "Search background"
+  },
+  {
+   "default": "60",
+   "description": "v15 only. v16 has no top navbar \u2014 its shell lives in the sidebar.",
+   "fieldname": "navbar_height",
+   "fieldtype": "Int",
+   "label": "Navbar height (px)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "cards_section",
+   "fieldtype": "Section Break",
+   "label": "Cards"
+  },
+  {
+   "default": "14",
+   "fieldname": "card_radius",
+   "fieldtype": "Int",
+   "label": "Card radius (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "20",
+   "fieldname": "card_padding",
+   "fieldtype": "Int",
+   "label": "Card padding (px)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "cards_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Medium",
+   "fieldname": "shadow_size",
+   "fieldtype": "Select",
+   "label": "Shadow",
+   "options": "None\nSmall\nMedium\nLarge"
+  },
+  {
+   "fieldname": "buttons_section",
+   "fieldtype": "Section Break",
+   "label": "Buttons"
+  },
+  {
+   "default": "8",
+   "fieldname": "button_radius",
+   "fieldtype": "Int",
+   "label": "Button radius (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "32",
+   "fieldname": "button_height",
+   "fieldtype": "Int",
+   "label": "Button height (px)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "buttons_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "500",
+   "fieldname": "button_font_weight",
+   "fieldtype": "Select",
+   "label": "Button label weight",
+   "options": "400\n500\n600\n700"
+  },
+  {
+   "fieldname": "forms_section",
+   "fieldtype": "Section Break",
+   "label": "Forms"
+  },
+  {
+   "default": "8",
+   "fieldname": "input_radius",
+   "fieldtype": "Int",
+   "label": "Input radius (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "32",
+   "fieldname": "input_height",
+   "fieldtype": "Int",
+   "label": "Input height (px)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "forms_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "16",
+   "fieldname": "form_section_spacing",
+   "fieldtype": "Int",
+   "label": "Space between sections (px)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "tables_section",
+   "fieldtype": "Section Break",
+   "label": "Tables"
+  },
+  {
+   "default": "#FBFBFC",
+   "description": "Applies to list view headers, report tables, child-table grids and datatables.",
+   "fieldname": "table_header_background",
+   "fieldtype": "Color",
+   "label": "Header background"
+  },
+  {
+   "default": "#6B7280",
+   "fieldname": "table_header_text",
+   "fieldtype": "Color",
+   "label": "Header text"
+  },
+  {
+   "default": "#E5E7EB",
+   "fieldname": "table_border_color",
+   "fieldtype": "Color",
+   "label": "Table border"
+  },
+  {
+   "fieldname": "tables_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#F7F7F9",
+   "fieldname": "table_row_hover",
+   "fieldtype": "Color",
+   "label": "Row hover"
+  },
+  {
+   "default": "#FAFAFB",
+   "description": "Used only when striped rows are on.",
+   "fieldname": "table_stripe_color",
+   "fieldtype": "Color",
+   "label": "Stripe colour"
+  },
+  {
+   "default": "0",
+   "fieldname": "zebra_tables",
+   "fieldtype": "Check",
+   "label": "Striped rows"
+  },
+  {
+   "fieldname": "tables_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "42",
+   "fieldname": "table_row_height",
+   "fieldtype": "Int",
+   "label": "Row height (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "12",
+   "fieldname": "table_cell_padding",
+   "fieldtype": "Int",
+   "label": "Cell padding (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "12",
+   "fieldname": "table_header_font_size",
+   "fieldtype": "Int",
+   "label": "Header font size (px)",
+   "non_negative": 1
+  },
+  {
+   "default": "Horizontal",
+   "description": "Horizontal draws row separators only \u2014 usually the quietest choice.",
+   "fieldname": "table_border_style",
+   "fieldtype": "Select",
+   "label": "Borders",
+   "options": "All\nHorizontal\nNone"
+  },
+  {
+   "default": "1",
+   "description": "The header stays put while the table body scrolls.",
+   "fieldname": "table_sticky_header",
+   "fieldtype": "Check",
+   "label": "Keep header visible"
+  },
+  {
+   "default": "0",
+   "fieldname": "table_header_uppercase",
+   "fieldtype": "Check",
+   "label": "Uppercase headers"
+  },
+  {
+   "fieldname": "dark_mode_section",
+   "fieldtype": "Section Break",
+   "label": "Dark Mode"
+  },
+  {
+   "default": "System",
+   "description": "Applied the first time a user opens the Desk. Their own choice always wins afterwards.",
+   "fieldname": "default_appearance",
+   "fieldtype": "Select",
+   "label": "Default appearance",
+   "options": "Light\nDark\nSystem"
+  },
+  {
+   "description": "Leave empty to derive it from the palette.",
+   "fieldname": "dark_background_color",
+   "fieldtype": "Color",
+   "label": "Dark background"
+  },
+  {
+   "description": "Leave empty to derive it from the palette.",
+   "fieldname": "dark_surface_color",
+   "fieldtype": "Color",
+   "label": "Dark surface"
+  },
+  {
+   "fieldname": "dark_col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Leave empty to derive it from the palette.",
+   "fieldname": "dark_text_color",
+   "fieldtype": "Color",
+   "label": "Dark text"
+  },
+  {
+   "description": "Leave empty to derive it from the palette.",
+   "fieldname": "dark_border_color",
+   "fieldtype": "Color",
+   "label": "Dark border"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "advanced_section",
+   "fieldtype": "Section Break",
+   "label": "Advanced"
+  },
+  {
+   "description": "Appended after every ItesLab stylesheet. Use it for site-specific tweaks.",
+   "fieldname": "custom_css",
+   "fieldtype": "Code",
+   "label": "Custom CSS",
+   "options": "CSS"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-03-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ItesLab",
+ "name": "Theme Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

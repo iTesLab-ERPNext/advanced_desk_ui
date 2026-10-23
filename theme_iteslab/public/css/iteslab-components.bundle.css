@@ -1,0 +1,351 @@
+/* Shared components: cards, buttons, inputs, dropdowns, dialogs, tabs, badges,
+ * pagination. Frappe's classes are restyled in place so behaviour, data
+ * attributes and event handlers are untouched. */
+
+/* Cards ------------------------------------------------------------------- */
+
+.iteslab-enabled .iteslab-card,
+.iteslab-enabled .widget,
+.iteslab-enabled .form-section .section-body .frappe-card,
+.iteslab-enabled .dashboard-section {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	padding: var(--iteslab-card-padding);
+	box-shadow: var(--iteslab-shadow);
+	transition: box-shadow var(--iteslab-transition), border-color var(--iteslab-transition),
+		transform var(--iteslab-transition);
+}
+
+.iteslab-enabled .iteslab-card:hover,
+.iteslab-enabled .widget:hover {
+	box-shadow: var(--iteslab-shadow-hover);
+	border-color: var(--iteslab-border);
+}
+
+.iteslab-enabled .widget .widget-head {
+	margin-bottom: var(--iteslab-space-3);
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.iteslab-enabled .widget .widget-title,
+.iteslab-enabled .widget .widget-head .widget-label {
+	font-weight: 600;
+	color: var(--iteslab-text);
+}
+
+/* Buttons ----------------------------------------------------------------- */
+
+.iteslab-enabled .btn {
+	border-radius: var(--iteslab-button-radius);
+	min-height: var(--iteslab-button-height);
+	font-weight: var(--iteslab-button-weight);
+	letter-spacing: 0;
+	box-shadow: none;
+	transition: background-color var(--iteslab-transition), border-color var(--iteslab-transition),
+		color var(--iteslab-transition), box-shadow var(--iteslab-transition),
+		transform var(--iteslab-transition);
+}
+
+.iteslab-enabled .btn:active {
+	transform: translateY(1px);
+}
+
+.iteslab-enabled .btn:disabled,
+.iteslab-enabled .btn.disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.iteslab-enabled .btn-primary {
+	background-color: var(--iteslab-primary);
+	border-color: var(--iteslab-primary);
+	color: var(--iteslab-primary-contrast);
+}
+
+.iteslab-enabled .btn-primary:hover,
+.iteslab-enabled .btn-primary:focus {
+	background-color: var(--iteslab-secondary);
+	border-color: var(--iteslab-secondary);
+	color: var(--iteslab-primary-contrast);
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .btn-secondary,
+.iteslab-enabled .btn-default {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .btn-secondary:hover,
+.iteslab-enabled .btn-default:hover {
+	background-color: var(--iteslab-surface-alt);
+	border-color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .btn-success {
+	background-color: var(--iteslab-success);
+	border-color: var(--iteslab-success);
+	color: #fff;
+}
+
+.iteslab-enabled .btn-danger {
+	background-color: var(--iteslab-error);
+	border-color: var(--iteslab-error);
+	color: #fff;
+}
+
+.iteslab-enabled .btn-warning {
+	background-color: var(--iteslab-warning);
+	border-color: var(--iteslab-warning);
+	color: #111827;
+}
+
+.iteslab-enabled .iteslab-btn-outline {
+	background-color: transparent;
+	border: 1px solid var(--iteslab-primary);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .iteslab-btn-outline:hover {
+	background-color: var(--iteslab-primary-soft);
+}
+
+.iteslab-enabled .btn-ghost,
+.iteslab-enabled .iteslab-btn-ghost {
+	background-color: transparent;
+	border-color: transparent;
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .btn-ghost:hover,
+.iteslab-enabled .iteslab-btn-ghost:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+/* Inputs ------------------------------------------------------------------ */
+
+.iteslab-enabled .form-control,
+.iteslab-enabled .input-with-feedback,
+.iteslab-enabled select.form-control,
+.iteslab-enabled textarea.form-control,
+.iteslab-enabled .like-disabled-input {
+	background-color: var(--iteslab-surface);
+	/* Height applies to single-line controls only; a textarea must still grow. */
+	min-height: var(--iteslab-input-height);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-input-radius);
+	color: var(--iteslab-text);
+	transition: border-color var(--iteslab-transition), box-shadow var(--iteslab-transition),
+		background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled textarea.form-control {
+	min-height: calc(var(--iteslab-input-height) * 2);
+	height: auto;
+}
+
+.iteslab-enabled .form-control::placeholder {
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .form-control:hover:not(:focus):not([disabled]) {
+	border-color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .form-control:focus {
+	border-color: var(--iteslab-primary);
+	box-shadow: 0 0 0 3px var(--iteslab-primary-soft);
+	outline: none;
+}
+
+.iteslab-enabled .form-control[disabled],
+.iteslab-enabled .form-control[readonly] {
+	background-color: var(--iteslab-surface-alt);
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .control-label {
+	color: var(--iteslab-muted);
+	font-size: 12px;
+	font-weight: 500;
+	margin-bottom: var(--iteslab-space-1);
+}
+
+.iteslab-enabled .checkbox .input-area input[type="checkbox"],
+.iteslab-enabled input[type="checkbox"] {
+	accent-color: var(--iteslab-primary);
+}
+
+/* Dropdowns and awesomplete ---------------------------------------------- */
+
+.iteslab-enabled .dropdown-menu,
+.iteslab-enabled .awesomplete > ul {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-radius-md);
+	box-shadow: var(--iteslab-shadow-lg);
+	padding: var(--iteslab-space-1);
+	animation: iteslab-pop 140ms var(--iteslab-ease);
+}
+
+.iteslab-enabled .dropdown-item,
+.iteslab-enabled .awesomplete > ul > li {
+	border-radius: var(--iteslab-radius-sm);
+	padding: 7px var(--iteslab-space-3);
+	color: var(--iteslab-text);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .dropdown-item:hover,
+.iteslab-enabled .dropdown-item:focus,
+.iteslab-enabled .awesomplete > ul > li[aria-selected="true"],
+.iteslab-enabled .awesomplete > ul > li:hover {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .dropdown-divider {
+	border-color: var(--iteslab-border);
+	margin: var(--iteslab-space-1) 0;
+}
+
+@keyframes iteslab-pop {
+	from {
+		opacity: 0;
+		transform: translateY(-4px) scale(0.99);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* Dialogs ----------------------------------------------------------------- */
+
+.iteslab-enabled .modal-content {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	box-shadow: var(--iteslab-shadow-lg);
+	overflow: hidden;
+}
+
+.iteslab-enabled .modal-header {
+	background-color: var(--iteslab-surface);
+	border-bottom: 1px solid var(--iteslab-border);
+	padding: var(--iteslab-space-4) var(--iteslab-space-5);
+}
+
+.iteslab-enabled .modal-title {
+	font-weight: 600;
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .modal-body {
+	padding: var(--iteslab-space-5);
+}
+
+.iteslab-enabled .modal-footer {
+	background-color: var(--iteslab-surface-alt);
+	border-top: 1px solid var(--iteslab-border);
+	padding: var(--iteslab-space-3) var(--iteslab-space-5);
+}
+
+.iteslab-enabled .modal.fade .modal-dialog {
+	transition: transform 180ms var(--iteslab-ease), opacity 180ms var(--iteslab-ease);
+}
+
+/* Tabs -------------------------------------------------------------------- */
+
+.iteslab-enabled .nav-tabs {
+	border-bottom: 1px solid var(--iteslab-border);
+	gap: var(--iteslab-space-4);
+}
+
+.iteslab-enabled .nav-tabs .nav-link {
+	border: none;
+	border-bottom: 2px solid transparent;
+	padding: var(--iteslab-space-3) 2px;
+	color: var(--iteslab-muted);
+	font-weight: 500;
+	transition: color var(--iteslab-transition), border-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .nav-tabs .nav-link:hover {
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .nav-tabs .nav-link.active {
+	background: transparent;
+	color: var(--iteslab-primary);
+	border-bottom-color: var(--iteslab-primary);
+}
+
+/* Badges and indicators --------------------------------------------------- */
+
+.iteslab-enabled .indicator-pill,
+.iteslab-enabled .iteslab-badge {
+	border-radius: 999px;
+	padding: 3px 10px;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	border: 1px solid transparent;
+}
+
+.iteslab-enabled .indicator-pill.green {
+	background-color: color-mix(in srgb, var(--iteslab-success) 14%, transparent);
+	color: var(--iteslab-success);
+}
+
+.iteslab-enabled .indicator-pill.orange,
+.iteslab-enabled .indicator-pill.yellow {
+	background-color: color-mix(in srgb, var(--iteslab-warning) 16%, transparent);
+	color: var(--iteslab-warning);
+}
+
+.iteslab-enabled .indicator-pill.red {
+	background-color: color-mix(in srgb, var(--iteslab-error) 14%, transparent);
+	color: var(--iteslab-error);
+}
+
+.iteslab-enabled .indicator-pill.blue {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .indicator-pill.gray,
+.iteslab-enabled .indicator-pill.grey {
+	background-color: var(--iteslab-surface-alt);
+	color: var(--iteslab-muted);
+	border-color: var(--iteslab-border);
+}
+
+/* Alerts and toasts ------------------------------------------------------- */
+
+.iteslab-enabled .desk-alert,
+.iteslab-enabled .alert {
+	border-radius: var(--iteslab-radius-md);
+	border: 1px solid var(--iteslab-border);
+	box-shadow: var(--iteslab-shadow-hover);
+	background-color: var(--iteslab-surface);
+}
+
+/* Pagination -------------------------------------------------------------- */
+
+.iteslab-enabled .list-paging-area .btn-group .btn,
+.iteslab-enabled .page-number-btn {
+	border-radius: var(--iteslab-button-radius);
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .list-paging-area .btn-group .btn.btn-info,
+.iteslab-enabled .page-number-btn.btn-info {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+	border-color: transparent;
+}

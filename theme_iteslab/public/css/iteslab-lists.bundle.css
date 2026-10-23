@@ -1,0 +1,360 @@
+/* List view, report view, tables, kanban and calendar. */
+
+/* Filters and search ------------------------------------------------------ */
+
+.iteslab-enabled .filter-section,
+.iteslab-enabled .standard-filter-section {
+	gap: var(--iteslab-space-2);
+}
+
+.iteslab-enabled .filter-selector .btn,
+.iteslab-enabled .sort-selector .btn,
+.iteslab-enabled .filter-button {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-button-radius);
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .filter-selector .btn:hover {
+	background-color: var(--iteslab-surface-alt);
+}
+
+.iteslab-enabled .tag-filters-area .filter-pill,
+.iteslab-enabled .filter-area .filter-pill {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+	border-radius: 999px;
+}
+
+/* List container ---------------------------------------------------------- */
+
+.iteslab-enabled .frappe-list .result,
+.iteslab-enabled .list-view-container .result {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	overflow: hidden;
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .list-row-head {
+	background-color: var(--iteslab-table-header-bg);
+	border-bottom: 1px solid var(--iteslab-table-border);
+	font-size: var(--iteslab-table-header-size);
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--iteslab-table-header-text);
+	min-height: var(--iteslab-table-row-height);
+}
+
+.iteslab-enabled .list-row-container {
+	border-bottom: 1px solid var(--iteslab-table-border);
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .list-row-container:last-child {
+	border-bottom: none;
+}
+
+.iteslab-enabled .list-row {
+	min-height: var(--iteslab-table-row-height);
+	padding-top: 0;
+	padding-bottom: 0;
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .list-row-container:hover {
+	background-color: var(--iteslab-table-row-hover);
+}
+
+.iteslab-enabled .list-row-container:has(.list-row-checkbox:checked) {
+	background-color: var(--iteslab-primary-soft);
+}
+
+.iteslab-enabled .list-subject .level-item .ellipsis {
+	font-weight: 550;
+}
+
+.iteslab-enabled .list-row .list-row-col .text-muted {
+	color: var(--iteslab-muted);
+}
+
+/* Optional zebra striping, driven by the "Striped rows" setting. */
+.iteslab-zebra.iteslab-enabled .list-row-container:nth-child(even),
+.iteslab-zebra.iteslab-enabled .datatable .dt-row--odd .dt-cell,
+.iteslab-zebra.iteslab-enabled table.table tbody tr:nth-child(even),
+.iteslab-zebra.iteslab-enabled .form-grid .grid-row:nth-child(even) {
+	background-color: var(--iteslab-table-stripe);
+}
+
+/* Hover must still win over the stripe. */
+.iteslab-zebra.iteslab-enabled .list-row-container:nth-child(even):hover,
+.iteslab-zebra.iteslab-enabled table.table tbody tr:nth-child(even):hover {
+	background-color: var(--iteslab-table-row-hover);
+}
+
+/* Bulk actions ------------------------------------------------------------ */
+
+.iteslab-enabled .list-paging-area,
+.iteslab-enabled .list-count {
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .bulk-actions-area .btn,
+.iteslab-enabled .list-actions .btn {
+	border-radius: var(--iteslab-button-radius);
+}
+
+/* Report view and generic tables ----------------------------------------- */
+
+.iteslab-enabled .dt-scrollable,
+.iteslab-enabled .datatable {
+	border-radius: var(--iteslab-card-radius);
+	overflow: hidden;
+	border: 1px solid var(--iteslab-table-border);
+	background-color: var(--iteslab-surface);
+}
+
+.iteslab-enabled .datatable .dt-header,
+.iteslab-enabled .datatable .dt-row-header {
+	background-color: var(--iteslab-table-header-bg);
+	border-bottom: 1px solid var(--iteslab-table-border);
+	color: var(--iteslab-table-header-text);
+	font-size: var(--iteslab-table-header-size);
+	font-weight: 600;
+}
+
+.iteslab-enabled .datatable .dt-cell {
+	border-color: var(--iteslab-table-border);
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .datatable .dt-cell--focus {
+	box-shadow: inset 0 0 0 2px var(--iteslab-primary);
+}
+
+.iteslab-enabled .datatable .dt-row:hover .dt-cell {
+	background-color: var(--iteslab-table-row-hover);
+}
+
+.iteslab-enabled table.table {
+	color: var(--iteslab-text);
+	border-color: var(--iteslab-table-border);
+}
+
+.iteslab-enabled table.table thead th {
+	background-color: var(--iteslab-table-header-bg);
+	border-bottom: 1px solid var(--iteslab-table-border);
+	color: var(--iteslab-table-header-text);
+	font-size: var(--iteslab-table-header-size);
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	padding: var(--iteslab-table-cell-padding);
+}
+
+.iteslab-enabled table.table td {
+	border-color: var(--iteslab-table-border);
+	padding: var(--iteslab-table-cell-padding);
+	height: var(--iteslab-table-row-height);
+	vertical-align: middle;
+}
+
+.iteslab-enabled table.table tbody tr {
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled table.table tbody tr:hover {
+	background-color: var(--iteslab-table-row-hover);
+}
+
+.iteslab-enabled .iteslab-table-wrapper,
+.iteslab-enabled .report-wrapper,
+.iteslab-enabled .table-responsive {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border-radius: var(--iteslab-card-radius);
+}
+
+/* Kanban ------------------------------------------------------------------ */
+
+.iteslab-enabled .kanban .kanban-column {
+	background-color: var(--iteslab-surface-alt);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+}
+
+.iteslab-enabled .kanban .kanban-card,
+.iteslab-enabled .kanban-card.content {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-radius-md);
+	box-shadow: var(--iteslab-shadow);
+	transition: box-shadow var(--iteslab-transition), transform var(--iteslab-transition);
+}
+
+.iteslab-enabled .kanban .kanban-card:hover {
+	box-shadow: var(--iteslab-shadow-hover);
+}
+
+.iteslab-enabled .kanban .kanban-column-title {
+	font-weight: 600;
+	color: var(--iteslab-text);
+}
+
+/* Calendar and Gantt ------------------------------------------------------ */
+
+.iteslab-enabled .fc-view-container,
+.iteslab-enabled .fc-unthemed .fc-content,
+.iteslab-enabled .fc-unthemed td,
+.iteslab-enabled .fc-unthemed th {
+	border-color: var(--iteslab-border);
+}
+
+.iteslab-enabled .fc-toolbar h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .fc-event {
+	border-radius: var(--iteslab-radius-sm);
+	border: none;
+	background-color: var(--iteslab-primary);
+	color: var(--iteslab-primary-contrast);
+	padding: 2px 6px;
+}
+
+.iteslab-enabled .fc-unthemed .fc-today {
+	background-color: var(--iteslab-primary-soft);
+}
+
+.iteslab-enabled .gantt .bar {
+	fill: var(--iteslab-primary);
+}
+
+/* ===========================================================================
+ * Table styles driven by a class rather than a variable
+ * ---------------------------------------------------------------------------
+ * These three settings cannot be expressed as a single value, so
+ * iteslab-theme.js puts the choice on <html> and each option is a rule set:
+ *
+ *   .iteslab-table-borders-all         every cell outlined
+ *   .iteslab-table-borders-horizontal  row separators only (default)
+ *   .iteslab-table-borders-none        no rules at all
+ *   .iteslab-table-sticky              header stays put while the body scrolls
+ *   .iteslab-table-upper               uppercase header labels
+ *
+ * The surfaces they apply to are the four kinds of table the Desk renders: the
+ * list view, DataTable (report view), plain Bootstrap tables, and the child
+ * table grid on a form.
+ * ======================================================================== */
+
+/* All borders ------------------------------------------------------------- */
+
+.iteslab-table-borders-all.iteslab-enabled table.table th,
+.iteslab-table-borders-all.iteslab-enabled table.table td {
+	border: 1px solid var(--iteslab-table-border);
+}
+
+.iteslab-table-borders-all.iteslab-enabled .datatable .dt-cell {
+	border-right: 1px solid var(--iteslab-table-border);
+	border-bottom: 1px solid var(--iteslab-table-border);
+}
+
+.iteslab-table-borders-all.iteslab-enabled .list-row-col:not(:last-child) {
+	border-right: 1px solid var(--iteslab-table-border);
+}
+
+.iteslab-table-borders-all.iteslab-enabled .form-grid .grid-static-col:not(:last-child) {
+	border-right: 1px solid var(--iteslab-table-border);
+}
+
+/* Horizontal only --------------------------------------------------------- */
+
+.iteslab-table-borders-horizontal.iteslab-enabled table.table th,
+.iteslab-table-borders-horizontal.iteslab-enabled table.table td {
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-bottom: 1px solid var(--iteslab-table-border);
+}
+
+.iteslab-table-borders-horizontal.iteslab-enabled .datatable .dt-cell {
+	border-right: none;
+	border-bottom: 1px solid var(--iteslab-table-border);
+}
+
+/* None -------------------------------------------------------------------- */
+
+.iteslab-table-borders-none.iteslab-enabled table.table th,
+.iteslab-table-borders-none.iteslab-enabled table.table td,
+.iteslab-table-borders-none.iteslab-enabled .datatable .dt-cell,
+.iteslab-table-borders-none.iteslab-enabled .list-row-container,
+.iteslab-table-borders-none.iteslab-enabled .form-grid .grid-row {
+	border: none;
+}
+
+/* The header rule is the one separator worth keeping without borders. */
+.iteslab-table-borders-none.iteslab-enabled .list-row-head,
+.iteslab-table-borders-none.iteslab-enabled table.table thead th {
+	border-bottom: 1px solid var(--iteslab-table-border);
+}
+
+/* Sticky header ----------------------------------------------------------- */
+
+.iteslab-table-sticky.iteslab-enabled table.table thead th {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	background-color: var(--iteslab-table-header-bg);
+}
+
+.iteslab-table-sticky.iteslab-enabled .list-row-head {
+	position: sticky;
+	/* Below the navbar on v15; the v16 shell has none, so 0 is right there. */
+	top: 0;
+	z-index: 2;
+}
+
+.iteslab-table-sticky.iteslab-enabled .form-grid .grid-heading-row {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	background-color: var(--iteslab-table-header-bg);
+}
+
+/* Uppercase headers ------------------------------------------------------- */
+
+.iteslab-table-upper.iteslab-enabled .list-row-head,
+.iteslab-table-upper.iteslab-enabled table.table thead th,
+.iteslab-table-upper.iteslab-enabled .datatable .dt-header,
+.iteslab-table-upper.iteslab-enabled .form-grid .grid-heading-row {
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+/* Child-table grids on a form share the table palette ------------------- */
+
+.iteslab-enabled .form-grid {
+	border-color: var(--iteslab-table-border);
+}
+
+.iteslab-enabled .form-grid .grid-heading-row {
+	background-color: var(--iteslab-table-header-bg);
+	border-bottom-color: var(--iteslab-table-border);
+	color: var(--iteslab-table-header-text);
+	font-size: var(--iteslab-table-header-size);
+}
+
+.iteslab-enabled .form-grid .grid-row {
+	border-bottom-color: var(--iteslab-table-border);
+}
+
+.iteslab-enabled .form-grid .grid-row:hover {
+	background-color: var(--iteslab-table-row-hover);
+}
+
+.iteslab-enabled .form-grid .grid-row > .data-row {
+	min-height: var(--iteslab-table-row-height);
+}

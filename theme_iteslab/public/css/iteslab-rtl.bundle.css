@@ -1,0 +1,102 @@
+/* ---------------------------------------------------------------------------
+ * Right-to-left refinements (Arabic, Hebrew, Persian, Pashto)
+ * ---------------------------------------------------------------------------
+ * Frappe already does the mechanical half of RTL: every *.bundle.css is run
+ * through rtlcss at build time into assets-rtl.json, and `rtl_<bundle>.css` is
+ * served whenever the user's language is one of ar / he / fa / ps. That handles
+ * left/right, padding, margins, border sides, border-radius corners and
+ * translateX — verified against rtlcss, not assumed.
+ *
+ * What rtlcss cannot know is typography. Two of this theme's Latin habits are
+ * actively wrong in Arabic script:
+ *
+ *   letter-spacing  Arabic is cursive: letters join. Adding tracking pulls the
+ *                   joins apart and the word stops reading as a word. Negative
+ *                   tracking, used here to tighten Latin headings, is worse.
+ *
+ *   text-transform  Arabic has no letter case, so uppercase is a no-op on the
+ *                   text itself — but it is usually paired with tracking, which
+ *                   is not. The setting is left alone; only the tracking goes.
+ *
+ * `dir` and the theme class both sit on <html>, hence the compound selector.
+ * rtlcss passes [dir="rtl"] selectors through untouched (also verified), so
+ * this file is correct in both the LTR and RTL builds: in the LTR build the
+ * rules simply never match.
+ * ------------------------------------------------------------------------- */
+
+.iteslab-enabled[dir="rtl"] h1,
+.iteslab-enabled[dir="rtl"] h2,
+.iteslab-enabled[dir="rtl"] h3,
+.iteslab-enabled[dir="rtl"] h4,
+.iteslab-enabled[dir="rtl"] h5,
+.iteslab-enabled[dir="rtl"] h6,
+.iteslab-enabled[dir="rtl"] .page-title .title-text,
+.iteslab-enabled[dir="rtl"] .workspace-title,
+.iteslab-enabled[dir="rtl"] .page-head .title-area .title-text,
+.iteslab-enabled[dir="rtl"] .number-widget-box .widget-content .number,
+.iteslab-enabled[dir="rtl"] .modal-title,
+.iteslab-enabled[dir="rtl"] .sidebar-header .header-title,
+.iteslab-enabled[dir="rtl"] .iteslab-sidebar-brand,
+.iteslab-enabled[dir="rtl"] .btn,
+.iteslab-enabled[dir="rtl"] .indicator-pill,
+.iteslab-enabled[dir="rtl"] .iteslab-badge {
+	letter-spacing: normal;
+}
+
+/* Labels and section headings: the eyebrow tracking that reads as "quiet
+ * heading" in Latin reads as broken words in Arabic. */
+.iteslab-enabled[dir="rtl"] .standard-sidebar-label,
+.iteslab-enabled[dir="rtl"] .sidebar-item-label,
+.iteslab-enabled[dir="rtl"] .body-sidebar .sidebar-label,
+.iteslab-enabled[dir="rtl"] .layout-side-section .sidebar-label,
+.iteslab-enabled[dir="rtl"] .form-sidebar .sidebar-label,
+.iteslab-enabled[dir="rtl"] .form-page .section-head,
+.iteslab-enabled[dir="rtl"] .layout-main-section .widget-group .widget-group-head,
+.iteslab-enabled[dir="rtl"] .layout-main-section .section-head,
+.iteslab-enabled[dir="rtl"] .sidebar-items .section-item .item-anchor.section-break .sidebar-item-label {
+	letter-spacing: normal;
+}
+
+/* Tables, including the "Uppercase headers" option: the case change is kept,
+ * the tracking that comes with it is not. */
+.iteslab-enabled[dir="rtl"] .list-row-head,
+.iteslab-enabled[dir="rtl"] table.table thead th,
+.iteslab-enabled[dir="rtl"] .datatable .dt-header,
+.iteslab-enabled[dir="rtl"] .datatable .dt-row-header,
+.iteslab-enabled[dir="rtl"] .form-grid .grid-heading-row,
+.iteslab-table-upper.iteslab-enabled[dir="rtl"] .list-row-head,
+.iteslab-table-upper.iteslab-enabled[dir="rtl"] table.table thead th,
+.iteslab-table-upper.iteslab-enabled[dir="rtl"] .datatable .dt-header,
+.iteslab-table-upper.iteslab-enabled[dir="rtl"] .form-grid .grid-heading-row {
+	letter-spacing: normal;
+}
+
+/* The collapsed-rail tooltip is positioned by rtlcss, but its text alignment
+ * has to follow the reading direction. */
+.iteslab-sidebar-collapsed.iteslab-enabled[dir="rtl"] .sidebar-item-container[data-iteslab-label]:hover::after {
+	text-align: right;
+}
+
+/* Frappe renders numbers, currency and dates left-to-right inside an RTL page.
+ * Keep the theme's number treatments from inheriting the paragraph direction so
+ * a figure never renders with its minus sign or decimals reordered. */
+.iteslab-enabled[dir="rtl"] .number-widget-box .widget-content .number,
+.iteslab-enabled[dir="rtl"] .iteslab-builder__hex,
+.iteslab-enabled[dir="rtl"] .iteslab-builder__number {
+	direction: ltr;
+	unicode-bidi: plaintext;
+}
+
+/* The search shortcut hint ("Ctrl+G") is a Latin key name: keep it LTR so the
+ * modifier stays in front of the key. */
+.iteslab-enabled[dir="rtl"] #navbar-search::placeholder {
+	direction: rtl;
+}
+
+/* Login and portal pages use the .iteslab-web root instead of .iteslab-enabled. */
+.iteslab-web[dir="rtl"] .login-content .page-card-head h4,
+.iteslab-web[dir="rtl"] .for-login h4,
+.iteslab-web[dir="rtl"] .btn-primary,
+.iteslab-web[dir="rtl"] .btn-login {
+	letter-spacing: normal;
+}

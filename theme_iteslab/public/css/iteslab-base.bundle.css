@@ -1,0 +1,154 @@
+/* Base layer: page canvas, typography, focus, scrollbars, icons.
+ * Everything is scoped under .iteslab-enabled, a class iteslab-theme.js puts on
+ * <html>. Turning the theme off in Theme Settings removes the class and the
+ * Desk returns to stock without an uninstall. */
+
+.iteslab-enabled body {
+	background-color: var(--iteslab-background);
+	color: var(--iteslab-text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.iteslab-enabled .page-head {
+	background-color: var(--iteslab-background);
+	border-bottom: 1px solid transparent;
+	transition: border-color var(--iteslab-transition), box-shadow var(--iteslab-transition);
+}
+
+.iteslab-enabled .page-head.iteslab-stuck {
+	border-bottom-color: var(--iteslab-border);
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .page-title .title-text {
+	font-weight: 650;
+	letter-spacing: -0.015em;
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled h1,
+.iteslab-enabled h2,
+.iteslab-enabled h3,
+.iteslab-enabled h4,
+.iteslab-enabled h5,
+.iteslab-enabled h6 {
+	color: var(--iteslab-text);
+	letter-spacing: -0.01em;
+}
+
+.iteslab-enabled a {
+	color: var(--iteslab-primary);
+	transition: color var(--iteslab-transition);
+}
+
+.iteslab-enabled a:hover {
+	color: var(--iteslab-secondary);
+}
+
+/* Breadcrumbs ------------------------------------------------------------- */
+
+.iteslab-enabled .navbar .breadcrumb-container .breadcrumb {
+	background: transparent;
+	gap: var(--iteslab-space-1);
+}
+
+.iteslab-enabled .breadcrumb .breadcrumb-item a {
+	color: var(--iteslab-muted);
+	font-weight: 500;
+	border-radius: var(--iteslab-radius-sm);
+	padding: 2px 6px;
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .breadcrumb .breadcrumb-item a:hover {
+	background-color: var(--iteslab-sidebar-hover);
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .breadcrumb .breadcrumb-item:last-child a {
+	color: var(--iteslab-text);
+}
+
+/* Icons -------------------------------------------------------------------
+ * The native Frappe/ERPNext SVG sprite is kept exactly as it is. Only colour,
+ * size and alignment are adjusted — the sprite itself is never swapped out. */
+
+.iteslab-enabled .icon {
+	vertical-align: middle;
+	transition: stroke var(--iteslab-transition), fill var(--iteslab-transition),
+		opacity var(--iteslab-transition), transform var(--iteslab-transition);
+}
+
+.iteslab-enabled .icon use {
+	/* Inherit, so an icon takes the colour of whatever it sits in. */
+	stroke: currentColor;
+}
+
+.iteslab-enabled .icon.icon-xs {
+	width: 12px;
+	height: 12px;
+}
+
+.iteslab-enabled .icon.icon-sm {
+	width: 14px;
+	height: 14px;
+}
+
+.iteslab-enabled .icon.icon-md {
+	width: 16px;
+	height: 16px;
+}
+
+.iteslab-enabled .icon.icon-lg {
+	width: 20px;
+	height: 20px;
+}
+
+/* Focus ------------------------------------------------------------------- */
+
+.iteslab-enabled :focus-visible {
+	outline: 2px solid var(--iteslab-primary);
+	outline-offset: 2px;
+	border-radius: var(--iteslab-radius-sm);
+}
+
+.iteslab-enabled .btn:focus,
+.iteslab-enabled .form-control:focus {
+	box-shadow: 0 0 0 3px var(--iteslab-primary-soft);
+}
+
+/* Scrollbars -------------------------------------------------------------- */
+
+.iteslab-enabled ::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.iteslab-enabled ::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.iteslab-enabled ::-webkit-scrollbar-thumb {
+	background-color: var(--iteslab-border);
+	border: 3px solid transparent;
+	background-clip: content-box;
+	border-radius: 999px;
+}
+
+.iteslab-enabled ::-webkit-scrollbar-thumb:hover {
+	background-color: var(--iteslab-muted);
+}
+
+/* Motion preferences ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+	.iteslab-enabled *,
+	.iteslab-enabled *::before,
+	.iteslab-enabled *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}

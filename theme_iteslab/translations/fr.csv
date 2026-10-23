@@ -1,0 +1,165 @@
+400,400
+500,500
+600,600
+700,700
+Accounting,Comptabilité
+Active,Actif
+Advanced,Avancé
+All,Toutes
+Appended after every ItesLab stylesheet. Use it for site-specific tweaks.,Ajouté après chaque feuille de style ItesLab. À utiliser pour les ajustements propres au site.
+Applied the first time a user opens the Desk. Their own choice always wins afterwards.,Appliqué à la première ouverture du Desk. Le choix de l’utilisateur prévaut ensuite toujours.
+"Applies to list view headers, report tables, child-table grids and datatables.","S’applique aux en-têtes des vues liste, aux tableaux de rapport, aux grilles des tableaux enfants et aux datatables."
+"Applies to list views, report tables, child tables and datatables.","S’applique aux vues liste, aux tableaux de rapport, aux tableaux enfants et aux datatables."
+Are you sure you want to log out?,Êtes-vous sûr de vouloir vous déconnecter ?
+Background,Arrière-plan
+Border,Bordure
+Borders,Bordures
+Button height (px),Hauteur des boutons (px)
+Button label weight,Graisse du texte des boutons
+Button radius (px),Rayon des boutons (px)
+Buttons,Boutons
+Cancel,Annuler
+Card padding (px),Marge intérieure des cartes (px)
+Card radius (px),Rayon des cartes (px)
+Cards,Cartes
+Cell padding (px),Marge intérieure des cellules (px)
+Changes preview on the right. Nothing is applied to the Desk until you save.,Les modifications s’affichent à droite. Rien n’est appliqué au Desk tant que vous n’avez pas enregistré.
+Clear,Effacer
+Colours,Couleurs
+"Colours, sizes and behaviour for the Theme ItesLab UI layer.","Couleurs, tailles et comportement de la couche d’interface Theme ItesLab."
+Comfortable,Confortable
+Compact,Compact
+Could not log out. Check your connection and try again.,Impossible de se déconnecter. Vérifiez votre connexion et réessayez.
+Create,Créer
+Custom,Personnalisé
+Custom CSS,CSS personnalisé
+Customer,Client
+Customers,Clients
+Dark,Sombre
+Dark background,Arrière-plan sombre
+Dark border,Bordure sombre
+Dark Mode,Mode sombre
+Dark surface,Surface sombre
+Dark text,Texte sombre
+Date,Date
+Default appearance,Apparence par défaut
+Density,Densité
+derived,déduit
+Discard changes,Annuler les modifications
+Enable Theme ItesLab,Activer Theme ItesLab
+Enter a hex colour like #1DA1F2,"Saisissez une couleur hexadécimale, par exemple #1DA1F2"
+Error,Erreur
+Filter,Filtrer
+Forms,Formulaires
+General,Général
+Header background,Arrière-plan de l’en-tête
+Header font size (px),Taille de police de l’en-tête (px)
+Header text,Texte de l’en-tête
+Height (px),Hauteur (px)
+Home,Accueil
+Horizontal,Horizontales
+Horizontal draws row separators only — usually the quietest choice.,« Horizontales » ne trace que les séparateurs de lignes — en général le choix le plus discret.
+Hover,Survol
+Icon,Icône
+Input height (px),Hauteur des champs (px)
+Input radius (px),Rayon des champs (px)
+Keep header visible,Garder l’en-tête visible
+Label weight,Graisse du libellé
+Large,Grande
+Last week,La semaine dernière
+Leave a colour empty to derive it from the palette.,Laissez une couleur vide pour la déduire de la palette.
+Leave empty to derive it from the palette.,Laissez vide pour la déduire de la palette.
+Light,Clair
+Loading theme,Chargement du thème
+Logging out...,Déconnexion en cours…
+Logout failed,Échec de la déconnexion
+Medium,Moyenne
+Muted text,Texte atténué
+ItesLab Blue,ItesLab Blue
+ItesLab Dark,ItesLab Dark
+ItesLab Default,ItesLab Default
+ItesLab Enterprise,ItesLab Enterprise
+ItesLab Minimal,ItesLab Minimal
+ItesLab styling stops after you save and reload.,La mise en forme ItesLab cessera après l’enregistrement et le rechargement.
+Navbar,Barre de navigation
+Navbar background,Arrière-plan de la barre de navigation
+Navbar border,Bordure de la barre de navigation
+Navbar height (px),Hauteur de la barre de navigation (px)
+Navbar text,Texte de la barre de navigation
+None,Aucune
+Open Theme Builder,Ouvrir le générateur de thème
+Open Theme Settings,Ouvrir les paramètres du thème
+Padding (px),Marge intérieure (px)
+Pending,En attente
+Preset,Préréglage
+Presets,Préréglages
+Primary,Principal
+Primary colour,Couleur principale
+Quotations,Devis
+Radius (px),Rayon (px)
+Replace the current palette with ItesLab Default?,Remplacer la palette actuelle par ItesLab Default ?
+Reset,Réinitialiser
+Reset to default,Réinitialiser aux valeurs par défaut
+Reset to ItesLab Default,Réinitialiser à ItesLab Default
+Resetting theme,Réinitialisation du thème
+Row height (px),Hauteur de ligne (px)
+Row hover,Survol de ligne
+Sales Orders,Commandes clients
+Save,Enregistrer
+Save theme,Enregistrer le thème
+Saved,Enregistré
+Saving theme,Enregistrement du thème
+Search,Rechercher
+Search background,Arrière-plan de la recherche
+Secondary,Secondaire
+Secondary colour,Couleur secondaire
+Selling,Ventes
+Settings,Paramètres
+Shadow,Ombre
+Sidebar,Barre latérale
+Sidebar active,Élément actif de la barre latérale
+Sidebar background,Arrière-plan de la barre latérale
+Sidebar hover,Survol dans la barre latérale
+Sidebar icon,Icône de la barre latérale
+Sidebar text,Texte de la barre latérale
+Sidebar width (px),Largeur de la barre latérale (px)
+Small,Petite
+Space between sections (px),Espace entre les sections (px)
+Start collapsed,Démarrer replié
+Status,Statut
+Stock,Stock
+Stripe,Rayure
+Stripe colour,Couleur des rayures
+Striped rows,Lignes alternées
+Submit,Valider
+Success,Succès
+Surface,Surface
+System,Système
+Table border,Bordure du tableau
+Tables,Tableaux
+Text,Texte
+The header stays put while the table body scrolls.,L’en-tête reste en place pendant le défilement du tableau.
+Theme Builder,Générateur de thème
+Theme enabled,Thème activé
+"Theme ItesLab supports Frappe v15 and v16. This site reports v{0}, so the theme may not match the Desk.",Theme ItesLab prend en charge Frappe v15 et v16. Ce site indique v{0} ; le thème peut donc ne pas correspondre au Desk.
+Theme reset,Thème réinitialisé
+Theme saved,Thème enregistré
+Theme Settings,Paramètres du thème
+Theme updated,Thème mis à jour
+Today,Aujourd’hui
+Toggle dark preview,Basculer l’aperçu sombre
+Toggle sidebar,Afficher/masquer la barre latérale
+Turn the theme off to fall back to the stock ERPNext look without uninstalling the app.,Désactivez le thème pour revenir à l’apparence d’origine d’ERPNext sans désinstaller l’application.
+Unknown preset: {0},Préréglage inconnu : {0}
+Unsaved,Non enregistré
+Unsupported Frappe version,Version de Frappe non prise en charge
+Uppercase headers,En-têtes en majuscules
+Use transitions,Utiliser les transitions
+Used only when striped rows are on.,Utilisé uniquement lorsque les lignes alternées sont activées.
+v15 only — on v16 the sidebar has its own resize handle.,"v15 uniquement — sur v16, la barre latérale possède sa propre poignée de redimensionnement."
+v15 only. v16 has no top navbar — its shell lives in the sidebar.,v15 uniquement. v16 n’a pas de barre de navigation supérieure : son interface se trouve dans la barre latérale.
+Warning,Avertissement
+Width (px),Largeur (px)
+Yesterday,Hier
+{0} is not a valid hex colour: {1},{0} n’est pas une couleur hexadécimale valide : {1}
+{0} loaded — save to apply,{0} chargé — enregistrez pour appliquer

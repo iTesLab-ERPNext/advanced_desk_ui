@@ -1,0 +1,95 @@
+/* Dark mode.
+ *
+ * Frappe v15 already sets data-theme="dark" on <html> through its own theme
+ * switcher, so ItesLab piggybacks on that attribute instead of introducing a
+ * competing toggle. The user menu keeps working exactly as before.
+ *
+ * The dark values themselves are written at runtime by iteslab-theme.js from the
+ * payload the server derives (accent colours carry over, surfaces are replaced).
+ * The rules below are the fallbacks plus the handful of places that need more
+ * than a variable swap. */
+
+.iteslab-enabled[data-theme="dark"] {
+	--iteslab-background: #0f1117;
+	--iteslab-surface: #171a21;
+	--iteslab-surface-alt: #1c202a;
+	--iteslab-text: #e5e7eb;
+	--iteslab-muted: #9aa3b2;
+	--iteslab-border: #272d3a;
+	--iteslab-sidebar-background: #12151c;
+	--iteslab-sidebar-text: #d7dce5;
+	--iteslab-sidebar-hover: rgba(255, 255, 255, 0.06);
+	--iteslab-sidebar-icon: #9aa3b2;
+	--iteslab-navbar-background: #12151c;
+	--iteslab-navbar-text: #e5e7eb;
+	--iteslab-navbar-border: #272d3a;
+	--iteslab-navbar-search-background: #1c202a;
+
+	/* Shadows read as noise on dark surfaces; borders do the work instead. */
+	--iteslab-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--iteslab-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+	--iteslab-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+.iteslab-enabled[data-theme="dark"] body {
+	color-scheme: dark;
+}
+
+.iteslab-enabled[data-theme="dark"] .widget,
+.iteslab-enabled[data-theme="dark"] .form-page .form-section,
+.iteslab-enabled[data-theme="dark"] .frappe-list .result,
+.iteslab-enabled[data-theme="dark"] .modal-content {
+	border-color: var(--iteslab-border);
+}
+
+.iteslab-enabled[data-theme="dark"] .iteslab-sidebar-overlay {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Images and charts can be over-bright against a dark canvas. */
+.iteslab-enabled[data-theme="dark"] .widget img:not([src$=".svg"]) {
+	filter: brightness(0.92);
+}
+
+.iteslab-enabled[data-theme="dark"] .frappe-chart .chart-label,
+.iteslab-enabled[data-theme="dark"] .frappe-chart text {
+	fill: var(--iteslab-muted);
+}
+
+/* Keep native icons legible without replacing the sprite. */
+.iteslab-enabled[data-theme="dark"] .sidebar-item-icon .icon,
+.iteslab-enabled[data-theme="dark"] .navbar .icon {
+	opacity: 0.92;
+}
+
+/* Frappe uses .text-muted widely; make sure it clears contrast in dark. */
+.iteslab-enabled[data-theme="dark"] .text-muted,
+.iteslab-enabled[data-theme="dark"] .control-label {
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled[data-theme="dark"] .form-control[disabled],
+.iteslab-enabled[data-theme="dark"] .form-control[readonly] {
+	background-color: var(--iteslab-surface-alt);
+}
+
+/* v16 shell surfaces (no-ops on v15, where these elements do not exist). */
+.iteslab-enabled[data-theme="dark"] .body-sidebar-container,
+.iteslab-enabled[data-theme="dark"] .body-sidebar,
+.iteslab-enabled[data-theme="dark"] .sidebar-header-menu,
+.iteslab-enabled[data-theme="dark"] .standard-items-sections .notifications-list {
+	background-color: var(--iteslab-sidebar-background);
+	border-color: var(--iteslab-border);
+}
+
+.iteslab-enabled[data-theme="dark"] .collapse-sidebar-link.sidebar-toggle-btn {
+	background-color: var(--iteslab-surface);
+	border-color: var(--iteslab-border);
+	color: var(--iteslab-muted);
+}
+
+/* v15 shell surfaces. */
+.iteslab-enabled[data-theme="dark"] .list-sidebar.overlay-sidebar,
+.iteslab-enabled[data-theme="dark"] .desk-sidebar {
+	background-color: var(--iteslab-sidebar-background);
+}

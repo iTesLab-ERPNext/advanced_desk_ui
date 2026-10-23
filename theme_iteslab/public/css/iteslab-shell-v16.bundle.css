@@ -1,0 +1,276 @@
+/* ---------------------------------------------------------------------------
+ * Desk shell — Frappe/ERPNext v16
+ * ---------------------------------------------------------------------------
+ * v16 has no top navbar. `navbar.html` renders only the announcement widget and
+ * the whole shell moved into the sidebar:
+ *
+ *   .body-sidebar-container(.expanded)
+ *     └ .body-sidebar
+ *         ├ .sidebar-header            brand + workspace title, opens
+ *         │                            .sidebar-header-menu (holds Logout)
+ *         ├ .body-sidebar-top > .sidebar-items
+ *         │     └ .sidebar-item-container
+ *         │         └ .standard-sidebar-item
+ *         │             └ a.item-anchor > .sidebar-item-icon + .sidebar-item-label
+ *         ├ .body-sidebar-cards
+ *         ├ .body-sidebar-bottom > .sidebar-user-button
+ *         ├ button.collapse-sidebar-link.sidebar-toggle-btn   (native collapse)
+ *         └ .sidebar-resize-handle                            (native resize)
+ *
+ * Three things this file deliberately does NOT do, because v16 owns them:
+ *   - it does not add a collapse control (v16 has `.collapse-sidebar-link`,
+ *     and the expanded state is the `.expanded` class on the container);
+ *   - it does not set a fixed width (`.sidebar-resize-handle` lets the user
+ *     drag it, and a hard width would fight that) — the width token is applied
+ *     only as the collapsed/expanded default;
+ *   - it does not add rail tooltips (v16 items already carry
+ *     `data-toggle="tooltip"`).
+ *
+ * This file is loaded only when compat.shell() == "v16".
+ * ------------------------------------------------------------------------- */
+
+/* Container --------------------------------------------------------------- */
+
+.iteslab-enabled .body-sidebar-container {
+	background-color: var(--iteslab-sidebar-background);
+	border-right: 1px solid var(--iteslab-border);
+	transition: width var(--iteslab-transition), transform 220ms var(--iteslab-ease);
+}
+
+.iteslab-enabled .body-sidebar {
+	background-color: var(--iteslab-sidebar-background);
+	padding: var(--iteslab-space-2);
+}
+
+/* The width token is the default for the expanded sidebar. The user can still
+ * drag `.sidebar-resize-handle`, because v16 sets an inline width when they do
+ * and an inline style beats this rule. */
+.iteslab-enabled .body-sidebar-container.expanded {
+	width: var(--iteslab-sidebar-width);
+}
+
+.iteslab-enabled .body-sidebar-container.expanded .body-sidebar-placeholder {
+	width: var(--iteslab-sidebar-width);
+}
+
+/* Sidebar header (brand + workspace switcher) ----------------------------- */
+
+.iteslab-enabled .sidebar-header {
+	display: flex;
+	align-items: center;
+	gap: var(--iteslab-space-2);
+	padding: var(--iteslab-space-2);
+	border-radius: var(--iteslab-radius-md);
+	color: var(--iteslab-sidebar-text);
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-header:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+.iteslab-enabled .sidebar-header .sidebar-item-icon {
+	border-radius: var(--iteslab-radius-sm);
+}
+
+.iteslab-enabled .sidebar-header .header-title {
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	color: var(--iteslab-sidebar-text);
+}
+
+.iteslab-enabled .sidebar-header .header-subtitle {
+	font-size: 11px;
+	color: var(--iteslab-muted);
+}
+
+/* The header menu carries Logout in v16 — style it, never hide it. */
+.iteslab-enabled .sidebar-header-menu {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-radius-md);
+	box-shadow: var(--iteslab-shadow-lg);
+	padding: var(--iteslab-space-1);
+}
+
+.iteslab-enabled .sidebar-header-menu .dropdown-menu-item {
+	display: flex;
+	align-items: center;
+	gap: var(--iteslab-space-2);
+	min-height: 34px;
+	padding: 6px var(--iteslab-space-2);
+	border-radius: var(--iteslab-radius-sm);
+	color: var(--iteslab-text);
+	cursor: pointer;
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-header-menu .dropdown-menu-item:hover {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .sidebar-header-menu .menu-item-shortcut {
+	margin-left: auto;
+	color: var(--iteslab-muted);
+	font-size: 11px;
+}
+
+/* Items ------------------------------------------------------------------- */
+
+.iteslab-enabled .sidebar-item-container {
+	position: relative;
+}
+
+.iteslab-enabled .sidebar-items .standard-sidebar-item {
+	border-radius: var(--iteslab-radius-md);
+	margin: 2px 0;
+	color: var(--iteslab-sidebar-text);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-items .item-anchor {
+	display: flex;
+	align-items: center;
+	gap: var(--iteslab-space-3);
+	min-height: 36px;
+	padding: 0 var(--iteslab-space-2);
+	color: inherit;
+	font-weight: 500;
+	border-radius: inherit;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.iteslab-enabled .sidebar-items .sidebar-item-icon,
+.iteslab-enabled .sidebar-items .sidebar-item-icon .icon {
+	color: var(--iteslab-sidebar-icon);
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+}
+
+.iteslab-enabled .sidebar-items .sidebar-item-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.iteslab-enabled .sidebar-items .standard-sidebar-item:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+.iteslab-enabled .sidebar-items .standard-sidebar-item.selected,
+.iteslab-enabled .sidebar-items .standard-sidebar-item.active {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-sidebar-active);
+	font-weight: 600;
+}
+
+.iteslab-enabled .sidebar-items .standard-sidebar-item.selected .sidebar-item-icon,
+.iteslab-enabled .sidebar-items .standard-sidebar-item.selected .sidebar-item-icon .icon,
+.iteslab-enabled .sidebar-items .standard-sidebar-item.active .sidebar-item-icon .icon {
+	color: var(--iteslab-sidebar-active);
+}
+
+/* Section breaks are labels, not links. */
+.iteslab-enabled .sidebar-items .section-item .item-anchor.section-break .sidebar-item-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .sidebar-items .standard-sidebar-item.indent .item-anchor {
+	padding-left: calc(var(--iteslab-space-2) + 20px);
+	font-weight: 450;
+}
+
+.iteslab-enabled .sidebar-items .divider {
+	border-color: var(--iteslab-border);
+}
+
+/* Sidebar cards and bottom area ------------------------------------------ */
+
+.iteslab-enabled .body-sidebar-cards .widget {
+	border-radius: var(--iteslab-radius-md);
+	border-color: var(--iteslab-border);
+}
+
+.iteslab-enabled .sidebar-user-button {
+	border-radius: var(--iteslab-radius-md);
+	padding: var(--iteslab-space-2);
+	color: var(--iteslab-sidebar-text);
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-user-button:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+.iteslab-enabled .sidebar-user-button .avatar {
+	box-shadow: 0 0 0 2px var(--iteslab-border);
+}
+
+.iteslab-enabled .onboarding-sidebar {
+	color: var(--iteslab-muted);
+	border-radius: var(--iteslab-radius-sm);
+}
+
+/* Native controls: restyled, never removed ------------------------------- */
+
+.iteslab-enabled .collapse-sidebar-link.sidebar-toggle-btn {
+	color: var(--iteslab-muted);
+	border-radius: var(--iteslab-radius-sm);
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .collapse-sidebar-link.sidebar-toggle-btn:hover {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-primary);
+}
+
+.iteslab-enabled .sidebar-resize-handle:hover {
+	background-color: var(--iteslab-primary);
+}
+
+/* v16 renders its own mobile overlay at z-index 1021. */
+.iteslab-enabled .body-sidebar-container .overlay {
+	background-color: rgba(15, 17, 23, 0.45);
+}
+
+/* Notifications panel now lives in the sidebar. */
+.iteslab-enabled .standard-items-sections .notifications-list {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-radius-md);
+	box-shadow: var(--iteslab-shadow-lg);
+}
+
+.iteslab-enabled .notification-list-header {
+	border-bottom: 1px solid var(--iteslab-border);
+	color: var(--iteslab-muted);
+}
+
+/* Espresso token bridge (v16 only) ---------------------------------------
+ * v16 components are authored against --ink-*, --surface-* and --outline-*.
+ * Re-pointing the handful that carry text, surface and border colour keeps the
+ * new components on the configured palette. The numeric ramp is left alone so
+ * v16 keeps its own contrast steps. */
+
+.iteslab-enabled {
+	--ink-gray-9: var(--iteslab-text);
+	--ink-gray-8: var(--iteslab-text);
+	--ink-gray-7: var(--iteslab-muted);
+	--ink-gray-6: var(--iteslab-muted);
+	--ink-gray-5: var(--iteslab-muted);
+
+	--surface-white: var(--iteslab-surface);
+	--surface-gray-1: var(--iteslab-surface-alt);
+	--surface-gray-2: var(--iteslab-surface-alt);
+
+	--outline-gray-1: var(--iteslab-border);
+	--outline-gray-2: var(--iteslab-border);
+	--outline-gray-modals: var(--iteslab-border);
+}

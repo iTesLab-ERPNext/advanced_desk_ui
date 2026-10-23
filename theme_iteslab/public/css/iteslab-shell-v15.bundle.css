@@ -1,0 +1,440 @@
+/* ---------------------------------------------------------------------------
+ * Desk shell — Frappe/ERPNext v15
+ * ---------------------------------------------------------------------------
+ * v15 renders a top navbar (`header.navbar`) plus a sidebar that lives inside
+ * the page layout:
+ *
+ *   .layout-side-section > .list-sidebar.overlay-sidebar > .desk-sidebar
+ *     └ .standard-sidebar-section
+ *         └ .sidebar-item-container
+ *             └ .desk-sidebar-item.standard-sidebar-item(.selected)
+ *                 └ a.item-anchor > .sidebar-item-icon + .sidebar-item-label
+ *
+ * v15 has no native collapse control, so the collapsed rail and the mobile
+ * drawer in this file are ours, driven by classes iteslab-sidebar.js puts on
+ * <html>:
+ *   .iteslab-sidebar-collapsed  icon rail with hover tooltips
+ *   .iteslab-sidebar-open       drawer visible (mobile only)
+ *
+ * This file is loaded only when compat.shell() == "v15".
+ * ------------------------------------------------------------------------- */
+
+.iteslab-enabled .navbar {
+	height: var(--iteslab-navbar-height);
+	min-height: var(--iteslab-navbar-height);
+	background-color: var(--iteslab-navbar-background);
+	border-bottom: 1px solid var(--iteslab-navbar-border);
+	box-shadow: none;
+	padding: 0 var(--iteslab-space-4);
+	transition: box-shadow var(--iteslab-transition), background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .navbar.iteslab-scrolled {
+	box-shadow: var(--iteslab-shadow);
+}
+
+.iteslab-enabled .navbar .container {
+	max-width: none;
+	padding: 0;
+	gap: var(--iteslab-space-3);
+}
+
+.iteslab-enabled .navbar-brand {
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--iteslab-navbar-text);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--iteslab-space-2);
+}
+
+.iteslab-enabled .navbar-brand img,
+.iteslab-enabled .navbar-brand .app-logo {
+	height: 24px;
+	width: auto;
+}
+
+/* Our own drawer/collapse trigger, injected by iteslab-navbar.js. */
+.iteslab-enabled .iteslab-nav-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	margin-right: var(--iteslab-space-2);
+	border: none;
+	background: transparent;
+	border-radius: var(--iteslab-button-radius);
+	color: var(--iteslab-navbar-text);
+	cursor: pointer;
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .iteslab-nav-toggle:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+.iteslab-enabled .iteslab-nav-toggle svg {
+	width: 18px;
+	height: 18px;
+}
+
+/* Search ------------------------------------------------------------------ */
+
+.iteslab-enabled .navbar .search-bar,
+.iteslab-enabled .navbar #navbar-search-container {
+	flex: 1 1 auto;
+	max-width: 520px;
+}
+
+.iteslab-enabled #navbar-search,
+.iteslab-enabled .navbar .search-bar input {
+	height: 36px;
+	width: 100%;
+	background-color: var(--iteslab-navbar-search-background);
+	border: 1px solid transparent;
+	border-radius: var(--iteslab-input-radius);
+	padding-left: 34px;
+	color: var(--iteslab-text);
+	transition: background-color var(--iteslab-transition), border-color var(--iteslab-transition),
+		box-shadow var(--iteslab-transition);
+}
+
+.iteslab-enabled #navbar-search::placeholder {
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled #navbar-search:focus,
+.iteslab-enabled .navbar .search-bar input:focus {
+	background-color: var(--iteslab-surface);
+	border-color: var(--iteslab-primary);
+	box-shadow: 0 0 0 3px var(--iteslab-primary-soft);
+}
+
+.iteslab-enabled .navbar .search-bar .search-icon,
+.iteslab-enabled .navbar .search-bar .fa-search {
+	color: var(--iteslab-muted);
+	left: 11px;
+}
+
+/* Right-hand controls ----------------------------------------------------- */
+
+.iteslab-enabled .navbar-nav {
+	align-items: center;
+	gap: var(--iteslab-space-1);
+}
+
+.iteslab-enabled .navbar-nav > .nav-item > .nav-link,
+.iteslab-enabled .navbar .dropdown-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 34px;
+	height: 34px;
+	padding: 0 var(--iteslab-space-2);
+	border-radius: var(--iteslab-button-radius);
+	color: var(--iteslab-navbar-text);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .navbar-nav > .nav-item > .nav-link:hover,
+.iteslab-enabled .navbar-nav > .nav-item.show > .nav-link {
+	background-color: var(--iteslab-sidebar-hover);
+	color: var(--iteslab-text);
+}
+
+.iteslab-enabled .navbar .notifications-icon .badge,
+.iteslab-enabled .navbar .notification-badge {
+	background-color: var(--iteslab-error);
+	color: #fff;
+	font-weight: 600;
+	border: 2px solid var(--iteslab-navbar-background);
+}
+
+.iteslab-enabled .navbar .avatar,
+.iteslab-enabled .navbar .avatar-frame {
+	border-radius: 999px;
+	box-shadow: 0 0 0 2px var(--iteslab-border);
+	transition: box-shadow var(--iteslab-transition);
+}
+
+.iteslab-enabled .navbar .nav-item.show .avatar,
+.iteslab-enabled .navbar .avatar:hover {
+	box-shadow: 0 0 0 2px var(--iteslab-primary);
+}
+
+/* Navigation arrows and page actions in the header. */
+.iteslab-enabled .page-head .page-actions .btn-group .btn {
+	border-radius: var(--iteslab-button-radius);
+}
+
+.iteslab-enabled .navbar .dropdown-menu {
+	margin-top: var(--iteslab-space-2);
+	min-width: 220px;
+}
+
+/* ===========================================================================
+ * Sidebar (v15)
+ * ======================================================================== */
+
+.iteslab-enabled .list-sidebar.overlay-sidebar,
+.iteslab-enabled .desk-sidebar {
+	background-color: var(--iteslab-sidebar-background);
+	transition: width var(--iteslab-transition), min-width var(--iteslab-transition),
+		transform 220ms var(--iteslab-ease);
+}
+
+/* The workspace sidebar is a column of the page grid in v15, so the width token
+ * is applied to that column — and only on the workspace route, where the
+ * sidebar is the module navigation. List and form sidebars keep their own
+ * widths so their filters and fields are not squeezed. */
+.iteslab-route-workspaces.iteslab-enabled .layout-side-section {
+	flex: 0 0 var(--iteslab-sidebar-width);
+	max-width: var(--iteslab-sidebar-width);
+	transition: flex-basis var(--iteslab-transition), max-width var(--iteslab-transition);
+}
+
+.iteslab-enabled .desk-sidebar {
+	padding-right: var(--iteslab-space-2);
+	overflow-x: hidden;
+}
+
+/* Brand block, injected by iteslab-sidebar.js at the top of the sidebar. */
+.iteslab-enabled .iteslab-sidebar-brand {
+	display: flex;
+	align-items: center;
+	gap: var(--iteslab-space-2);
+	height: 44px;
+	padding: 0 var(--iteslab-space-3);
+	margin-bottom: var(--iteslab-space-3);
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.06em;
+	color: var(--iteslab-sidebar-text);
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.iteslab-enabled .iteslab-sidebar-brand .iteslab-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: var(--iteslab-radius-sm);
+	background-color: var(--iteslab-primary);
+	color: var(--iteslab-primary-contrast);
+	font-size: 14px;
+}
+
+/* Section headings ("Public", "Private"). */
+.iteslab-enabled .desk-sidebar .standard-sidebar-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: var(--iteslab-muted);
+	padding: var(--iteslab-space-3) var(--iteslab-space-3) var(--iteslab-space-1);
+	margin-bottom: 0 !important;
+}
+
+/* Items ------------------------------------------------------------------- */
+
+.iteslab-enabled .sidebar-item-container {
+	position: relative;
+}
+
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item {
+	border-radius: var(--iteslab-radius-md);
+	margin: 2px 0;
+	padding: 0;
+	color: var(--iteslab-sidebar-text);
+	transition: background-color var(--iteslab-transition), color var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-item-container .item-anchor {
+	display: flex;
+	align-items: center;
+	gap: var(--iteslab-space-3);
+	min-height: 38px;
+	padding: 0 var(--iteslab-space-3);
+	color: inherit;
+	font-weight: 500;
+	border-radius: inherit;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.iteslab-enabled .sidebar-item-container .sidebar-item-icon,
+.iteslab-enabled .sidebar-item-container .sidebar-item-icon .icon {
+	color: var(--iteslab-sidebar-icon);
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+}
+
+.iteslab-enabled .sidebar-item-container .sidebar-item-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: opacity var(--iteslab-transition);
+}
+
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item.selected {
+	background-color: var(--iteslab-primary-soft);
+	color: var(--iteslab-sidebar-active);
+	font-weight: 600;
+}
+
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item.selected .sidebar-item-icon,
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item.selected .sidebar-item-icon .icon {
+	color: var(--iteslab-sidebar-active);
+}
+
+.iteslab-enabled .sidebar-item-container .desk-sidebar-item.selected::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 20%;
+	height: 60%;
+	width: 3px;
+	border-radius: 0 3px 3px 0;
+	background-color: var(--iteslab-sidebar-active);
+}
+
+/* Nested (child workspace) items sit one step in. */
+.iteslab-enabled .sidebar-child-item .item-anchor {
+	padding-left: calc(var(--iteslab-space-3) + 20px);
+	font-weight: 450;
+}
+
+.iteslab-enabled .sidebar-item-container .drop-icon {
+	color: var(--iteslab-muted);
+	transition: transform var(--iteslab-transition);
+}
+
+/* Collapsed rail (ours — v15 has no native collapse) ---------------------- */
+
+.iteslab-sidebar-collapsed.iteslab-enabled .layout-side-section {
+	flex: 0 0 var(--iteslab-sidebar-rail-width);
+	max-width: var(--iteslab-sidebar-rail-width);
+}
+
+.iteslab-sidebar-collapsed.iteslab-enabled .sidebar-item-label,
+.iteslab-sidebar-collapsed.iteslab-enabled .desk-sidebar .standard-sidebar-label,
+.iteslab-sidebar-collapsed.iteslab-enabled .iteslab-sidebar-brand .iteslab-wordmark,
+.iteslab-sidebar-collapsed.iteslab-enabled .desk-sidebar .drop-icon,
+.iteslab-sidebar-collapsed.iteslab-enabled .desk-sidebar .sidebar-item-control {
+	opacity: 0;
+	width: 0;
+	pointer-events: none;
+	position: absolute;
+}
+
+.iteslab-sidebar-collapsed.iteslab-enabled .sidebar-item-container .item-anchor,
+.iteslab-sidebar-collapsed.iteslab-enabled .iteslab-sidebar-brand {
+	justify-content: center;
+	padding: 0;
+}
+
+/* Tooltip for the rail. The label is copied into a data attribute by
+ * iteslab-sidebar.js, so no extra markup is inserted into Frappe's tree. */
+.iteslab-sidebar-collapsed.iteslab-enabled .sidebar-item-container[data-iteslab-label]:hover::after {
+	content: attr(data-iteslab-label);
+	position: absolute;
+	top: 6px;
+	left: calc(var(--iteslab-sidebar-rail-width) - 12px);
+	z-index: 1030;
+	padding: 6px 10px;
+	border-radius: var(--iteslab-radius-sm);
+	background-color: var(--iteslab-text);
+	color: var(--iteslab-surface);
+	font-size: 12px;
+	font-weight: 500;
+	white-space: nowrap;
+	box-shadow: var(--iteslab-shadow-hover);
+	pointer-events: none;
+}
+
+/* Page-level sidebar (list filters, form sidebar) ------------------------- */
+
+.iteslab-enabled .layout-side-section .sidebar-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: var(--iteslab-muted);
+}
+
+.iteslab-enabled .list-sidebar .list-link > a {
+	border-radius: var(--iteslab-radius-sm);
+	padding: 6px var(--iteslab-space-2);
+	color: var(--iteslab-text);
+	transition: background-color var(--iteslab-transition);
+}
+
+.iteslab-enabled .list-sidebar .list-link > a:hover {
+	background-color: var(--iteslab-sidebar-hover);
+}
+
+/* Mobile drawer (ours) ---------------------------------------------------- */
+
+.iteslab-enabled .iteslab-sidebar-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1024;
+	background-color: rgba(15, 17, 23, 0.45);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 200ms var(--iteslab-ease), visibility 200ms;
+}
+
+.iteslab-sidebar-open.iteslab-enabled .iteslab-sidebar-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+@media (max-width: 991px) {
+	/* v15 hides .layout-side-section below lg; the drawer brings it back. */
+	.iteslab-sidebar-open.iteslab-enabled .layout-side-section {
+		display: block;
+		position: fixed;
+		top: var(--iteslab-navbar-height);
+		bottom: 0;
+		left: 0;
+		z-index: 1025;
+		width: min(84vw, var(--iteslab-sidebar-width));
+		max-width: none;
+		flex: none;
+		overflow-y: auto;
+		background-color: var(--iteslab-sidebar-background);
+		box-shadow: var(--iteslab-shadow-lg);
+	}
+
+	.iteslab-sidebar-open.iteslab-enabled .list-sidebar.overlay-sidebar {
+		display: block !important;
+	}
+
+	/* In the drawer, always show labels — the rail makes no sense here. */
+	.iteslab-sidebar-open.iteslab-enabled .sidebar-item-label {
+		opacity: 1;
+		width: auto;
+		position: static;
+		pointer-events: auto;
+	}
+
+	.iteslab-sidebar-open.iteslab-enabled .sidebar-item-container .item-anchor {
+		justify-content: flex-start;
+		padding: 0 var(--iteslab-space-3);
+	}
+}
+
+/* A sticky table header must clear the v15 navbar, which is itself sticky.
+ * (The shared rule in iteslab-lists.bundle.css pins it to 0, which is correct on
+ * v16 where there is no navbar.) */
+.iteslab-table-sticky.iteslab-enabled .list-row-head,
+.iteslab-table-sticky.iteslab-enabled table.table thead th {
+	top: var(--iteslab-navbar-height);
+}

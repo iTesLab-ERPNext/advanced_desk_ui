@@ -1,0 +1,68 @@
+/* Login and portal pages.
+ * Frappe renders these outside the Desk, so the palette arrives via
+ * iteslab-web.bundle.js rather than frappe.boot. Layout is left alone; only
+ * colour, radius and elevation are applied. */
+
+.iteslab-web body {
+	background-color: var(--iteslab-background);
+	color: var(--iteslab-text);
+}
+
+.iteslab-web .page_content .for-login,
+.iteslab-web .for-login,
+.iteslab-web .for-forgot,
+.iteslab-web .for-signup,
+.iteslab-web .login-content {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-card-radius);
+	box-shadow: var(--iteslab-shadow-lg);
+	padding: var(--iteslab-space-6);
+}
+
+.iteslab-web .login-content .page-card-head h4,
+.iteslab-web .for-login h4 {
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	color: var(--iteslab-text);
+}
+
+.iteslab-web .form-control {
+	background-color: var(--iteslab-surface);
+	border: 1px solid var(--iteslab-border);
+	border-radius: var(--iteslab-input-radius);
+	color: var(--iteslab-text);
+	transition: border-color var(--iteslab-transition), box-shadow var(--iteslab-transition);
+}
+
+.iteslab-web .form-control:focus {
+	border-color: var(--iteslab-primary);
+	box-shadow: 0 0 0 3px var(--iteslab-primary-soft);
+	outline: none;
+}
+
+.iteslab-web .btn-primary,
+.iteslab-web .btn-login {
+	background-color: var(--iteslab-primary);
+	border-color: var(--iteslab-primary);
+	color: var(--iteslab-primary-contrast);
+	border-radius: var(--iteslab-button-radius);
+	font-weight: 550;
+	transition: background-color var(--iteslab-transition), box-shadow var(--iteslab-transition);
+}
+
+.iteslab-web .btn-primary:hover {
+	background-color: var(--iteslab-secondary);
+	border-color: var(--iteslab-secondary);
+	box-shadow: var(--iteslab-shadow-hover);
+}
+
+.iteslab-web .page-card-actions a,
+.iteslab-web .forgot-password-message a {
+	color: var(--iteslab-primary);
+}
+
+.iteslab-web .app-logo,
+.iteslab-web .navbar-brand img {
+	max-height: 32px;
+}
